@@ -49,13 +49,14 @@ export default function Footer() {
 
           .footer-cursive-heading {
             font-family: 'Caveat', cursive;
-            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-size: clamp(2rem, 6.5vw, 5.5rem);
             font-weight: 700;
             color: #0f172a;
             line-height: 1.1;
             letter-spacing: 0.02em;
             text-align: center;
             margin: 0;
+            white-space: nowrap;
           }
 
           .footer-nav-link {
@@ -68,12 +69,18 @@ export default function Footer() {
           .footer-nav-link:hover {
             color: #2563eb;
           }
+
+          @media (max-width: 480px) {
+            .footer-cursive-heading {
+              font-size: clamp(2.1rem, 7.5vw, 3rem);
+            }
+          }
         `}
       </style>
 
       <footer ref={footerRef} style={{ 
         width: '100%', 
-        padding: '4.5rem 1.5rem 3rem 1.5rem', 
+        padding: '4.5rem 1rem 3rem 1rem', 
         backgroundColor: '#ffffff',
         borderTop: '1px solid #e2e8f0',
         boxSizing: 'border-box',
@@ -81,7 +88,8 @@ export default function Footer() {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: '2rem'
+        gap: '2rem',
+        overflow: 'hidden'
       }}>
         
         <div style={{ textAlign: 'center', width: '100%', maxWidth: '950px' }}>
@@ -99,9 +107,11 @@ export default function Footer() {
           gap: '8px', 
           fontSize: '0.85rem',
           fontWeight: '600',
-          color: '#475569'
+          color: '#475569',
+          textAlign: 'center',
+          padding: '0 0.5rem'
         }}>
-          <span style={{ width: '8px', height: '8px', backgroundColor: '#22c55e', borderRadius: '50%', display: 'inline-block', boxShadow: '0 0 8px rgba(34, 197, 94, 0.5)' }}></span>
+          <span style={{ width: '8px', height: '8px', backgroundColor: '#22c55e', borderRadius: '50%', display: 'inline-block', boxShadow: '0 0 8px rgba(34, 197, 94, 0.5)', flexShrink: 0 }}></span>
           <span>Always learning DSA & building for the future</span>
         </div>
 

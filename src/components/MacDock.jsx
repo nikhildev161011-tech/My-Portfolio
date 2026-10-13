@@ -1,11 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { FaHome, FaUser, FaGraduationCap, FaCode, FaEnvelope, FaGithub, FaLinkedin } from 'react-icons/fa';
 import { SiLeetcode } from 'react-icons/si';
 
 export default function MacDock() {
   const [showContactMenu, setShowContactMenu] = useState(false);
   const [activeIndex, setActiveIndex] = useState(null);
-  const dockRef = useRef(null);
 
   const dockItems = [
     { name: "Home", icon: <FaHome size={24} color="#2563eb" />, type: "scroll", target: "#top" },
@@ -17,31 +16,14 @@ export default function MacDock() {
   ];
 
   const handleTouchMove = (e) => {
-    if (!dockRef.current) return;
     const touch = e.touches[0];
-    const dockRect = dockRef.current.getBoundingClientRect();
-    const touchX = touch.clientX;
-
-    // चेक करें कि उंगली डॉक के एरिया के अंदर है या नहीं
-    if (touch.clientY >= dockRect.top - 30 && touch.clientY <= dockRect.bottom + 30) {
-      const items = dockRef.current.querySelectorAll('.dock-icon-item');
-      let closestIndex = null;
-      let minDistance = Infinity;
-
-      items.forEach((item, index) => {
-        const rect = item.getBoundingClientRect();
-        const itemCenterX = rect.left + rect.width / 2;
-        const distance = Math.abs(touchX - itemCenterX);
-
-        if (distance < minDistance && distance < 60) { // 60px के दायरे में आने पर मैग्निफाई होगा
-          minDistance = distance;
-          closestIndex = index;
-        }
-      });
-
-      setActiveIndex(closestIndex);
-    } else {
-      setActiveIndex(null);
+    const target = document.elementFromPoint(touch.clientX, touch.clientY);
+    const itemElement = target?.closest('.dock-icon-item');
+    if (itemElement) {
+      const index = itemElement.getAttribute('data-index');
+      if (index !== null) {
+        setActiveIndex(Number(index));
+      }
     }
   };
 
@@ -85,7 +67,7 @@ export default function MacDock() {
             align-items: flex-end;
             justify-content: center;
             gap: 12px;
-            padding: 12px 20px;
+            padding: 10px 18px;
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
@@ -93,7 +75,7 @@ export default function MacDock() {
             border-radius: 24px;
             box-shadow: 0 10px 30px rgba(37, 99, 235, 0.12);
             max-width: 100%;
-            touch-action: none; /* ब्राउज़र के डिफ़ॉल्ट स्क्रॉल/ड्रैग को रोकेगा ताकि एनिमेशन स्मूथ चले */
+            touch-action: none;
           }
 
           .dock-icon-item {
@@ -107,24 +89,23 @@ export default function MacDock() {
             border: 1px solid #e2e8f0;
             border-radius: 14px;
             cursor: pointer;
-            transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
             text-decoration: none;
             -webkit-tap-highlight-color: transparent;
-            will-change: transform;
           }
 
           .dock-icon-item:hover, .dock-icon-item.touch-active {
-            transform: translateY(-12px) scale(1.3);
+            transform: translateY(-10px) scale(1.25);
             border-color: #2563eb;
             background: #eff6ff;
-            box-shadow: 0 14px 28px rgba(37, 99, 235, 0.35);
+            box-shadow: 0 12px 25px rgba(37, 99, 235, 0.3);
             z-index: 10;
           }
 
           .dock-tooltip {
             position: absolute;
-            bottom: 62px;
+            bottom: 60px;
             left: 50%;
             transform: translateX(-50%) translateY(4px);
             background: #0f172a;
@@ -136,7 +117,7 @@ export default function MacDock() {
             white-space: nowrap;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.15s ease;
+            transition: all 0.2s ease;
             pointer-events: none;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
           }
@@ -149,7 +130,7 @@ export default function MacDock() {
 
           .contact-popup-menu {
             position: absolute;
-            bottom: 90px;
+            bottom: 85px;
             background: #ffffff;
             border: 1px solid #e2e8f0;
             border-radius: 16px;
@@ -159,7 +140,7 @@ export default function MacDock() {
             gap: 8px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
             z-index: 50;
-            animation: popUp 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: popUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
           }
 
           @keyframes popUp {
@@ -189,7 +170,7 @@ export default function MacDock() {
           @media (max-width: 480px) {
             .mac-dock {
               gap: 8px;
-              padding: 10px 14px;
+              padding: 8px 12px;
             }
             .dock-icon-item {
               width: 42px;
@@ -202,29 +183,28 @@ export default function MacDock() {
       <div className="mac-dock-container">
         {showContactMenu && (
           <div className="contact-popup-menu">
-            <a href="https://github.com/nikhildev161011-tech" target="_blank" rel="noopener noreferrer" className="contact-popup-item">
+            <a href="https://github.com/nikhil161011" target="_blank" rel="noopener noreferrer" className="contact-popup-item">
               <FaGithub size={16} color="#0f172a" /> GitHub Profile
             </a>
-            <a href="https://www.linkedin.com/in/nikhil-gupta-64697b3b6" target="_blank" rel="noopener noreferrer" className="contact-popup-item">
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="contact-popup-item">
               <FaLinkedin size={16} color="#0A66C2" /> LinkedIn Profile
             </a>
-            <a href="mailto:nikhildev16161011@gmail.com" className="contact-popup-item">
+            <a href="mailto:nikhil@gmail.com" className="contact-popup-item">
               <FaEnvelope size={16} color="#EA4335" /> Send Email
             </a>
           </div>
         )}
 
         <div 
-          ref={dockRef}
           className="mac-dock"
           onTouchMove={handleTouchMove}
-          onTouchStart={handleTouchMove}
           onTouchEnd={() => setActiveIndex(null)}
         >
           {dockItems.map((item, index) => (
             <a 
               key={index}
-              href={item.url || item.target || "#"}
+              data-index={index}
+              href={item.link || item.target || "#"}
               target={item.url ? "_blank" : "_self"}
               rel={item.url ? "noopener noreferrer" : ""}
               className={`dock-icon-item ${activeIndex === index ? 'touch-active' : ''}`}

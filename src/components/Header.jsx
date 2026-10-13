@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaHome, FaUser, FaCode, FaGraduationCap } from 'react-icons/fa';
+import { FaHome, FaUser, FaCode, FaGraduationCap, FaTerminal } from 'react-icons/fa';
 import { SiLeetcode } from 'react-icons/si';
 
 export default function Header() {
@@ -41,7 +41,8 @@ export default function Header() {
     { name: 'ABOUT', href: '#about', icon: <FaUser size={15} color="#2563eb" /> },
     { name: 'PROJECTS', href: '#projects', icon: <FaCode size={16} color="#2563eb" /> },
     { name: 'EDUCATION', href: '#education', icon: <FaGraduationCap size={17} color="#2563eb" /> },
-    { name: 'LEETCODE', href: '#leetcode', icon: <SiLeetcode size={16} color="#f59e0b" /> }
+    { name: 'LEETCODE', href: '#leetcode', icon: <SiLeetcode size={16} color="#f59e0b" /> },
+    { name: 'TERMINAL', href: '#console', icon: <FaTerminal size={15} color="#2563eb" /> }
   ];
 
   return (
@@ -71,7 +72,6 @@ export default function Header() {
         `}
       </style>
 
-      {/* Header Bar */}
       <header style={{ 
         position: 'sticky', 
         top: 0, 
@@ -85,7 +85,6 @@ export default function Header() {
       }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative' }}>
           
-          {/* Hamburger Menu Button */}
           <button 
             onClick={() => setIsMenuOpen(true)}
             style={{ 
@@ -105,7 +104,6 @@ export default function Header() {
             <span style={{ width: '24px', height: '2px', backgroundColor: '#0f172a', borderRadius: '2px' }}></span>
           </button>
 
-          {/* Center Logo with Infinite Writing Effect */}
           <div style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', display: 'flex', alignItems: 'center' }}>
             <div className="signature-writing-container">
               {displayedText}
@@ -116,7 +114,6 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Slide-in Mobile Menu Drawer (Simple Clean Background) */}
       {isMenuOpen && (
         <div style={{
           position: 'fixed',
@@ -141,7 +138,6 @@ export default function Header() {
             boxSizing: 'border-box'
           }}>
             <div>
-              {/* Close Button */}
               <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: '2.5rem' }}>
                 <button 
                   onClick={() => setIsMenuOpen(false)}
@@ -151,7 +147,6 @@ export default function Header() {
                 </button>
               </div>
 
-              {/* Navigation Links with Icons */}
               <nav style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                 {menuItems.map((item) => {
                   const isActive = activeItem === item.name;

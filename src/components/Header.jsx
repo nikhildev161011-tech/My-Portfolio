@@ -16,26 +16,28 @@ export default function Header() {
       <style>
         {`
           @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
-          
-          @keyframes drawSignature {
+
+          @keyframes smoothWrite {
             0% {
-              stroke-dashoffset: 400;
-              fill-opacity: 0;
-            }
-            70% {
-              stroke-dashoffset: 0;
-              fill-opacity: 0;
+              width: 0;
             }
             100% {
-              stroke-dashoffset: 0;
-              fill-opacity: 1;
+              width: 100%;
             }
           }
 
-          .animated-signature-path {
-            stroke-dasharray: 400;
-            stroke-dashoffset: 400;
-            animation: drawSignature 2.5s ease-in-out forwards;
+          .signature-writing-container {
+            font-family: 'Caveat', cursive;
+            font-size: 1.9rem;
+            font-weight: 700;
+            color: #000000;
+            letter-spacing: 0.06em;
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            width: 0;
+            animation: smoothWrite 2.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            border-right: none !important;
           }
 
           .menu-link {
@@ -78,26 +80,11 @@ export default function Header() {
             <span style={{ width: '24px', height: '2px', backgroundColor: '#0f172a', borderRadius: '2px' }}></span>
           </button>
 
-          {/* Center Logo with Drawing Animation */}
+          {/* Center Logo with Smooth Writing Effect */}
           <div style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', display: 'flex', alignItems: 'center' }}>
-            <svg height="40" width="180" viewBox="0 0 250 60">
-              <text 
-                x="5" 
-                y="42" 
-                className="animated-signature-path"
-                style={{
-                  fontFamily: "'Caveat', cursive",
-                  fontSize: '38px',
-                  fontWeight: '700',
-                  fill: '#2563eb',
-                  stroke: '#0f172a',
-                  strokeWidth: '1px',
-                  letterSpacing: '1px'
-                }}
-              >
-                Nikhil Gupta.
-              </text>
-            </svg>
+            <div className="signature-writing-container">
+              Nikhil gupta.
+            </div>
           </div>
 
           <div style={{ width: '32px' }}></div>

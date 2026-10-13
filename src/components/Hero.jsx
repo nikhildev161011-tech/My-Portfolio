@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 export default function Hero() {
   return (
@@ -7,14 +8,6 @@ export default function Hero() {
         {`
           @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&display=swap');
 
-          @keyframes heroFadeIn {
-            0% { opacity: 0; transform: translateY(15px); }
-            100% { opacity: 1; transform: translateY(0); }
-          }
-          .hero-animate {
-            animation: heroFadeIn 0.8s ease-out forwards;
-          }
-          
           .photo-modern-shadow {
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.12), 0 0 15px rgba(37, 99, 235, 0.12);
           }
@@ -147,9 +140,16 @@ export default function Hero() {
         boxSizing: 'border-box',
         overflow: 'hidden',
         backgroundColor: '#f8fafc'
-      }} className="hero-animate hero-section">
+      }} className="hero-section">
         
-        <div className="hero-desktop-layout" style={{ zIndex: 2, marginBottom: '2.5rem' }}>
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="hero-desktop-layout" 
+          style={{ zIndex: 2, marginBottom: '2.5rem' }}
+        >
           
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', flex: '1 1 450px', maxWidth: '550px' }}>
             <h1 style={{ fontSize: 'clamp(2.8rem, 7vw, 5.5rem)', fontWeight: '900', color: '#2563eb', margin: '0 0 1rem 0', letterSpacing: '-0.03em', lineHeight: '1.05' }}>
@@ -166,9 +166,16 @@ export default function Hero() {
             </div>
           </div>
 
-        </div>
+        </motion.div>
 
-        <div className="hero-mobile-layout" style={{ zIndex: 2, marginBottom: '1.75rem' }}>
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="hero-mobile-layout" 
+          style={{ zIndex: 2, marginBottom: '1.75rem' }}
+        >
           
           <h1 style={{ fontSize: '2.5rem', fontWeight: '900', color: '#2563eb', margin: 0, letterSpacing: '-0.03em', lineHeight: '1.1' }}>
             Nikhil Gupta
@@ -182,18 +189,25 @@ export default function Hero() {
             I am a BCA first-year student and aspiring software engineer passionate about building strong fundamentals in computer science, solving problems through code, and mastering Data Structures & Algorithms (DSA).
           </p>
 
-        </div>
+        </motion.div>
 
-        <div style={{ 
-          maxWidth: '1000px', 
-          width: '100%', 
-          display: 'flex', 
-          gap: '1rem', 
-          alignItems: 'center', 
-          zIndex: 2, 
-          marginBottom: '2rem',
-          flexWrap: 'wrap'
-        }} className="hero-action-buttons">
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          style={{ 
+            maxWidth: '1000px', 
+            width: '100%', 
+            display: 'flex', 
+            gap: '1rem', 
+            alignItems: 'center', 
+            zIndex: 2, 
+            marginBottom: '2rem',
+            flexWrap: 'wrap'
+          }} 
+          className="hero-action-buttons"
+        >
           
           <a href="#projects" className="primary-action-btn">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
@@ -205,19 +219,26 @@ export default function Hero() {
             View Resume
           </a>
 
-        </div>
+        </motion.div>
 
-        <div style={{ 
-          maxWidth: '1000px', 
-          width: '100%', 
-          display: 'flex', 
-          flexDirection: 'column', 
-          alignItems: 'flex-start', 
-          gap: '0.85rem', 
-          zIndex: 2,
-          borderTop: '1px solid #cbd5e1',
-          paddingTop: '1.5rem'
-        }} className="hero-text-content">
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          style={{ 
+            maxWidth: '1000px', 
+            width: '100%', 
+            display: 'flex', 
+            flexDirection: 'column', 
+            alignItems: 'flex-start', 
+            gap: '0.85rem', 
+            zIndex: 2,
+            borderTop: '1px solid #cbd5e1',
+            paddingTop: '1.5rem'
+          }} 
+          className="hero-text-content"
+        >
           
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.1rem', position: 'relative' }}>
             <h3 className="cursive-heading">
@@ -262,7 +283,7 @@ export default function Hero() {
 
           </div>
 
-        </div>
+        </motion.div>
 
       </section>
     </>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 export default function Education() {
   return (
@@ -53,7 +54,6 @@ export default function Education() {
         `}
       </style>
 
-      {/* Education Section Container with id="education" */}
       <section id="education" style={{ 
         width: '100%', 
         padding: '5rem 1.5rem', 
@@ -69,8 +69,13 @@ export default function Education() {
           gap: '3rem' 
         }}>
           
-          {/* Section Header */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', position: 'relative' }}>
+          <motion.div 
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', position: 'relative' }}
+          >
             <span style={{ fontSize: '0.85rem', fontWeight: '700', letterSpacing: '-0.02em', color: '#2563eb', textTransform: 'uppercase' }}>
               Academic Background
             </span>
@@ -78,10 +83,15 @@ export default function Education() {
               Education
             </h2>
             <div style={{ width: '60px', height: '4px', background: 'linear-gradient(90deg, #2563eb 0%, #60a5fa 100%)', borderRadius: '2px', marginTop: '4px' }}></div>
-          </div>
+          </motion.div>
 
-          {/* Education Card */}
-          <div className="edu-card">
+          <motion.div 
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="edu-card"
+          >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem', marginBottom: '1rem' }}>
               <div>
                 <h3 style={{ fontSize: '1.35rem', fontWeight: '800', color: '#0f172a', margin: '0 0 0.25rem 0' }}>
@@ -111,7 +121,7 @@ export default function Education() {
                 <span>Study Centre: Microtek College of Management & Technology (View on Map)</span>
               </a>
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </section>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 export default function Projects() {
   const projectsList = [
@@ -31,7 +32,6 @@ export default function Projects() {
         {`
           @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&display=swap');
 
-          /* Bold Cursive Heading */
           .bold-cursive-heading {
             font-family: 'Caveat', cursive;
             font-size: clamp(2.5rem, 6vw, 4rem);
@@ -115,7 +115,6 @@ export default function Projects() {
         `}
       </style>
 
-      {/* Projects Section Container with id="projects" */}
       <section id="projects" className="projects-section" style={{ 
         width: '100%', 
         padding: '5rem 1.5rem', 
@@ -131,8 +130,13 @@ export default function Projects() {
           gap: '3rem' 
         }}>
           
-          {/* Section Header */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', position: 'relative' }}>
+          <motion.div 
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', position: 'relative' }}
+          >
             <span style={{ fontSize: '0.85rem', fontWeight: '700', letterSpacing: '-0.02em', color: '#2563eb', textTransform: 'uppercase' }}>
               Crafted Work & Web Applications
             </span>
@@ -140,18 +144,23 @@ export default function Projects() {
               Projects
             </h2>
             <div style={{ width: '60px', height: '4px', background: 'linear-gradient(90deg, #2563eb 0%, #60a5fa 100%)', borderRadius: '2px', marginTop: '4px' }}></div>
-          </div>
+          </motion.div>
 
-          {/* Projects Grid */}
           <div style={{ 
             display: 'grid', 
             gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
             gap: '2rem' 
           }}>
             {projectsList.map((project, index) => (
-              <div key={index} className="project-card">
+              <motion.div 
+                key={index} 
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.2 }}
+                transition={{ duration: 0.7, delay: index * 0.15, ease: "easeOut" }}
+                className="project-card"
+              >
                 
-                {/* Project Screenshot / Image */}
                 <div className="project-image-wrapper">
                   <img 
                     src={project.image} 
@@ -163,7 +172,6 @@ export default function Projects() {
                   />
                 </div>
 
-                {/* Content Area */}
                 <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem', flex: 1, justifyContent: 'space-between' }}>
                   
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
@@ -176,7 +184,6 @@ export default function Projects() {
                   </div>
 
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                    {/* Tags */}
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
                       {project.tags.map((tag, tagIndex) => (
                         <span key={tagIndex} className="project-tag">
@@ -185,7 +192,6 @@ export default function Projects() {
                       ))}
                     </div>
 
-                    {/* Custom View Button */}
                     <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: '1rem' }}>
                       <a href={project.viewLink} target="_blank" rel="noopener noreferrer" className="view-project-btn">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
@@ -196,7 +202,7 @@ export default function Projects() {
 
                 </div>
 
-              </div>
+              </motion.div>
             ))}
           </div>
 

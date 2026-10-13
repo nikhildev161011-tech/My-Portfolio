@@ -4,6 +4,7 @@ import { SiLeetcode } from 'react-icons/si';
 
 export default function MacDock() {
   const [showContactMenu, setShowContactMenu] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(null);
 
   const dockItems = [
     { name: "Home", icon: <FaHome size={24} color="#2563eb" />, type: "scroll", target: "#top" },
@@ -13,6 +14,18 @@ export default function MacDock() {
     { name: "Projects", icon: <FaCode size={24} color="#059669" />, type: "scroll", target: "#projects" },
     { name: "Contact", icon: <FaEnvelope size={22} color="#dc2626" />, type: "menu" }
   ];
+
+  const handleTouchMove = (e) => {
+    const touch = e.touches[0];
+    const target = document.elementFromPoint(touch.clientX, touch.clientY);
+    const itemElement = target?.closest('.dock-icon-item');
+    if (itemElement) {
+      const index = itemElement.getAttribute('data-index');
+      if (index !== null) {
+        setActiveIndex(Number(index));
+      }
+    }
+  };
 
   const handleItemClick = (item, e) => {
     if (item.type === "scroll") {
@@ -26,6 +39,7 @@ export default function MacDock() {
         }
       }
       setShowContactMenu(false);
+      setActiveIndex(null);
     } else if (item.type === "link") {
       setShowContactMenu(false);
     } else if (item.type === "menu") {
@@ -50,18 +64,18 @@ export default function MacDock() {
 
           .mac-dock {
             display: flex;
-            align-items: center;
+            align-items: flex-end;
             justify-content: center;
-            flex-wrap: wrap;
             gap: 12px;
-            padding: 10px 16px;
-            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 18px;
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(37, 99, 235, 0.2);
-            border-radius: 22px;
+            border-radius: 24px;
             box-shadow: 0 10px 30px rgba(37, 99, 235, 0.12);
             max-width: 100%;
+            touch-action: none;
           }
 
           .dock-icon-item {
@@ -75,23 +89,23 @@ export default function MacDock() {
             border: 1px solid #e2e8f0;
             border-radius: 14px;
             cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
             text-decoration: none;
             -webkit-tap-highlight-color: transparent;
           }
 
-          .dock-icon-item:hover, .dock-icon-item:active {
-            transform: translateY(-6px) scale(1.15);
+          .dock-icon-item:hover, .dock-icon-item.touch-active {
+            transform: translateY(-10px) scale(1.25);
             border-color: #2563eb;
             background: #eff6ff;
-            box-shadow: 0 10px 22px rgba(37, 99, 235, 0.25);
+            box-shadow: 0 12px 25px rgba(37, 99, 235, 0.3);
             z-index: 10;
           }
 
           .dock-tooltip {
             position: absolute;
-            bottom: 56px;
+            bottom: 60px;
             left: 50%;
             transform: translateX(-50%) translateY(4px);
             background: #0f172a;
@@ -108,7 +122,7 @@ export default function MacDock() {
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
           }
 
-          .dock-icon-item:hover .dock-tooltip {
+          .dock-icon-item:hover .dock-tooltip, .dock-icon-item.touch-active .dock-tooltip {
             opacity: 1;
             visibility: visible;
             transform: translateX(-50%) translateY(0);
@@ -169,26 +183,31 @@ export default function MacDock() {
       <div className="mac-dock-container">
         {showContactMenu && (
           <div className="contact-popup-menu">
-            <a href="https://github.com/nikhildev161011-tech" target="_blank" rel="noopener noreferrer" className="contact-popup-item">
+            <a href="https://github.com/nikhil161011" target="_blank" rel="noopener noreferrer" className="contact-popup-item">
               <FaGithub size={16} color="#0f172a" /> GitHub Profile
             </a>
-            <a href="https://www.linkedin.com/in/nikhil-gupta-64697b3b6" target="_blank" rel="noopener noreferrer" className="contact-popup-item">
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="contact-popup-item">
               <FaLinkedin size={16} color="#0A66C2" /> LinkedIn Profile
             </a>
-            <a href="mailto:nikhildev16161011@gmail.com" className="contact-popup-item">
+            <a href="mailto:nikhil@gmail.com" className="contact-popup-item">
               <FaEnvelope size={16} color="#EA4335" /> Send Email
             </a>
           </div>
         )}
 
-        <div className="mac-dock">
+        <div 
+          className="mac-dock"
+          onTouchMove={handleTouchMove}
+          onTouchEnd={() => setActiveIndex(null)}
+        >
           {dockItems.map((item, index) => (
             <a 
               key={index}
+              data-index={index}
               href={item.link || item.target || "#"}
               target={item.url ? "_blank" : "_self"}
               rel={item.url ? "noopener noreferrer" : ""}
-              className="dock-icon-item"
+              className={`dock-icon-item ${activeIndex === index ? 'touch-active' : ''}`}
               onClick={(e) => handleItemClick(item, e)}
             >
               {item.icon}

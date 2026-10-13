@@ -1,43 +1,107 @@
 import React from 'react';
-import { FaGithub, FaLinkedin, FaEnvelope, FaHome, FaUser, FaCode, FaGraduationCap } from 'react-icons/fa';
+import { motion } from 'framer-motion';
+import { FaGithub, FaLinkedin, FaInstagram, FaHome, FaUser, FaCode, FaGraduationCap } from 'react-icons/fa';
+import { FiMail } from 'react-icons/fi';
 import { SiLeetcode } from 'react-icons/si';
 
 export default function Footer() {
+  const iconsContainerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.08,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const iconBounceVariant = {
+    hidden: { 
+      opacity: 0, 
+      y: -20, 
+      scale: 0.4,
+      rotate: -10 
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      rotate: 0,
+      transition: { 
+        type: "spring",
+        stiffness: 300,
+        damping: 15,
+        mass: 0.8
+      }
+    }
+  };
+
+  const socialLinks = [
+    {
+      title: "GitHub",
+      link: "https://github.com/nikhildev161011-tech",
+      icon: <FaGithub size={22} color="#181717" />
+    },
+    {
+      title: "LinkedIn",
+      link: "https://www.linkedin.com/in/nikhil-gupta-64697b3b6",
+      icon: <FaLinkedin size={22} color="#0A66C2" />
+    },
+    {
+      title: "LeetCode",
+      link: "https://leetcode.com/u/nikhil161011/",
+      icon: <SiLeetcode size={22} color="#FFA116" />
+    },
+    {
+      title: "Instagram",
+      link: "https://instagram.com/nikhildev161011",
+      icon: <FaInstagram size={22} color="#E4405F" />
+    },
+    {
+      title: "Email",
+      link: "mailto:nikhildev16161011@gmail.com",
+      icon: <FiMail size={22} color="#EA4335" />
+    }
+  ];
+
   return (
     <>
       <style>
         {`
-          @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&display=swap');
+          @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700&display=swap');
 
-          .footer-cursive-heading {
-            font-family: 'Caveat', cursive;
-            font-size: clamp(2rem, 4vw, 2.8rem);
-            font-weight: 500;
-            color: #0f172a;
-            line-height: 1.1;
-            letter-spacing: 0.02em;
+          .footer-wrapper-card {
+            background: #ffffff;
+            border: 1px solid #2563eb;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.08);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          }
+          .footer-wrapper-card:hover {
+            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.15);
           }
 
-          .footer-social-btn {
+          .footer-social-icon-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 38px;
-            height: 38px;
+            width: 48px;
+            height: 48px;
             background: #ffffff;
             border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            color: #2563eb;
-            transition: all 0.25s ease;
+            border-radius: 14px;
             text-decoration: none;
+            cursor: pointer;
+            transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
           }
-          .footer-social-btn:hover {
-            background-color: #2563eb;
-            color: #ffffff;
+          .footer-social-icon-btn:hover {
+            transform: translateY(-3px) scale(1.05);
             border-color: #2563eb;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+            background: #eff6ff;
+            box-shadow: 0 6px 15px rgba(37, 99, 235, 0.15);
           }
 
           .footer-link {
@@ -55,19 +119,25 @@ export default function Footer() {
           }
 
           @media (max-width: 768px) {
+            .footer-section {
+              padding: 3rem 1rem !important;
+            }
+            .footer-wrapper-card {
+              padding: 1.5rem;
+            }
             .footer-bottom-row {
               flex-direction: column;
               align-items: center;
               text-align: center;
-              gap: 1rem;
+              gap: 1.25rem;
             }
           }
         `}
       </style>
 
-      <footer style={{ 
+      <footer className="footer-section" style={{ 
         width: '100%', 
-        padding: '4rem 1.5rem 2.5rem 1.5rem', 
+        padding: '4rem 1.5rem 3rem 1.5rem', 
         backgroundColor: '#f8fafc',
         borderTop: '1px solid #e2e8f0',
         boxSizing: 'border-box',
@@ -80,72 +150,77 @@ export default function Footer() {
           width: '100%', 
           margin: '0 auto', 
           display: 'flex', 
-          flexDirection: 'column', 
-          gap: '2.5rem' 
+          flexDirection: 'column' 
         }}>
           
-          <div style={{ 
-            display: 'flex', 
-            justifyContent: 'space-between', 
-            alignItems: 'center', 
-            flexWrap: 'wrap', 
-            gap: '1.5rem',
-            borderBottom: '1px solid #e2e8f0',
-            paddingBottom: '2rem'
-          }}>
-            <div>
-              <h2 className="footer-cursive-heading" style={{ margin: 0 }}>
-                Developer & Cricketer
-              </h2>
+          <div className="footer-wrapper-card" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+            
+            <div 
+              style={{ 
+                display: 'flex', 
+                justifyContent: 'center', 
+                alignItems: 'center', 
+                width: '100%',
+                borderBottom: '1px solid #e2e8f0',
+                paddingBottom: '2rem'
+              }}
+            >
+              <motion.div 
+                variants={iconsContainerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: false, amount: 0.2 }}
+                style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}
+              >
+                {socialLinks.map((item, index) => (
+                  <motion.a 
+                    key={index}
+                    href={item.link} 
+                    target={item.title === "Email" ? "_self" : "_blank"} 
+                    rel="noopener noreferrer" 
+                    variants={iconBounceVariant}
+                    className="footer-social-icon-btn" 
+                    title={item.title}
+                  >
+                    {item.icon}
+                  </motion.a>
+                ))}
+              </motion.div>
             </div>
 
-            <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-              <a href="https://github.com/nikhildev161011-tech" target="_blank" rel="noopener noreferrer" className="footer-social-btn" title="GitHub">
-                <FaGithub size={18} />
-              </a>
-              <a href="https://www.linkedin.com/in/nikhil-gupta-64697b3b6" target="_blank" rel="noopener noreferrer" className="footer-social-btn" title="LinkedIn">
-                <FaLinkedin size={18} />
-              </a>
-              <a href="https://leetcode.com/u/nikhil161011/" target="_blank" rel="noopener noreferrer" className="footer-social-btn" title="LeetCode">
-                <SiLeetcode size={18} />
-              </a>
-              <a href="mailto:nikhildev16161011@gmail.com" className="footer-social-btn" title="Email">
-                <FaEnvelope size={17} />
-              </a>
-            </div>
-          </div>
+            <div 
+              className="footer-bottom-row"
+              style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center', 
+                width: '100%',
+                gap: '1.5rem' 
+              }}
+            >
+              <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}>
+                <a href="#" className="footer-link">
+                  <FaHome size={15} color="#2563eb" /> Home
+                </a>
+                <a href="#about" className="footer-link">
+                  <FaUser size={14} color="#2563eb" /> About
+                </a>
+                <a href="#projects" className="footer-link">
+                  <FaCode size={15} color="#2563eb" /> Projects
+                </a>
+                <a href="#education" className="footer-link">
+                  <FaGraduationCap size={16} color="#2563eb" /> Education
+                </a>
+                <a href="#leetcode" className="footer-link">
+                  <SiLeetcode size={15} color="#FFA116" /> LeetCode
+                </a>
+              </div>
 
-          <div 
-            className="footer-bottom-row"
-            style={{ 
-              display: 'flex', 
-              justifyContent: 'space-between', 
-              alignItems: 'center', 
-              width: '100%',
-              gap: '1.5rem' 
-            }}
-          >
-            <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
-              <a href="#" className="footer-link">
-                <FaHome size={15} color="#2563eb" /> Home
-              </a>
-              <a href="#about" className="footer-link">
-                <FaUser size={14} color="#2563eb" /> About
-              </a>
-              <a href="#projects" className="footer-link">
-                <FaCode size={15} color="#2563eb" /> Projects
-              </a>
-              <a href="#education" className="footer-link">
-                <FaGraduationCap size={16} color="#2563eb" /> Education
-              </a>
-              <a href="#leetcode" className="footer-link">
-                <SiLeetcode size={15} color="#f59e0b" /> LeetCode
-              </a>
+              <p style={{ margin: 0, fontSize: '0.85rem', color: '#94a3b8', fontWeight: '600' }}>
+                &copy; 2026 || All rights reserved
+              </p>
             </div>
 
-            <p style={{ margin: 0, fontSize: '0.85rem', color: '#94a3b8', fontWeight: '600', textAlign: 'right' }}>
-              &copy; 2026 Nikhil Gupta || All rights reserved
-            </p>
           </div>
 
         </div>

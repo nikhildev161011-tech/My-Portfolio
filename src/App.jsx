@@ -6,6 +6,7 @@ import About from './components/About';
 import Education from './components/Education';
 import LeetCodeCard from './components/LeetCodeCard';
 import Projects from './components/Projects';
+import Contact from './components/Contact';
 import DevConsole from './components/DevConsole';
 import MacDock from './components/MacDock';
 import Footer from './components/Footer';
@@ -37,6 +38,10 @@ export default function App() {
 
       <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.15 }} transition={{ duration: 0.8, ease: "easeOut" }}>
         <Projects />
+      </motion.div>
+
+      <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.15 }} transition={{ duration: 0.8, ease: "easeOut" }}>
+        <Contact />
       </motion.div>
 
       <DevConsole />

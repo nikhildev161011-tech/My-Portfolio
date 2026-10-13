@@ -1,48 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FaHome, FaUser, FaCode, FaGraduationCap, FaTerminal } from 'react-icons/fa';
 import { SiLeetcode } from 'react-icons/si';
+import { FiMail } from 'react-icons/fi';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeItem, setActiveItem] = useState('HOME');
 
-  const fullText = "Nikhil gupta.";
-  const [displayedText, setDisplayedText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [loopNum, setLoopNum] = useState(0);
-  const [typingSpeed, setTypingSpeed] = useState(120);
-
-  useEffect(() => {
-    const handleTyping = () => {
-      const currentLength = displayedText.length;
-
-      if (!isDeleting) {
-        setDisplayedText(fullText.substring(0, currentLength + 1));
-        if (currentLength + 1 === fullText.length) {
-          setTimeout(() => setIsDeleting(true), 3000);
-          setTypingSpeed(80);
-        }
-      } else {
-        setDisplayedText(fullText.substring(0, currentLength - 1));
-        if (currentLength - 1 === 0) {
-          setIsDeleting(false);
-          setLoopNum(loopNum + 1);
-          setTypingSpeed(120);
-        }
-      }
-    };
-
-    const timer = setTimeout(handleTyping, typingSpeed);
-    return () => clearTimeout(timer);
-  }, [displayedText, isDeleting, loopNum, typingSpeed]);
-
   const menuItems = [
-    { name: 'HOME', href: '#home', icon: <FaHome size={16} color="#2563eb" /> },
-    { name: 'ABOUT', href: '#about', icon: <FaUser size={15} color="#2563eb" /> },
-    { name: 'PROJECTS', href: '#projects', icon: <FaCode size={16} color="#2563eb" /> },
-    { name: 'EDUCATION', href: '#education', icon: <FaGraduationCap size={17} color="#2563eb" /> },
-    { name: 'LEETCODE', href: '#leetcode', icon: <SiLeetcode size={16} color="#f59e0b" /> },
-    { name: 'TERMINAL', href: '#console', icon: <FaTerminal size={15} color="#2563eb" /> }
+    { name: 'HOME', href: '#home', icon: <FaHome size={24} color="#2563eb" /> },
+    { name: 'ABOUT', href: '#about', icon: <FaUser size={22} color="#2563eb" /> },
+    { name: 'PROJECTS', href: '#projects', icon: <FaCode size={23} color="#2563eb" /> },
+    { name: 'EDUCATION', href: '#education', icon: <FaGraduationCap size={25} color="#2563eb" /> },
+    { name: 'LEETCODE', href: '#leetcode', icon: <SiLeetcode size={23} color="#f59e0b" /> },
+    { name: 'CONTACT', href: '#contact', icon: <FiMail size={23} color="#EA4335" /> },
+    { name: 'TERMINAL', href: '#console', icon: <FaTerminal size={21} color="#2563eb" /> }
   ];
 
   return (
@@ -50,24 +22,72 @@ export default function Header() {
       <style>
         {`
           @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
+          @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@800;900&display=swap');
 
-          .signature-writing-container {
-            font-family: 'Caveat', cursive;
-            font-size: 1.9rem;
-            font-weight: 700;
-            color: #000000;
-            letter-spacing: 0.06em;
+          .signature-wrapper {
+            position: relative;
             display: inline-block;
+            font-family: 'Caveat', cursive;
+            font-size: 2.2rem;
+            font-weight: 700;
             white-space: nowrap;
-            border-right: none !important;
-            min-height: 2.2rem;
+          }
+
+          .signature-base {
+            color: #cbd5e1;
+            user-select: none;
+          }
+
+          .signature-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            color: #0f172a;
+            overflow: hidden;
+            white-space: nowrap;
+            animation: signatureDraw 3.5s ease-in-out infinite;
+          }
+
+          @keyframes signatureDraw {
+            0% {
+              width: 0%;
+            }
+            70% {
+              width: 100%;
+            }
+            90% {
+              width: 100%;
+            }
+            100% {
+              width: 0%;
+            }
           }
 
           .menu-link {
             transition: all 0.25s ease-in-out;
             display: inline-flex;
             align-items: center;
-            gap: 12px;
+            gap: 18px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 900;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            text-decoration: none;
+            line-height: 1.1;
+          }
+
+          .menu-link:hover {
+            transform: translateX(8px) scale(1.03);
+            color: #2563eb !important;
+          }
+
+          .menu-icon-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 32px;
           }
         `}
       </style>
@@ -105,8 +125,9 @@ export default function Header() {
           </button>
 
           <div style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', display: 'flex', alignItems: 'center' }}>
-            <div className="signature-writing-container">
-              {displayedText}
+            <div className="signature-wrapper">
+              <span className="signature-base">Nikhil gupta.</span>
+              <span className="signature-overlay">Nikhil gupta.</span>
             </div>
           </div>
 
@@ -121,33 +142,35 @@ export default function Header() {
           left: 0,
           width: '100%',
           height: '100%',
-          backgroundColor: 'rgba(0, 0, 0, 0.4)',
+          backgroundColor: 'rgba(0, 0, 0, 0.45)',
+          backdropFilter: 'blur(4px)',
           zIndex: 100,
           display: 'flex',
           transition: 'all 0.3s ease'
         }}>
           <div style={{
-            width: '280px',
+            width: '320px',
             backgroundColor: '#ffffff',
             height: '100%',
-            padding: '2rem 1.5rem',
-            boxShadow: '4px 0 15px rgba(0,0,0,0.1)',
+            padding: '2.5rem 2rem',
+            boxShadow: '6px 0 25px rgba(0,0,0,0.15)',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
-            boxSizing: 'border-box'
+            boxSizing: 'border-box',
+            overflowY: 'auto'
           }}>
             <div>
-              <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: '2.5rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: '3rem' }}>
                 <button 
                   onClick={() => setIsMenuOpen(false)}
-                  style={{ background: 'none', border: 'none', fontSize: '1.4rem', cursor: 'pointer', color: '#0f172a', padding: 0 }}
+                  style={{ background: 'none', border: 'none', fontSize: '1.6rem', fontWeight: '800', cursor: 'pointer', color: '#0f172a', padding: 0 }}
                 >
                   ✕
                 </button>
               </div>
 
-              <nav style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+              <nav style={{ display: 'flex', flexDirection: 'column', gap: '1.85rem' }}>
                 {menuItems.map((item) => {
                   const isActive = activeItem === item.name;
                   return (
@@ -160,17 +183,15 @@ export default function Header() {
                       }} 
                       className="menu-link"
                       style={{ 
-                        fontSize: '1rem', 
-                        fontWeight: '700', 
-                        color: isActive ? '#2563eb' : '#000000', 
-                        textDecoration: 'none',
-                        letterSpacing: '0.05em',
-                        transform: isActive ? 'scale(1.04)' : 'scale(1)',
-                        transition: 'transform 0.2s ease, color 0.2s ease'
+                        fontSize: '1.45rem', 
+                        color: isActive ? '#2563eb' : '#0f172a', 
+                        transform: isActive ? 'translateX(8px)' : 'none'
                       }}
                     >
-                      {item.icon}
-                      {item.name}
+                      <span className="menu-icon-wrap">
+                        {item.icon}
+                      </span>
+                      <span>{item.name}</span>
                     </a>
                   );
                 })}

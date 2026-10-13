@@ -3,19 +3,45 @@ import { motion } from 'framer-motion';
 import { IoSchool } from 'react-icons/io5';
 
 export default function Education() {
+  const educationLetters = "Education".split("");
+
+  const titleContainerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.06,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const letterVariants = {
+    hidden: { opacity: 0, y: 35 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.45, ease: "easeOut" }
+    }
+  };
+
   return (
     <>
       <style>
         {`
-          @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&display=swap');
+          @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&display=swap');
 
-          .bold-cursive-heading {
-            font-family: 'Caveat', cursive;
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 700;
+          .education-main-heading {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+            font-weight: 900;
             color: #0f172a;
-            line-height: 1.1;
-            letter-spacing: 0.02em;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            display: flex;
+            overflow: hidden;
+            margin: 0;
+            white-space: nowrap;
           }
 
           .edu-card {
@@ -50,6 +76,9 @@ export default function Education() {
             .edu-card {
               padding: 1.5rem;
             }
+            .education-main-heading {
+              font-size: clamp(1.8rem, 5vw, 2.4rem);
+            }
           }
         `}
       </style>
@@ -81,9 +110,25 @@ export default function Education() {
               <span style={{ fontSize: '0.85rem', fontWeight: '700', letterSpacing: '-0.02em', color: '#2563eb', textTransform: 'uppercase' }}>
                 Academic Background
               </span>
-              <h2 className="bold-cursive-heading" style={{ margin: 0 }}>
-                Education
-              </h2>
+
+              <motion.h2 
+                className="education-main-heading"
+                variants={titleContainerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: false, amount: 0.2 }}
+              >
+                {educationLetters.map((char, index) => (
+                  <motion.span 
+                    key={index} 
+                    variants={letterVariants}
+                    style={{ display: 'inline-block', whiteSpace: char === " " ? "pre" : "normal" }}
+                  >
+                    {char}
+                  </motion.span>
+                ))}
+              </motion.h2>
+
               <div style={{ width: '60px', height: '4px', background: 'linear-gradient(90deg, #2563eb 0%, #60a5fa 100%)', borderRadius: '2px', marginTop: '4px' }}></div>
             </div>
 

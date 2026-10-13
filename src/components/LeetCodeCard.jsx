@@ -3,19 +3,45 @@ import { motion } from 'framer-motion';
 import { SiLeetcode } from 'react-icons/si';
 
 export default function LeetCodeCard() {
+  const headingLetters = "LeetCode & DSA Practice".split("");
+
+  const titleContainerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.04,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const letterVariants = {
+    hidden: { opacity: 0, y: 35 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.45, ease: "easeOut" }
+    }
+  };
+
   return (
     <>
       <style>
         {`
-          @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&display=swap');
+          @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&display=swap');
 
-          .bold-cursive-heading {
-            font-family: 'Caveat', cursive;
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 700;
+          .leetcode-main-heading {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: clamp(1.4rem, 3.8vw, 2.8rem);
+            font-weight: 900;
             color: #0f172a;
-            line-height: 1.1;
-            letter-spacing: 0.02em;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            display: flex;
+            overflow: hidden;
+            margin: 0;
+            white-space: nowrap;
           }
 
           .leetcode-card {
@@ -58,6 +84,9 @@ export default function LeetCodeCard() {
             .leetcode-card {
               padding: 1.25rem;
             }
+            .leetcode-main-heading {
+              font-size: clamp(1.15rem, 4.8vw, 1.6rem);
+            }
           }
         `}
       </style>
@@ -89,9 +118,25 @@ export default function LeetCodeCard() {
               <span style={{ fontSize: '0.85rem', fontWeight: '700', letterSpacing: '-0.02em', color: '#2563eb', textTransform: 'uppercase' }}>
                 Problem Solving Journey
               </span>
-              <h2 className="bold-cursive-heading" style={{ margin: 0 }}>
-                LeetCode & DSA Practice
-              </h2>
+
+              <motion.h2 
+                className="leetcode-main-heading"
+                variants={titleContainerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: false, amount: 0.2 }}
+              >
+                {headingLetters.map((char, index) => (
+                  <motion.span 
+                    key={index} 
+                    variants={letterVariants}
+                    style={{ display: 'inline-block', whiteSpace: char === " " ? "pre" : "normal" }}
+                  >
+                    {char}
+                  </motion.span>
+                ))}
+              </motion.h2>
+
               <div style={{ width: '60px', height: '4px', background: 'linear-gradient(90deg, #2563eb 0%, #60a5fa 100%)', borderRadius: '2px', marginTop: '4px' }}></div>
             </div>
 

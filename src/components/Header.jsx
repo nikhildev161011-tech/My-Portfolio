@@ -1,14 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { FaHome, FaUser, FaCode, FaGraduationCap } from 'react-icons/fa';
+import { SiLeetcode } from 'react-icons/si';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeItem, setActiveItem] = useState('HOME');
 
+  const fullText = "Nikhil gupta.";
+  const [displayedText, setDisplayedText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [loopNum, setLoopNum] = useState(0);
+  const [typingSpeed, setTypingSpeed] = useState(120);
+
+  useEffect(() => {
+    const handleTyping = () => {
+      const currentLength = displayedText.length;
+
+      if (!isDeleting) {
+        setDisplayedText(fullText.substring(0, currentLength + 1));
+        if (currentLength + 1 === fullText.length) {
+          setTimeout(() => setIsDeleting(true), 3000);
+          setTypingSpeed(80);
+        }
+      } else {
+        setDisplayedText(fullText.substring(0, currentLength - 1));
+        if (currentLength - 1 === 0) {
+          setIsDeleting(false);
+          setLoopNum(loopNum + 1);
+          setTypingSpeed(120);
+        }
+      }
+    };
+
+    const timer = setTimeout(handleTyping, typingSpeed);
+    return () => clearTimeout(timer);
+  }, [displayedText, isDeleting, loopNum, typingSpeed]);
+
   const menuItems = [
-    { name: 'HOME', href: '#home' },
-    { name: 'ABOUT', href: '#about' },
-    { name: 'PROJECTS', href: '#projects' },
-    { name: 'EDUCATION', href: '#education' }
+    { name: 'HOME', href: '#home', icon: <FaHome size={16} color="#2563eb" /> },
+    { name: 'ABOUT', href: '#about', icon: <FaUser size={15} color="#2563eb" /> },
+    { name: 'PROJECTS', href: '#projects', icon: <FaCode size={16} color="#2563eb" /> },
+    { name: 'EDUCATION', href: '#education', icon: <FaGraduationCap size={17} color="#2563eb" /> },
+    { name: 'LEETCODE', href: '#leetcode', icon: <SiLeetcode size={16} color="#f59e0b" /> }
   ];
 
   return (
@@ -17,15 +50,6 @@ export default function Header() {
         {`
           @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
 
-          @keyframes smoothWrite {
-            0% {
-              width: 0;
-            }
-            100% {
-              width: 100%;
-            }
-          }
-
           .signature-writing-container {
             font-family: 'Caveat', cursive;
             font-size: 1.9rem;
@@ -33,15 +57,16 @@ export default function Header() {
             color: #000000;
             letter-spacing: 0.06em;
             display: inline-block;
-            overflow: hidden;
             white-space: nowrap;
-            width: 0;
-            animation: smoothWrite 2.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
             border-right: none !important;
+            min-height: 2.2rem;
           }
 
           .menu-link {
             transition: all 0.25s ease-in-out;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
           }
         `}
       </style>
@@ -80,10 +105,10 @@ export default function Header() {
             <span style={{ width: '24px', height: '2px', backgroundColor: '#0f172a', borderRadius: '2px' }}></span>
           </button>
 
-          {/* Center Logo with Smooth Writing Effect */}
+          {/* Center Logo with Infinite Writing Effect */}
           <div style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', display: 'flex', alignItems: 'center' }}>
             <div className="signature-writing-container">
-              Nikhil gupta.
+              {displayedText}
             </div>
           </div>
 
@@ -91,7 +116,7 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Slide-in Mobile Menu Drawer */}
+      {/* Slide-in Mobile Menu Drawer (Simple Clean Background) */}
       {isMenuOpen && (
         <div style={{
           position: 'fixed',
@@ -100,7 +125,6 @@ export default function Header() {
           width: '100%',
           height: '100%',
           backgroundColor: 'rgba(0, 0, 0, 0.4)',
-          backdropFilter: 'blur(4px)',
           zIndex: 100,
           display: 'flex',
           transition: 'all 0.3s ease'
@@ -127,8 +151,8 @@ export default function Header() {
                 </button>
               </div>
 
-              {/* Navigation Links */}
-              <nav style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+              {/* Navigation Links with Icons */}
+              <nav style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                 {menuItems.map((item) => {
                   const isActive = activeItem === item.name;
                   return (
@@ -146,11 +170,11 @@ export default function Header() {
                         color: isActive ? '#2563eb' : '#000000', 
                         textDecoration: 'none',
                         letterSpacing: '0.05em',
-                        display: 'inline-block',
-                        transform: isActive ? 'scale(1.06)' : 'scale(1)',
+                        transform: isActive ? 'scale(1.04)' : 'scale(1)',
                         transition: 'transform 0.2s ease, color 0.2s ease'
                       }}
                     >
+                      {item.icon}
                       {item.name}
                     </a>
                   );

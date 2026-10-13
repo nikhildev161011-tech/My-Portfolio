@@ -1,133 +1,154 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
+import { FaGithub, FaLinkedin, FaEnvelope, FaHome, FaUser, FaCode, FaGraduationCap } from 'react-icons/fa';
+import { SiLeetcode } from 'react-icons/si';
 
 export default function Footer() {
-  const [isVisible, setIsVisible] = useState(false);
-  const footerRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    if (footerRef.current) {
-      observer.observe(footerRef.current);
-    }
-
-    return () => {
-      if (footerRef.current) {
-        observer.unobserve(footerRef.current);
-      }
-    };
-  }, []);
-
   return (
     <>
       <style>
         {`
-          @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&display=swap');
-
-          @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-          }
-
-          .typewriter-container {
-            display: inline-block;
-            overflow: hidden;
-            white-space: nowrap;
-            width: 0;
-          }
-
-          .animate-typing {
-            animation: typing 2.5s steps(24, end) forwards;
-          }
+          @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&display=swap');
 
           .footer-cursive-heading {
             font-family: 'Caveat', cursive;
-            font-size: clamp(2rem, 6.5vw, 5.5rem);
-            font-weight: 700;
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 500;
             color: #0f172a;
             line-height: 1.1;
             letter-spacing: 0.02em;
-            text-align: center;
-            margin: 0;
-            white-space: nowrap;
           }
 
-          .footer-nav-link {
-            color: #64748b;
+          .footer-social-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            color: #2563eb;
+            transition: all 0.25s ease;
             text-decoration: none;
-            font-size: 0.9rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+          }
+          .footer-social-btn:hover {
+            background-color: #2563eb;
+            color: #ffffff;
+            border-color: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+          }
+
+          .footer-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #475569;
+            text-decoration: none;
+            font-size: 0.95rem;
             font-weight: 600;
             transition: color 0.2s ease;
           }
-          .footer-nav-link:hover {
+          .footer-link:hover {
             color: #2563eb;
           }
 
-          @media (max-width: 480px) {
-            .footer-cursive-heading {
-              font-size: clamp(2.1rem, 7.5vw, 3rem);
+          @media (max-width: 768px) {
+            .footer-bottom-row {
+              flex-direction: column;
+              align-items: center;
+              text-align: center;
+              gap: 1rem;
             }
           }
         `}
       </style>
 
-      <footer ref={footerRef} style={{ 
+      <footer style={{ 
         width: '100%', 
-        padding: '4.5rem 1rem 3rem 1rem', 
-        backgroundColor: '#ffffff',
+        padding: '4rem 1.5rem 2.5rem 1.5rem', 
+        backgroundColor: '#f8fafc',
         borderTop: '1px solid #e2e8f0',
         boxSizing: 'border-box',
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: '2rem',
-        overflow: 'hidden'
+        alignItems: 'center'
       }}>
-        
-        <div style={{ textAlign: 'center', width: '100%', maxWidth: '950px' }}>
-          <h2 className="footer-cursive-heading">
-            <span className={`typewriter-container ${isVisible ? 'animate-typing' : ''}`}>
-              Developer & Cricketer
-            </span>
-          </h2>
-          <div style={{ width: '80px', height: '4px', background: 'linear-gradient(90deg, #2563eb 0%, #60a5fa 100%)', borderRadius: '2px', margin: '1rem auto 0 auto' }}></div>
-        </div>
-
         <div style={{ 
-          display: 'inline-flex', 
-          alignItems: 'center', 
-          gap: '8px', 
-          fontSize: '0.85rem',
-          fontWeight: '600',
-          color: '#475569',
-          textAlign: 'center',
-          padding: '0 0.5rem'
+          maxWidth: '1000px', 
+          width: '100%', 
+          margin: '0 auto', 
+          display: 'flex', 
+          flexDirection: 'column', 
+          gap: '2.5rem' 
         }}>
-          <span style={{ width: '8px', height: '8px', backgroundColor: '#22c55e', borderRadius: '50%', display: 'inline-block', boxShadow: '0 0 8px rgba(34, 197, 94, 0.5)', flexShrink: 0 }}></span>
-          <span>Always learning DSA & building for the future</span>
-        </div>
+          
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'space-between', 
+            alignItems: 'center', 
+            flexWrap: 'wrap', 
+            gap: '1.5rem',
+            borderBottom: '1px solid #e2e8f0',
+            paddingBottom: '2rem'
+          }}>
+            <div>
+              <h2 className="footer-cursive-heading" style={{ margin: 0 }}>
+                Developer & Cricketer
+              </h2>
+            </div>
 
-        <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
-          <a href="#home" className="footer-nav-link">Home</a>
-          <a href="#about" className="footer-nav-link">About</a>
-          <a href="#projects" className="footer-nav-link">Projects</a>
-          <a href="#education" className="footer-nav-link">Education</a>
-        </div>
+            <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+              <a href="https://github.com/nikhildev161011-tech" target="_blank" rel="noopener noreferrer" className="footer-social-btn" title="GitHub">
+                <FaGithub size={18} />
+              </a>
+              <a href="https://www.linkedin.com/in/nikhil-gupta-64697b3b6" target="_blank" rel="noopener noreferrer" className="footer-social-btn" title="LinkedIn">
+                <FaLinkedin size={18} />
+              </a>
+              <a href="https://leetcode.com/u/nikhil161011/" target="_blank" rel="noopener noreferrer" className="footer-social-btn" title="LeetCode">
+                <SiLeetcode size={18} />
+              </a>
+              <a href="mailto:nikhildev16161011@gmail.com" className="footer-social-btn" title="Email">
+                <FaEnvelope size={17} />
+              </a>
+            </div>
+          </div>
 
-        <div style={{ textAlign: 'center', borderTop: '1px solid #f1f5f9', width: '100%', paddingTop: '1.5rem', maxWidth: '600px' }}>
-          <p style={{ fontSize: '0.9rem', color: '#64748b', fontWeight: '600', margin: 0, letterSpacing: '0.02em' }}>
-            &copy; {new Date().getFullYear()} All rights reserved &bull; Nikhil Gupta
-          </p>
-        </div>
+          <div 
+            className="footer-bottom-row"
+            style={{ 
+              display: 'flex', 
+              justifyContent: 'space-between', 
+              alignItems: 'center', 
+              width: '100%',
+              gap: '1.5rem' 
+            }}
+          >
+            <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
+              <a href="#" className="footer-link">
+                <FaHome size={15} color="#2563eb" /> Home
+              </a>
+              <a href="#about" className="footer-link">
+                <FaUser size={14} color="#2563eb" /> About
+              </a>
+              <a href="#projects" className="footer-link">
+                <FaCode size={15} color="#2563eb" /> Projects
+              </a>
+              <a href="#education" className="footer-link">
+                <FaGraduationCap size={16} color="#2563eb" /> Education
+              </a>
+              <a href="#leetcode" className="footer-link">
+                <SiLeetcode size={15} color="#f59e0b" /> LeetCode
+              </a>
+            </div>
 
+            <p style={{ margin: 0, fontSize: '0.85rem', color: '#94a3b8', fontWeight: '600', textAlign: 'right' }}>
+              &copy; 2026 Nikhil Gupta || All rights reserved
+            </p>
+          </div>
+
+        </div>
       </footer>
     </>
   );

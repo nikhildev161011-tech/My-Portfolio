@@ -60,7 +60,7 @@ export default function Footer() {
     },
     {
       title: "Email",
-      link: "mailto:nikhildev16161011@gmail.com",
+      link: "mailto:nikhil.dev161011@gmail.com",
       icon: <FiMail size={22} color="#EA4335" />
     }
   ];
@@ -71,16 +71,36 @@ export default function Footer() {
         {`
           @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700&display=swap');
 
+          .footer-seamless-section {
+            width: 100%;
+            padding: 2.5rem 1.5rem 4rem 1.5rem;
+            background: transparent !important;
+            border: none !important;
+            border-top: none !important;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+          }
+
           .footer-wrapper-card {
-            background: #ffffff;
-            border: 1px solid #2563eb;
-            border-radius: 20px;
+            position: relative;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(226, 232, 240, 0.85);
+            border-radius: 24px;
             padding: 2.5rem;
-            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.08);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.03);
+            overflow: hidden;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
           }
           .footer-wrapper-card:hover {
-            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.15);
+            border-color: #2563eb;
+            box-shadow: 0 18px 40px rgba(37, 99, 235, 0.1);
+            transform: translateY(-2px);
           }
 
           .footer-social-icon-btn {
@@ -89,7 +109,9 @@ export default function Footer() {
             justify-content: center;
             width: 48px;
             height: 48px;
-            background: #ffffff;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             border: 1px solid #e2e8f0;
             border-radius: 14px;
             text-decoration: none;
@@ -119,8 +141,8 @@ export default function Footer() {
           }
 
           @media (max-width: 768px) {
-            .footer-section {
-              padding: 3rem 1rem !important;
+            .footer-seamless-section {
+              padding: 1.5rem 1rem 3rem 1rem !important;
             }
             .footer-wrapper-card {
               padding: 1.5rem;
@@ -135,16 +157,7 @@ export default function Footer() {
         `}
       </style>
 
-      <footer className="footer-section" style={{ 
-        width: '100%', 
-        padding: '4rem 1.5rem 3rem 1.5rem', 
-        backgroundColor: '#f8fafc',
-        borderTop: '1px solid #e2e8f0',
-        boxSizing: 'border-box',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center'
-      }}>
+      <footer className="footer-seamless-section">
         <div style={{ 
           maxWidth: '1000px', 
           width: '100%', 
@@ -156,69 +169,103 @@ export default function Footer() {
           <div className="footer-wrapper-card" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
             
             <div 
-              style={{ 
-                display: 'flex', 
-                justifyContent: 'center', 
-                alignItems: 'center', 
-                width: '100%',
-                borderBottom: '1px solid #e2e8f0',
-                paddingBottom: '2rem'
-              }}
-            >
-              <motion.div 
-                variants={iconsContainerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: false, amount: 0.2 }}
-                style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}
-              >
-                {socialLinks.map((item, index) => (
-                  <motion.a 
-                    key={index}
-                    href={item.link} 
-                    target={item.title === "Email" ? "_self" : "_blank"} 
-                    rel="noopener noreferrer" 
-                    variants={iconBounceVariant}
-                    className="footer-social-icon-btn" 
-                    title={item.title}
-                  >
-                    {item.icon}
-                  </motion.a>
-                ))}
-              </motion.div>
-            </div>
+              style={{
+                position: 'absolute',
+                top: 0,
+                right: 0,
+                width: 'min(70vw, 450px)',
+                height: 'min(70vw, 450px)',
+                transform: 'translate(25%, -25%)',
+                borderRadius: '50%',
+                background: 'radial-gradient(circle at 70% 30%, rgba(15, 23, 42, 0.35) 0%, rgba(15, 23, 42, 0.18) 28%, rgba(15, 23, 42, 0.06) 52%, transparent 75%)',
+                filter: 'blur(52px)',
+                pointerEvents: 'none',
+                zIndex: 0
+              }} 
+            />
 
             <div 
-              className="footer-bottom-row"
-              style={{ 
-                display: 'flex', 
-                justifyContent: 'space-between', 
-                alignItems: 'center', 
-                width: '100%',
-                gap: '1.5rem' 
-              }}
-            >
-              <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}>
-                <a href="#" className="footer-link">
-                  <FaHome size={15} color="#2563eb" /> Home
-                </a>
-                <a href="#about" className="footer-link">
-                  <FaUser size={14} color="#2563eb" /> About
-                </a>
-                <a href="#projects" className="footer-link">
-                  <FaCode size={15} color="#2563eb" /> Projects
-                </a>
-                <a href="#education" className="footer-link">
-                  <FaGraduationCap size={16} color="#2563eb" /> Education
-                </a>
-                <a href="#leetcode" className="footer-link">
-                  <SiLeetcode size={15} color="#FFA116" /> LeetCode
-                </a>
+              style={{
+                position: 'absolute',
+                bottom: 0,
+                left: 0,
+                width: 'min(65vw, 400px)',
+                height: 'min(65vw, 400px)',
+                transform: 'translate(-25%, 25%)',
+                borderRadius: '50%',
+                background: 'radial-gradient(circle at 30% 70%, rgba(15, 23, 42, 0.28) 0%, rgba(15, 23, 42, 0.14) 30%, transparent 70%)',
+                filter: 'blur(56px)',
+                pointerEvents: 'none',
+                zIndex: 0
+              }} 
+            />
+
+            <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+              <div 
+                style={{ 
+                  display: 'flex', 
+                  justifyContent: 'center', 
+                  alignItems: 'center', 
+                  width: '100%',
+                  borderBottom: '1px solid rgba(226, 232, 240, 0.8)',
+                  paddingBottom: '2rem'
+                }}
+              >
+                <motion.div 
+                  variants={iconsContainerVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: false, amount: 0.2 }}
+                  style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}
+                >
+                  {socialLinks.map((item, index) => (
+                    <motion.a 
+                      key={index}
+                      href={item.link} 
+                      target={item.title === "Email" ? "_self" : "_blank"} 
+                      rel="noopener noreferrer" 
+                      variants={iconBounceVariant}
+                      className="footer-social-icon-btn" 
+                      title={item.title}
+                    >
+                      {item.icon}
+                    </motion.a>
+                  ))}
+                </motion.div>
               </div>
 
-              <p style={{ margin: 0, fontSize: '0.85rem', color: '#94a3b8', fontWeight: '600' }}>
-                &copy; 2026 || All rights reserved
-              </p>
+              <div 
+                className="footer-bottom-row"
+                style={{ 
+                  display: 'flex', 
+                  justifyContent: 'space-between', 
+                  alignItems: 'center', 
+                  width: '100%',
+                  gap: '1.5rem' 
+                }}
+              >
+                <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}>
+                  <a href="#home" className="footer-link">
+                    <FaHome size={15} color="#2563eb" /> Home
+                  </a>
+                  <a href="#about" className="footer-link">
+                    <FaUser size={14} color="#2563eb" /> About
+                  </a>
+                  <a href="#projects" className="footer-link">
+                    <FaCode size={15} color="#2563eb" /> Projects
+                  </a>
+                  <a href="#education" className="footer-link">
+                    <FaGraduationCap size={16} color="#2563eb" /> Education
+                  </a>
+                  <a href="#leetcode" className="footer-link">
+                    <SiLeetcode size={15} color="#FFA116" /> LeetCode
+                  </a>
+                </div>
+
+                <p style={{ margin: 0, fontSize: '0.85rem', color: '#94a3b8', fontWeight: '600' }}>
+                  &copy; 2026 || All rights reserved
+                </p>
+              </div>
             </div>
 
           </div>

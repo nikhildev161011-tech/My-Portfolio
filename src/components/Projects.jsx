@@ -98,11 +98,35 @@ export default function Projects() {
     }
   };
 
+  const buttonPopVariants = {
+    hidden: { opacity: 0, y: 20, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.7,
+        ease: [0.25, 0.1, 0.25, 1.0]
+      }
+    }
+  };
+
   return (
     <>
       <style>
         {`
           @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&display=swap');
+
+          .projects-seamless-section {
+            width: 100%;
+            padding: 2.5rem 1.5rem 5rem 1.5rem;
+            background: transparent !important;
+            border: none !important;
+            border-top: none !important;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 2;
+          }
 
           .projects-main-heading {
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -129,20 +153,26 @@ export default function Projects() {
           }
 
           .projects-wrapper-card {
-            background: #ffffff;
-            border: 1px solid #2563eb;
-            border-radius: 20px;
+            position: relative;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(226, 232, 240, 0.85);
+            border-radius: 24px;
             padding: 2.5rem;
-            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.08);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.03);
+            overflow: hidden;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
           }
           .projects-wrapper-card:hover {
-            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.15);
+            border-color: #2563eb;
+            box-shadow: 0 18px 40px rgba(37, 99, 235, 0.1);
+            transform: translateY(-2px);
           }
 
           .project-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(226, 232, 240, 0.85);
             border-radius: 20px;
             overflow: hidden;
             display: flex;
@@ -248,7 +278,9 @@ export default function Projects() {
             align-items: center;
             justify-content: center;
             padding: 8px;
-            background: #f8fafc;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             border: 1px solid #e2e8f0;
             border-radius: 12px;
             transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
@@ -270,21 +302,22 @@ export default function Projects() {
             font-weight: 700;
             color: #ffffff;
             background-color: #2563eb;
-            padding: 10px 16px;
+            padding: 0.65rem 1.25rem;
             border-radius: 12px;
             text-decoration: none;
             box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
-            transition: all 0.2s ease;
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+            box-sizing: border-box;
           }
           .view-project-btn:hover {
             background-color: #1d4ed8;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 18px rgba(37, 99, 235, 0.35);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 22px rgba(37, 99, 235, 0.35);
           }
 
           @media (max-width: 768px) {
-            .projects-section {
-              padding: 3rem 1rem !important;
+            .projects-seamless-section {
+              padding: 1.5rem 1rem 3rem 1rem !important;
             }
             .projects-wrapper-card {
               padding: 1.5rem;
@@ -299,13 +332,7 @@ export default function Projects() {
         `}
       </style>
 
-      <section id="projects" className="projects-section" style={{ 
-        width: '100%', 
-        padding: '5rem 1.5rem', 
-        backgroundColor: '#f8fafc',
-        borderTop: '1px solid #e2e8f0',
-        boxSizing: 'border-box'
-      }}>
+      <section id="projects" className="projects-seamless-section">
         <div style={{ 
           maxWidth: '1000px', 
           margin: '0 auto', 
@@ -315,142 +342,180 @@ export default function Projects() {
         }}>
           
           <motion.div 
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0.2 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
             className="projects-wrapper-card"
             style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}
           >
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', position: 'relative' }}>
-              <span style={{ fontSize: '0.85rem', fontWeight: '700', letterSpacing: '-0.02em', color: '#2563eb', textTransform: 'uppercase' }}>
-                Crafted Work & Web Applications
-              </span>
+            <div 
+              style={{
+                position: 'absolute',
+                top: 0,
+                right: 0,
+                width: 'min(70vw, 450px)',
+                height: 'min(70vw, 450px)',
+                transform: 'translate(25%, -25%)',
+                borderRadius: '50%',
+                background: 'radial-gradient(circle at 70% 30%, rgba(15, 23, 42, 0.35) 0%, rgba(15, 23, 42, 0.18) 28%, rgba(15, 23, 42, 0.06) 52%, transparent 75%)',
+                filter: 'blur(52px)',
+                pointerEvents: 'none',
+                zIndex: 0
+              }} 
+            />
 
-              <motion.h2 
-                className="projects-main-heading"
-                variants={titleContainerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: false, amount: 0.2 }}
-              >
-                {headingLetters.map((char, index) => (
-                  <motion.span 
-                    key={index} 
-                    variants={letterVariants}
-                    style={{ display: 'inline-block', whiteSpace: char === " " ? "pre" : "normal" }}
-                  >
-                    {char}
-                  </motion.span>
-                ))}
-              </motion.h2>
+            <div 
+              style={{
+                position: 'absolute',
+                bottom: 0,
+                left: 0,
+                width: 'min(65vw, 400px)',
+                height: 'min(65vw, 400px)',
+                transform: 'translate(-25%, 25%)',
+                borderRadius: '50%',
+                background: 'radial-gradient(circle at 30% 70%, rgba(15, 23, 42, 0.28) 0%, rgba(15, 23, 42, 0.14) 30%, transparent 70%)',
+                filter: 'blur(56px)',
+                pointerEvents: 'none',
+                zIndex: 0
+              }} 
+            />
 
-              <div style={{ width: '60px', height: '4px', background: 'linear-gradient(90deg, #2563eb 0%, #60a5fa 100%)', borderRadius: '2px', marginTop: '4px' }}></div>
-            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem', position: 'relative', zIndex: 1 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', position: 'relative' }}>
+                <span style={{ fontSize: '0.85rem', fontWeight: '700', letterSpacing: '-0.02em', color: '#2563eb', textTransform: 'uppercase' }}>
+                  Crafted Work & Web Applications
+                </span>
 
-            <div style={{ 
-              display: 'grid', 
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
-              gap: '2rem' 
-            }}>
-              {projectsList.map((project, index) => {
-                const projectTitleLetters = project.title.split("");
+                <motion.h2 
+                  className="projects-main-heading"
+                  variants={titleContainerVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: false, amount: 0.2 }}
+                >
+                  {headingLetters.map((char, index) => (
+                    <motion.span 
+                      key={index} 
+                      variants={letterVariants}
+                      style={{ display: 'inline-block', whiteSpace: char === " " ? "pre" : "normal" }}
+                    >
+                      {char}
+                    </motion.span>
+                  ))}
+                </motion.h2>
 
-                return (
-                  <motion.div 
-                    key={index} 
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: false, amount: 0.2 }}
-                    transition={{ duration: 0.6, delay: index * 0.15, ease: "easeOut" }}
-                    className="project-card"
-                  >
-                    
-                    <div className="browser-mockup-wrapper">
-                      <div className="browser-window">
-                        <div className="browser-top-bar">
-                          <div className="browser-dots">
-                            <span className="browser-dot dot-red"></span>
-                            <span className="browser-dot dot-yellow"></span>
-                            <span className="browser-dot dot-green"></span>
+                <div style={{ width: '60px', height: '4px', background: 'linear-gradient(90deg, #2563eb 0%, #60a5fa 100%)', borderRadius: '2px', marginTop: '4px' }}></div>
+              </div>
+
+              <div style={{ 
+                display: 'grid', 
+                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
+                gap: '2rem' 
+              }}>
+                {projectsList.map((project, index) => {
+                  const projectTitleLetters = project.title.split("");
+
+                  return (
+                    <motion.div 
+                      key={index} 
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: false, amount: 0.2 }}
+                      transition={{ duration: 0.6, delay: index * 0.15, ease: "easeOut" }}
+                      className="project-card"
+                    >
+                      <div className="browser-mockup-wrapper">
+                        <div className="browser-window">
+                          <div className="browser-top-bar">
+                            <div className="browser-dots">
+                              <span className="browser-dot dot-red"></span>
+                              <span className="browser-dot dot-yellow"></span>
+                              <span className="browser-dot dot-green"></span>
+                            </div>
+                            <div className="browser-address-bar">
+                              <span className="browser-address-text">{project.title.toLowerCase().replace(/\s+/g, '')}.app</span>
+                            </div>
                           </div>
-                          <div className="browser-address-bar">
-                            <span className="browser-address-text">{project.title.toLowerCase().replace(/\s+/g, '')}.app</span>
+
+                          <div className="browser-screen-viewport">
+                            <img 
+                              src={project.image} 
+                              alt={project.title} 
+                              onError={(e) => {
+                                e.target.src = "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80";
+                              }}
+                            />
                           </div>
                         </div>
+                      </div>
 
-                        <div className="browser-screen-viewport">
-                          <img 
-                            src={project.image} 
-                            alt={project.title} 
-                            onError={(e) => {
-                              e.target.src = "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80";
-                            }}
-                          />
+                      <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem', flex: 1, justifyContent: 'space-between' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                          <motion.h3 
+                            className="project-title-animated"
+                            variants={titleContainerVariants}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: false, amount: 0.2 }}
+                          >
+                            {projectTitleLetters.map((char, charIdx) => (
+                              <motion.span 
+                                key={charIdx} 
+                                variants={letterVariants}
+                                style={{ display: 'inline-block', whiteSpace: char === " " ? "pre" : "normal" }}
+                              >
+                                {char}
+                              </motion.span>
+                            ))}
+                          </motion.h3>
+                          <p style={{ fontSize: '0.95rem', color: '#475569', lineHeight: '1.6', margin: 0, fontWeight: '500' }}>
+                            {project.description}
+                          </p>
+                        </div>
+
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                          <motion.div 
+                            variants={iconsContainerVariants}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: false, amount: 0.2 }}
+                            style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', alignItems: 'center' }}
+                          >
+                            {project.tags.map((tag, tagIndex) => (
+                              <motion.div 
+                                key={tagIndex} 
+                                variants={iconBounceVariant} 
+                                className="project-icon-wrapper" 
+                                title={tag.name}
+                              >
+                                {tag.icon}
+                              </motion.div>
+                            ))}
+                          </motion.div>
+
+                          <div style={{ borderTop: '1px solid rgba(226, 232, 240, 0.8)', paddingTop: '1rem' }}>
+                            <motion.a 
+                              href={project.viewLink} 
+                              target="_blank" 
+                              rel="noopener noreferrer" 
+                              variants={buttonPopVariants}
+                              initial="hidden"
+                              whileInView="visible"
+                              viewport={{ once: false, amount: 0.2 }}
+                              className="view-project-btn"
+                            >
+                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                              View Live Demo
+                            </motion.a>
+                          </div>
                         </div>
                       </div>
-                    </div>
-
-                    <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem', flex: 1, justifyContent: 'space-between' }}>
-                      
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                        <motion.h3 
-                          className="project-title-animated"
-                          variants={titleContainerVariants}
-                          initial="hidden"
-                          whileInView="visible"
-                          viewport={{ once: false, amount: 0.2 }}
-                        >
-                          {projectTitleLetters.map((char, charIdx) => (
-                            <motion.span 
-                              key={charIdx} 
-                              variants={letterVariants}
-                              style={{ display: 'inline-block', whiteSpace: char === " " ? "pre" : "normal" }}
-                            >
-                              {char}
-                            </motion.span>
-                          ))}
-                        </motion.h3>
-                        <p style={{ fontSize: '0.95rem', color: '#475569', lineHeight: '1.6', margin: 0, fontWeight: '500' }}>
-                          {project.description}
-                        </p>
-                      </div>
-
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                        <motion.div 
-                          variants={iconsContainerVariants}
-                          initial="hidden"
-                          whileInView="visible"
-                          viewport={{ once: false, amount: 0.2 }}
-                          style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', alignItems: 'center' }}
-                        >
-                          {project.tags.map((tag, tagIndex) => (
-                            <motion.div 
-                              key={tagIndex} 
-                              variants={iconBounceVariant} 
-                              className="project-icon-wrapper" 
-                              title={tag.name}
-                            >
-                              {tag.icon}
-                            </motion.div>
-                          ))}
-                        </motion.div>
-
-                        <div style={{ borderTop: '1px solid #f1f5f9', paddingTop: '1rem' }}>
-                          <a href={project.viewLink} target="_blank" rel="noopener noreferrer" className="view-project-btn">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                            View Live Demo
-                          </a>
-                        </div>
-                      </div>
-
-                    </div>
-
-                  </motion.div>
-                );
-              })}
+                    </motion.div>
+                  );
+                })}
+              </div>
             </div>
-
           </motion.div>
 
         </div>

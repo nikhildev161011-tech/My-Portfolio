@@ -106,6 +106,17 @@ export default function Contact() {
         {`
           @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&display=swap');
 
+          .contact-seamless-section {
+            width: 100%;
+            padding: 2.5rem 1.5rem 5rem 1.5rem;
+            background: transparent !important;
+            border: none !important;
+            border-top: none !important;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 2;
+          }
+
           .contact-main-heading {
             font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: clamp(2.2rem, 5.5vw, 3.8rem);
@@ -120,15 +131,30 @@ export default function Contact() {
           }
 
           .contact-wrapper-card {
-            background: #ffffff;
-            border: 1px solid #2563eb;
-            border-radius: 20px;
+            position: relative;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(226, 232, 240, 0.85);
+            border-radius: 24px;
             padding: 2.5rem;
-            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.08);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.03);
+            overflow: hidden;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
           }
           .contact-wrapper-card:hover {
-            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.15);
+            border-color: #2563eb;
+            box-shadow: 0 18px 40px rgba(37, 99, 235, 0.1);
+            transform: translateY(-2px);
+          }
+
+          .contact-form-box {
+            background: rgba(248, 250, 252, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 1.75rem;
+            border-radius: 18px;
+            border: 1px solid rgba(226, 232, 240, 0.9);
           }
 
           .contact-input-field {
@@ -136,13 +162,13 @@ export default function Contact() {
             padding: 14px 16px;
             border-radius: 12px;
             border: 1px solid #cbd5e1;
-            background: #f8fafc;
+            background: rgba(255, 255, 255, 0.9);
             color: #0f172a;
             font-size: 0.95rem;
             font-family: inherit;
             box-sizing: border-box;
             outline: none;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
           }
           .contact-input-field:focus {
             border-color: #2563eb;
@@ -181,7 +207,9 @@ export default function Contact() {
             justify-content: center;
             width: 48px;
             height: 48px;
-            background: #f8fafc;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             border: 1px solid #e2e8f0;
             border-radius: 14px;
             text-decoration: none;
@@ -196,8 +224,8 @@ export default function Contact() {
           }
 
           @media (max-width: 768px) {
-            .contact-section {
-              padding: 3rem 1rem !important;
+            .contact-seamless-section {
+              padding: 1.5rem 1rem 3rem 1rem !important;
             }
             .contact-wrapper-card {
               padding: 1.5rem;
@@ -209,13 +237,7 @@ export default function Contact() {
         `}
       </style>
 
-      <section id="contact" className="contact-section" style={{ 
-        width: '100%', 
-        padding: '5rem 1.5rem', 
-        backgroundColor: '#ffffff',
-        borderTop: '1px solid #e2e8f0',
-        boxSizing: 'border-box'
-      }}>
+      <section id="contact" className="contact-seamless-section">
         <div style={{ 
           maxWidth: '1000px', 
           margin: '0 auto', 
@@ -225,130 +247,161 @@ export default function Contact() {
         }}>
           
           <motion.div 
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0.2 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
             className="contact-wrapper-card"
             style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}
           >
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', position: 'relative' }}>
-              <span style={{ fontSize: '0.85rem', fontWeight: '700', letterSpacing: '-0.02em', color: '#2563eb', textTransform: 'uppercase' }}>
-                Get In Touch
-              </span>
+            <div 
+              style={{
+                position: 'absolute',
+                top: 0,
+                right: 0,
+                width: 'min(70vw, 450px)',
+                height: 'min(70vw, 450px)',
+                transform: 'translate(25%, -25%)',
+                borderRadius: '50%',
+                background: 'radial-gradient(circle at 70% 30%, rgba(15, 23, 42, 0.35) 0%, rgba(15, 23, 42, 0.18) 28%, rgba(15, 23, 42, 0.06) 52%, transparent 75%)',
+                filter: 'blur(52px)',
+                pointerEvents: 'none',
+                zIndex: 0
+              }} 
+            />
 
-              <motion.h2 
-                className="contact-main-heading"
-                variants={titleContainerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: false, amount: 0.2 }}
-              >
-                {headingLetters.map((char, index) => (
-                  <motion.span 
-                    key={index} 
-                    variants={letterVariants}
-                    style={{ display: 'inline-block', whiteSpace: char === " " ? "pre" : "normal" }}
-                  >
-                    {char}
-                  </motion.span>
-                ))}
-              </motion.h2>
+            <div 
+              style={{
+                position: 'absolute',
+                bottom: 0,
+                left: 0,
+                width: 'min(65vw, 400px)',
+                height: 'min(65vw, 400px)',
+                transform: 'translate(-25%, 25%)',
+                borderRadius: '50%',
+                background: 'radial-gradient(circle at 30% 70%, rgba(15, 23, 42, 0.28) 0%, rgba(15, 23, 42, 0.14) 30%, transparent 70%)',
+                filter: 'blur(56px)',
+                pointerEvents: 'none',
+                zIndex: 0
+              }} 
+            />
 
-              <div style={{ width: '60px', height: '4px', background: 'linear-gradient(90deg, #2563eb 0%, #60a5fa 100%)', borderRadius: '2px', marginTop: '4px' }}></div>
-            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem', position: 'relative', zIndex: 1 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', position: 'relative' }}>
+                <span style={{ fontSize: '0.85rem', fontWeight: '700', letterSpacing: '-0.02em', color: '#2563eb', textTransform: 'uppercase' }}>
+                  Get In Touch
+                </span>
 
-            <div style={{ 
-              display: 'grid', 
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
-              gap: '2.5rem',
-              alignItems: 'start'
-            }}>
-              
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                <p style={{ fontSize: '1.1rem', color: '#334155', lineHeight: '1.7', margin: 0, fontWeight: '500' }}>
-                  Have an exciting project idea, internship opportunity, or just want to chat about tech and DSA? Feel free to reach out directly!
-                </p>
+                <motion.h2 
+                  className="contact-main-heading"
+                  variants={titleContainerVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: false, amount: 0.2 }}
+                >
+                  {headingLetters.map((char, index) => (
+                    <motion.span 
+                      key={index} 
+                      variants={letterVariants}
+                      style={{ display: 'inline-block', whiteSpace: char === " " ? "pre" : "normal" }}
+                    >
+                      {char}
+                    </motion.span>
+                  ))}
+                </motion.h2>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
-                  <span style={{ fontSize: '0.85rem', fontWeight: '700', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-                    Connect Across Platforms
-                  </span>
-                  <motion.div 
-                    variants={iconsContainerVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: false, amount: 0.2 }}
-                    style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', alignItems: 'center' }}
-                  >
-                    {socialLinks.map((item, index) => (
-                      <motion.a 
-                        key={index}
-                        href={item.link} 
-                        target={item.title === "Email" ? "_self" : "_blank"} 
-                        rel="noopener noreferrer" 
-                        variants={iconBounceVariant}
-                        className="contact-social-icon-btn" 
-                        title={item.title}
-                      >
-                        {item.icon}
-                      </motion.a>
-                    ))}
-                  </motion.div>
+                <div style={{ width: '60px', height: '4px', background: 'linear-gradient(90deg, #2563eb 0%, #60a5fa 100%)', borderRadius: '2px', marginTop: '4px' }}></div>
+              </div>
+
+              <div style={{ 
+                display: 'grid', 
+                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
+                gap: '2.5rem',
+                alignItems: 'start'
+              }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                  <p style={{ fontSize: '1.1rem', color: '#334155', lineHeight: '1.7', margin: 0, fontWeight: '500' }}>
+                    Have an exciting project idea, internship opportunity, or just want to chat about tech and DSA? Feel free to reach out directly!
+                  </p>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+                    <span style={{ fontSize: '0.85rem', fontWeight: '700', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                      Connect Across Platforms
+                    </span>
+                    <motion.div 
+                      variants={iconsContainerVariants}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: false, amount: 0.2 }}
+                      style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', alignItems: 'center' }}
+                    >
+                      {socialLinks.map((item, index) => (
+                        <motion.a 
+                          key={index}
+                          href={item.link} 
+                          target={item.title === "Email" ? "_self" : "_blank"} 
+                          rel="noopener noreferrer" 
+                          variants={iconBounceVariant}
+                          className="contact-social-icon-btn" 
+                          title={item.title}
+                        >
+                          {item.icon}
+                        </motion.a>
+                      ))}
+                    </motion.div>
+                  </div>
+                </div>
+
+                <div className="contact-form-box">
+                  <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                      <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#334155' }}>Your Name</label>
+                      <input 
+                        type="text" 
+                        name="name" 
+                        required 
+                        value={formData.name}
+                        onChange={handleChange}
+                        placeholder="Enter your name" 
+                        className="contact-input-field" 
+                      />
+                    </div>
+
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                      <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#334155' }}>Your Email</label>
+                      <input 
+                        type="email" 
+                        name="email" 
+                        required 
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="Enter your email" 
+                        className="contact-input-field" 
+                      />
+                    </div>
+
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                      <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#334155' }}>Message</label>
+                      <textarea 
+                        name="message" 
+                        required 
+                        rows="6" 
+                        value={formData.message}
+                        onChange={handleChange}
+                        placeholder="Enter your message" 
+                        className="contact-input-field" 
+                        style={{ resize: 'vertical', minHeight: '140px' }}
+                      ></textarea>
+                    </div>
+
+                    <button type="submit" className="contact-submit-outline-btn">
+                      <FiSend size={16} />
+                      <span>Send Message</span>
+                    </button>
+                  </form>
                 </div>
               </div>
-
-              <div style={{ background: '#f8fafc', padding: '1.75rem', borderRadius: '16px', border: '1px solid #e2e8f0' }}>
-                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-                    <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#334155' }}>Your Name</label>
-                    <input 
-                      type="text" 
-                      name="name" 
-                      required 
-                      value={formData.name}
-                      onChange={handleChange}
-                      placeholder="Enter your name" 
-                      className="contact-input-field" 
-                    />
-                  </div>
-
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-                    <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#334155' }}>Your Email</label>
-                    <input 
-                      type="email" 
-                      name="email" 
-                      required 
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder="Enter your email" 
-                      className="contact-input-field" 
-                    />
-                  </div>
-
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-                    <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#334155' }}>Message</label>
-                    <textarea 
-                      name="message" 
-                      required 
-                      rows="6" 
-                      value={formData.message}
-                      onChange={handleChange}
-                      placeholder="Enter your message" 
-                      className="contact-input-field" 
-                      style={{ resize: 'vertical', minHeight: '140px' }}
-                    ></textarea>
-                  </div>
-
-                  <button type="submit" className="contact-submit-outline-btn">
-                    <FiSend size={16} />
-                    <span>Send Message</span>
-                  </button>
-                </form>
-              </div>
-
             </div>
-
           </motion.div>
 
         </div>

@@ -7,12 +7,12 @@ export default function MacDock() {
   const [activeIndex, setActiveIndex] = useState(null);
 
   const dockItems = [
-    { name: "Home", icon: <FaHome size={24} color="#2563eb" />, type: "scroll", target: "#top" },
-    { name: "About Me", icon: <FaUser size={22} color="#4f46e5" />, type: "scroll", target: "#about" },
-    { name: "Education", icon: <FaGraduationCap size={24} color="#0284c7" />, type: "scroll", target: "#education" },
-    { name: "LeetCode", icon: <SiLeetcode size={24} color="#f59e0b" />, type: "link", url: "https://leetcode.com/u/nikhil161011/" },
-    { name: "Projects", icon: <FaCode size={24} color="#059669" />, type: "scroll", target: "#projects" },
-    { name: "Contact", icon: <FaEnvelope size={22} color="#dc2626" />, type: "menu" }
+    { name: "Home", icon: <FaHome size={22} color="#2563eb" />, type: "scroll", target: "#home" },
+    { name: "About Me", icon: <FaUser size={20} color="#4f46e5" />, type: "scroll", target: "#about" },
+    { name: "Education", icon: <FaGraduationCap size={22} color="#0284c7" />, type: "scroll", target: "#education" },
+    { name: "LeetCode", icon: <SiLeetcode size={22} color="#f59e0b" />, type: "link", url: "https://leetcode.com/u/nikhil161011/" },
+    { name: "Projects", icon: <FaCode size={22} color="#059669" />, type: "scroll", target: "#projects" },
+    { name: "Contact", icon: <FaEnvelope size={20} color="#dc2626" />, type: "menu" }
   ];
 
   const handleTouchMove = (e) => {
@@ -30,7 +30,7 @@ export default function MacDock() {
   const handleItemClick = (item, e) => {
     if (item.type === "scroll") {
       e.preventDefault();
-      if (item.target === "#top") {
+      if (item.target === "#home") {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
         const element = document.querySelector(item.target);
@@ -52,14 +52,17 @@ export default function MacDock() {
     <>
       <style>
         {`
-          .mac-dock-container {
+          .mac-dock-seamless-container {
             display: flex;
             justify-content: center;
             width: 100%;
-            padding: 1.5rem 1rem;
-            background-color: #f8fafc;
+            padding: 2.5rem 1rem 3rem 1rem;
+            background: transparent !important;
+            border: none !important;
+            border-top: none !important;
             box-sizing: border-box;
             position: relative;
+            z-index: 10;
           }
 
           .mac-dock {
@@ -68,14 +71,21 @@ export default function MacDock() {
             justify-content: center;
             gap: 12px;
             padding: 10px 18px;
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.75);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(37, 99, 235, 0.2);
+            border: 1px solid rgba(226, 232, 240, 0.85);
             border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.12);
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
             max-width: 100%;
             touch-action: none;
+            position: relative;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+          }
+
+          .mac-dock:hover {
+            border-color: #2563eb;
+            box-shadow: 0 14px 35px rgba(37, 99, 235, 0.12);
           }
 
           .dock-icon-item {
@@ -85,21 +95,21 @@ export default function MacDock() {
             justify-content: center;
             width: 48px;
             height: 48px;
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(226, 232, 240, 0.9);
             border-radius: 14px;
             cursor: pointer;
-            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
             text-decoration: none;
             -webkit-tap-highlight-color: transparent;
           }
 
           .dock-icon-item:hover, .dock-icon-item.touch-active {
-            transform: translateY(-10px) scale(1.25);
+            transform: translateY(-8px) scale(1.2);
             border-color: #2563eb;
             background: #eff6ff;
-            box-shadow: 0 12px 25px rgba(37, 99, 235, 0.3);
+            box-shadow: 0 10px 22px rgba(37, 99, 235, 0.25);
             z-index: 10;
           }
 
@@ -131,14 +141,16 @@ export default function MacDock() {
           .contact-popup-menu {
             position: absolute;
             bottom: 85px;
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(226, 232, 240, 0.9);
+            border-radius: 18px;
             padding: 10px;
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            gap: 6px;
+            box-shadow: 0 15px 35px rgba(15, 23, 42, 0.12);
             z-index: 50;
             animation: popUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
           }
@@ -152,12 +164,12 @@ export default function MacDock() {
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 8px 12px;
+            padding: 8px 14px;
             color: #334155;
             text-decoration: none;
             font-size: 0.85rem;
             font-weight: 700;
-            border-radius: 8px;
+            border-radius: 10px;
             transition: all 0.2s ease;
             white-space: nowrap;
           }
@@ -168,6 +180,9 @@ export default function MacDock() {
           }
 
           @media (max-width: 480px) {
+            .mac-dock-seamless-container {
+              padding: 1.5rem 0.5rem 2.5rem 0.5rem !important;
+            }
             .mac-dock {
               gap: 8px;
               padding: 8px 12px;
@@ -180,17 +195,30 @@ export default function MacDock() {
         `}
       </style>
 
-      <div className="mac-dock-container">
+      <div className="mac-dock-seamless-container">
         {showContactMenu && (
           <div className="contact-popup-menu">
-            <a href="https://github.com/nikhil161011" target="_blank" rel="noopener noreferrer" className="contact-popup-item">
+            <a 
+              href="https://github.com/nikhildev161011-tech" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="contact-popup-item"
+            >
               <FaGithub size={16} color="#0f172a" /> GitHub Profile
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="contact-popup-item">
-              <FaLinkedin size={16} color="#0A66C2" /> LinkedIn Profile
+            <a 
+              href="https://www.linkedin.com/in/nikhil-gupta-64697b3b6" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="contact-popup-item"
+            >
+              <FaLinkedin size={16} color="#0a66c2" /> LinkedIn Profile
             </a>
-            <a href="mailto:nikhil@gmail.com" className="contact-popup-item">
-              <FaEnvelope size={16} color="#EA4335" /> Send Email
+            <a 
+              href="mailto:nikhil.dev161011@gmail.com" 
+              className="contact-popup-item"
+            >
+              <FaEnvelope size={16} color="#ea4335" /> Send Email
             </a>
           </div>
         )}
@@ -204,7 +232,7 @@ export default function MacDock() {
             <a 
               key={index}
               data-index={index}
-              href={item.link || item.target || "#"}
+              href={item.url || item.target || "#"}
               target={item.url ? "_blank" : "_self"}
               rel={item.url ? "noopener noreferrer" : ""}
               className={`dock-icon-item ${activeIndex === index ? 'touch-active' : ''}`}

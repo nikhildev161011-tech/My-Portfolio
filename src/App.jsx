@@ -20,34 +20,98 @@ export default function App() {
   }, []);
 
   return (
-    <div style={{ width: '100%', minHeight: '100vh', backgroundColor: '#f8fafc', margin: 0, padding: 0, overflowX: 'hidden' }}>
-      <Header />
-      <Hero />
+    <div style={{ 
+      position: 'relative',
+      width: '100%', 
+      minHeight: '100vh', 
+      backgroundColor: '#f1f5f9', 
+      margin: 0, 
+      padding: 0, 
+      overflowX: 'hidden' 
+    }}>
       
-      <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.15 }} transition={{ duration: 0.8, ease: "easeOut" }}>
-        <About />
-      </motion.div>
+      {/* Background Dark Fog Spots */}
+      <div 
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100vw',
+          height: '100vh',
+          pointerEvents: 'none',
+          zIndex: 0,
+          overflow: 'hidden'
+        }}
+      >
+        <div 
+          style={{
+            position: 'absolute',
+            top: '-10%',
+            right: '-10%',
+            width: '650px',
+            height: '650px',
+            borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(15, 23, 42, 0.18) 0%, rgba(15, 23, 42, 0.08) 50%, transparent 75%)',
+            filter: 'blur(80px)',
+          }}
+        />
 
-      <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.15 }} transition={{ duration: 0.8, ease: "easeOut" }}>
-        <Education />
-      </motion.div>
+        <div 
+          style={{
+            position: 'absolute',
+            top: '40%',
+            left: '-15%',
+            width: '600px',
+            height: '600px',
+            borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(15, 23, 42, 0.16) 0%, rgba(15, 23, 42, 0.06) 50%, transparent 75%)',
+            filter: 'blur(90px)',
+          }}
+        />
 
-      <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.15 }} transition={{ duration: 0.8, ease: "easeOut" }}>
-        <LeetCodeCard />
-      </motion.div>
+        <div 
+          style={{
+            position: 'absolute',
+            bottom: '-10%',
+            right: '-5%',
+            width: '700px',
+            height: '700px',
+            borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(15, 23, 42, 0.16) 0%, transparent 75%)',
+            filter: 'blur(90px)',
+          }}
+        />
+      </div>
 
-      <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.15 }} transition={{ duration: 0.8, ease: "easeOut" }}>
-        <Projects />
-      </motion.div>
+      <div style={{ position: 'relative', zIndex: 1 }}>
+        <Header />
+        <Hero />
+        
+        <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.15 }} transition={{ duration: 0.8, ease: "easeOut" }}>
+          <About />
+        </motion.div>
 
-      <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.15 }} transition={{ duration: 0.8, ease: "easeOut" }}>
-        <Contact />
-      </motion.div>
+        <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.15 }} transition={{ duration: 0.8, ease: "easeOut" }}>
+          <Education />
+        </motion.div>
 
-      <DevConsole />
+        <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.15 }} transition={{ duration: 0.8, ease: "easeOut" }}>
+          <LeetCodeCard />
+        </motion.div>
 
-      <MacDock />
-      <Footer />
+        <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.15 }} transition={{ duration: 0.8, ease: "easeOut" }}>
+          <Projects />
+        </motion.div>
+
+        <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.15 }} transition={{ duration: 0.8, ease: "easeOut" }}>
+          <Contact />
+        </motion.div>
+
+        <DevConsole />
+        <MacDock />
+        <Footer />
+      </div>
+
     </div>
   );
 }

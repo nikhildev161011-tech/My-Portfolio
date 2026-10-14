@@ -133,6 +133,7 @@ export default function Hero() {
             font-size: 0.9rem;
             box-shadow: 0 4px 15px rgba(37, 99, 235, 0.25);
             transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+            white-space: nowrap;
           }
           .primary-action-btn:hover {
             transform: translateY(-3px);
@@ -146,21 +147,25 @@ export default function Hero() {
             justify-content: center;
             gap: 8px;
             padding: 0.65rem 1.25rem;
-            background: #ffffff;
+            background: rgba(15, 23, 42, 0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             color: #0f172a;
-            border: 1px solid #cbd5e1;
+            border: 1px solid rgba(15, 23, 42, 0.16);
             border-radius: 12px;
             text-decoration: none;
             font-weight: 700;
             font-size: 0.9rem;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
-            transition: transform 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+            transition: transform 0.3s ease, border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+            white-space: nowrap;
           }
           .secondary-action-btn:hover {
             transform: translateY(-3px);
-            border-color: #2563eb;
-            color: #2563eb;
-            box-shadow: 0 6px 15px rgba(37, 99, 235, 0.15);
+            background: rgba(15, 23, 42, 0.14);
+            border-color: rgba(15, 23, 42, 0.3);
+            color: #0f172a;
+            box-shadow: 0 6px 18px rgba(15, 23, 42, 0.12);
           }
 
           .hero-desktop-grid {
@@ -178,7 +183,7 @@ export default function Hero() {
             display: flex;
             gap: 0.85rem;
             align-items: center;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             margin-top: 0.25rem;
           }
 
@@ -196,11 +201,27 @@ export default function Hero() {
             }
             .hero-action-buttons {
               width: 100%;
+              max-width: 380px;
               justify-content: center;
               flex-direction: row;
+              flex-wrap: nowrap;
+              gap: 0.65rem;
+            }
+            .primary-action-btn,
+            .secondary-action-btn {
+              flex: 1;
+              padding: 0.65rem 0.85rem;
+              font-size: 0.82rem;
+              gap: 6px;
+            }
+            .primary-action-btn svg,
+            .secondary-action-btn svg {
+              width: 15px;
+              height: 15px;
+              flex-shrink: 0;
             }
             .hero-seamless-container {
-              padding: 3rem 1rem !important;
+              padding: 2.5rem 1rem !important;
             }
             .hero-avatar-box {
               width: 140px !important;

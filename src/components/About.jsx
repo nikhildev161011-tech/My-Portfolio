@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { SiCplusplus, SiMongodb, SiExpress, SiTailwindcss, SiJavascript, SiGit } from 'react-icons/si';
-import { FaHtml5, FaCss3Alt, FaReact, FaNodeJs } from 'react-icons/fa';
+import { SiCplusplus, SiMongodb, SiExpress, SiTailwindcss, SiJavascript, SiGit, SiFirebase } from 'react-icons/si';
+import { FaHtml5, FaCss3Alt, FaReact, FaNodeJs, FaCode } from 'react-icons/fa';
+import { VscVscode } from 'react-icons/vsc';
 
 export default function About() {
   const aboutLetters = "About Me".split("");
@@ -157,26 +158,6 @@ export default function About() {
             display: inline-block;
           }
 
-          .metric-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 12px;
-            background: rgba(239, 246, 255, 0.85);
-            border: 1px solid #bfdbfe;
-            border-radius: 9999px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: #1d4ed8;
-          }
-
-          .google-g { color: #4285F4; }
-          .google-o1 { color: #EA4335; }
-          .google-o2 { color: #FBBC05; }
-          .google-g2 { color: #4285F4; }
-          .google-l { color: #34A853; }
-          .google-e { color: #EA4335; }
-
           @media (max-width: 768px) {
             .about-seamless-section {
               padding: 1rem 1rem 3rem 1rem !important;
@@ -269,13 +250,8 @@ export default function About() {
               }}>
                 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                  <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                    <span className="metric-badge">Target: SDE @ <span style={{ fontWeight: '800' }}><span className="google-g">G</span><span className="google-o1">o</span><span className="google-o2">o</span><span className="google-g2">g</span><span className="google-l">l</span><span className="google-e">e</span></span></span>
-                    <span className="metric-badge">BCA First Year</span>
-                  </div>
-
                   <p style={{ fontSize: '1.05rem', color: '#334155', lineHeight: '1.7', margin: 0, fontWeight: '500' }}>
-                    I am an aspiring Software Development Engineer building solid foundations in Data Structures & Algorithms, Object-Oriented Programming, and Computer Science fundamentals while shipping production-grade full-stack applications.
+                    I am an aspiring Software Development Engineer building solid fundamentals in Data Structures & Algorithms, Object-Oriented Programming, and Computer Science fundamentals while shipping production-grade full-stack applications.
                   </p>
                   
                   <p style={{ fontSize: '0.98rem', color: '#64748b', lineHeight: '1.7', margin: 0 }}>
@@ -287,7 +263,7 @@ export default function About() {
                   
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                     <h4 style={{ margin: 0, fontSize: '0.8rem', color: '#64748b', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                      Problem Solving & Core
+                      Learning Path
                     </h4>
                     <motion.div 
                       variants={iconsContainerVariants}
@@ -313,7 +289,7 @@ export default function About() {
 
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                     <h4 style={{ margin: 0, fontSize: '0.8rem', color: '#64748b', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                      Web Tech & Database
+                      Skills Acquired
                     </h4>
                     <motion.div 
                       variants={iconsContainerVariants}
@@ -336,6 +312,12 @@ export default function About() {
                       </motion.div>
                       <motion.div variants={iconBounceVariant} className="tech-icon-wrapper" title="Tailwind CSS">
                         <SiTailwindcss size={23} color="#06B6D4" />
+                      </motion.div>
+                      <motion.div variants={iconBounceVariant} className="tech-icon-wrapper" title="Firebase">
+                        <SiFirebase size={23} color="#FFCA28" />
+                      </motion.div>
+                      <motion.div variants={iconBounceVariant} className="tech-icon-wrapper" title="VS Code">
+                        <VscVscode size={23} color="#007ACC" />
                       </motion.div>
                       <motion.div variants={iconBounceVariant} className="tech-icon-wrapper" title="HTML5">
                         <FaHtml5 size={23} color="#E34F26" />

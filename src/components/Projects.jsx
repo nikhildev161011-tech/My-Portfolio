@@ -20,30 +20,6 @@ export default function Projects() {
       image: "/moneytracker.png",
       viewLink: "https://money-tracker-frontend-lilac.vercel.app/"
     },
-    {
-      title: "DevCart",
-      description: "A modern e-commerce web platform built for developers, featuring seamless product browsing, cart management, and secure checkout simulation.",
-      tags: [
-        { name: "React", icon: <FaReact size={20} color="#61DAFB" /> },
-        { name: "Express", icon: <SiExpress size={20} color="#0f172a" /> },
-        { name: "Tailwind CSS", icon: <SiTailwindcss size={20} color="#06B6D4" /> },
-        { name: "REST API", icon: <FaServer size={20} color="#2563eb" /> }
-      ],
-      image: "/devcart.png",
-      viewLink: "https://ecommerce-frontend-ivory-rho.vercel.app/"
-    },
-    {
-      title: "PCIMT",
-      description: "An advanced institutional web portal designed for efficient academic management, student tracking, and resource sharing.",
-      tags: [
-        { name: "Full Stack", icon: <FaServer size={20} color="#2563eb" /> },
-        { name: "Node.js", icon: <FaNodeJs size={20} color="#339933" /> },
-        { name: "Express", icon: <SiExpress size={20} color="#0f172a" /> },
-        { name: "MongoDB", icon: <SiMongodb size={20} color="#47A248" /> }
-      ],
-      image: "/pcimt.png.png",
-      viewLink: "https://pcimt-frontend-qhhv.vercel.app/"
-    }
   ];
 
   const titleContainerVariants = {

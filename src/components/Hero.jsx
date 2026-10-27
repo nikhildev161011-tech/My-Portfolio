@@ -312,7 +312,7 @@ export default function Hero() {
               />
             </div>
             <span style={{ fontSize: '0.78rem', fontWeight: '700', letterSpacing: '0.04em', color: '#64748b', textTransform: 'uppercase', textAlign: 'center' }}>
-              CS Fundamentals & DSA • Software Engineering Aspirant
+            Software Engineering Aspirant
             </span>
           </motion.div>
 

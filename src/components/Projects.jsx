@@ -90,9 +90,9 @@ export default function Projects() {
   const phoneScrollVariants = {
     hidden: { 
       opacity: 0, 
-      y: 50, 
-      scale: 0.9,
-      filter: "blur(6px)"
+      y: 40, 
+      scale: 0.94,
+      filter: "blur(4px)"
     },
     visible: {
       opacity: 1, 
@@ -100,7 +100,7 @@ export default function Projects() {
       scale: 1,
       filter: "blur(0px)",
       transition: {
-        duration: 0.85,
+        duration: 0.8,
         ease: [0.25, 0.1, 0.25, 1.0]
       }
     }
@@ -185,63 +185,33 @@ export default function Projects() {
           .mobile-standalone-stage {
             width: 100%;
             background: transparent;
-            padding: 2.25rem 1rem 1rem 1rem;
+            padding: 2rem 1rem 0.5rem 1rem;
             box-sizing: border-box;
             display: flex;
             justify-content: center;
             align-items: center;
           }
 
-          .s23-phone-frame {
-            width: 250px;
-            height: 440px;
-            background: #0f172a;
-            border-radius: 34px;
-            padding: 8px;
-            box-shadow: 0 20px 45px rgba(15, 23, 42, 0.22), 0 0 0 1.5px rgba(255, 255, 255, 0.18) inset;
-            box-sizing: border-box;
+          .phone-mockup-container {
+            width: 100%;
+            max-width: 250px;
             display: flex;
-            flex-direction: column;
-            position: relative;
-            transition: transform 0.35s ease, box-shadow 0.35s ease;
+            justify-content: center;
+            align-items: center;
+            filter: drop-shadow(0 16px 28px rgba(15, 23, 42, 0.15));
+            transition: transform 0.35s ease, filter 0.35s ease;
           }
-          .project-card:hover .s23-phone-frame {
+          .project-card:hover .phone-mockup-container {
             transform: translateY(-6px) scale(1.02);
-            box-shadow: 0 26px 50px rgba(37, 99, 235, 0.25);
+            filter: drop-shadow(0 22px 34px rgba(37, 99, 235, 0.22));
           }
 
-          .s23-punch-hole {
-            position: absolute;
-            top: 14px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 10px;
-            height: 10px;
-            background-color: #020617;
-            border-radius: 50%;
-            z-index: 5;
-            box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.15);
-          }
-
-          .s23-screen-viewport {
+          .phone-mockup-img {
             width: 100%;
-            height: 100%;
-            border-radius: 26px;
-            overflow: hidden;
-            background: #ffffff;
-            position: relative;
-          }
-
-          .s23-screen-viewport img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: top center;
+            height: auto;
+            max-height: 480px;
+            object-fit: contain;
             display: block;
-            transition: transform 0.4s ease;
-          }
-          .project-card:hover .s23-screen-viewport img {
-            transform: scale(1.03);
           }
 
           .project-icon-wrapper {
@@ -296,17 +266,11 @@ export default function Projects() {
             .projects-main-heading {
               font-size: clamp(1.8rem, 5vw, 2.4rem);
             }
-            .s23-phone-frame {
-              width: 215px;
-              height: 380px;
-              border-radius: 28px;
-              padding: 7px;
-            }
-            .s23-screen-viewport {
-              border-radius: 22px;
-            }
             .mobile-standalone-stage {
-              padding: 1.75rem 0.5rem 0.75rem 0.5rem;
+              padding: 1.5rem 0.5rem 0.25rem 0.5rem;
+            }
+            .phone-mockup-container {
+              max-width: 220px;
             }
           }
         `}
@@ -411,18 +375,16 @@ export default function Projects() {
                           initial="hidden"
                           whileInView="visible"
                           viewport={{ once: false, amount: 0.25 }}
-                          className="s23-phone-frame"
+                          className="phone-mockup-container"
                         >
-                          <div className="s23-punch-hole"></div>
-                          <div className="s23-screen-viewport">
-                            <img 
-                              src={project.image} 
-                              alt={project.title} 
-                              onError={(e) => {
-                                e.target.src = "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80";
-                              }}
-                            />
-                          </div>
+                          <img 
+                            src={project.image} 
+                            alt={project.title} 
+                            className="phone-mockup-img"
+                            onError={(e) => {
+                              e.target.src = "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80";
+                            }}
+                          />
                         </motion.div>
                       </div>
 

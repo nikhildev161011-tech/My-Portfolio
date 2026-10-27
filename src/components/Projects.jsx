@@ -163,81 +163,58 @@ export default function Projects() {
             box-shadow: 0 14px 30px rgba(37, 99, 235, 0.12);
           }
 
-          .browser-mockup-wrapper {
+          .mobile-mockup-wrapper {
             width: 100%;
             background: #f8fafc;
-            padding: 1.25rem 1.25rem 0 1.25rem;
+            padding: 1.5rem 1rem 1.25rem 1rem;
             border-bottom: 1px solid #e2e8f0;
             box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
           }
 
-          .browser-window {
-            width: 100%;
-            background: #ffffff;
-            border-radius: 12px 12px 0 0;
-            border: 1px solid #cbd5e1;
-            border-bottom: none;
-            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
-            overflow: hidden;
+          .s23-phone-frame {
+            width: 180px;
+            height: 310px;
+            background: #0f172a;
+            border-radius: 26px;
+            padding: 6px;
+            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.16), 0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+            box-sizing: border-box;
             display: flex;
             flex-direction: column;
-            transition: transform 0.35s ease;
+            position: relative;
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
           }
-          .project-card:hover .browser-window {
-            transform: translateY(-3px);
-          }
-
-          .browser-top-bar {
-            height: 32px;
-            background: #f1f5f9;
-            border-bottom: 1px solid #e2e8f0;
-            display: flex;
-            align-items: center;
-            padding: 0 12px;
-            gap: 12px;
+          .project-card:hover .s23-phone-frame {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 18px 36px rgba(37, 99, 235, 0.22);
           }
 
-          .browser-dots {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-          }
-
-          .browser-dot {
-            width: 9px;
-            height: 9px;
+          .s23-punch-hole {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 8px;
+            background-color: #020617;
             border-radius: 50%;
-          }
-          .dot-red { background: #ef4444; }
-          .dot-yellow { background: #f59e0b; }
-          .dot-green { background: #10b981; }
-
-          .browser-address-bar {
-            flex: 1;
-            height: 18px;
-            background: #ffffff;
-            border-radius: 6px;
-            border: 1px solid #e2e8f0;
-            display: flex;
-            align-items: center;
-            padding: 0 8px;
+            z-index: 5;
+            box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.1);
           }
 
-          .browser-address-text {
-            font-size: 0.65rem;
-            color: #94a3b8;
-            font-family: monospace;
-          }
-
-          .browser-screen-viewport {
+          .s23-screen-viewport {
             width: 100%;
-            height: 200px;
+            height: 100%;
+            border-radius: 20px;
             overflow: hidden;
             background: #ffffff;
             position: relative;
           }
 
-          .browser-screen-viewport img {
+          .s23-screen-viewport img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -245,8 +222,8 @@ export default function Projects() {
             display: block;
             transition: transform 0.4s ease;
           }
-          .project-card:hover .browser-screen-viewport img {
-            transform: scale(1.03);
+          .project-card:hover .s23-screen-viewport img {
+            transform: scale(1.04);
           }
 
           .project-icon-wrapper {
@@ -301,8 +278,9 @@ export default function Projects() {
             .projects-main-heading {
               font-size: clamp(1.8rem, 5vw, 2.4rem);
             }
-            .browser-screen-viewport {
-              height: 180px;
+            .s23-phone-frame {
+              width: 160px;
+              height: 275px;
             }
           }
         `}
@@ -401,20 +379,10 @@ export default function Projects() {
                       transition={{ duration: 0.6, delay: index * 0.15, ease: "easeOut" }}
                       className="project-card"
                     >
-                      <div className="browser-mockup-wrapper">
-                        <div className="browser-window">
-                          <div className="browser-top-bar">
-                            <div className="browser-dots">
-                              <span className="browser-dot dot-red"></span>
-                              <span className="browser-dot dot-yellow"></span>
-                              <span className="browser-dot dot-green"></span>
-                            </div>
-                            <div className="browser-address-bar">
-                              <span className="browser-address-text">{project.title.toLowerCase().replace(/\s+/g, '')}.app</span>
-                            </div>
-                          </div>
-
-                          <div className="browser-screen-viewport">
+                      <div className="mobile-mockup-wrapper">
+                        <div className="s23-phone-frame">
+                          <div className="s23-punch-hole"></div>
+                          <div className="s23-screen-viewport">
                             <img 
                               src={project.image} 
                               alt={project.title} 

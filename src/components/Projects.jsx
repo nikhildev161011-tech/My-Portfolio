@@ -87,6 +87,25 @@ export default function Projects() {
     }
   };
 
+  const phoneScrollVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 50, 
+      scale: 0.9,
+      filter: "blur(6px)"
+    },
+    visible: {
+      opacity: 1, 
+      y: 0, 
+      scale: 1,
+      filter: "blur(0px)",
+      transition: {
+        duration: 0.85,
+        ease: [0.25, 0.1, 0.25, 1.0]
+      }
+    }
+  };
+
   return (
     <>
       <style>
@@ -163,11 +182,10 @@ export default function Projects() {
             box-shadow: 0 14px 30px rgba(37, 99, 235, 0.12);
           }
 
-          .mobile-mockup-wrapper {
+          .mobile-standalone-stage {
             width: 100%;
-            background: #f8fafc;
-            padding: 1.5rem 1rem 1.25rem 1rem;
-            border-bottom: 1px solid #e2e8f0;
+            background: transparent;
+            padding: 2.25rem 1rem 1rem 1rem;
             box-sizing: border-box;
             display: flex;
             justify-content: center;
@@ -175,12 +193,12 @@ export default function Projects() {
           }
 
           .s23-phone-frame {
-            width: 180px;
-            height: 310px;
+            width: 250px;
+            height: 440px;
             background: #0f172a;
-            border-radius: 26px;
-            padding: 6px;
-            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.16), 0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+            border-radius: 34px;
+            padding: 8px;
+            box-shadow: 0 20px 45px rgba(15, 23, 42, 0.22), 0 0 0 1.5px rgba(255, 255, 255, 0.18) inset;
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
@@ -188,27 +206,27 @@ export default function Projects() {
             transition: transform 0.35s ease, box-shadow 0.35s ease;
           }
           .project-card:hover .s23-phone-frame {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 18px 36px rgba(37, 99, 235, 0.22);
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 26px 50px rgba(37, 99, 235, 0.25);
           }
 
           .s23-punch-hole {
             position: absolute;
-            top: 10px;
+            top: 14px;
             left: 50%;
             transform: translateX(-50%);
-            width: 8px;
-            height: 8px;
+            width: 10px;
+            height: 10px;
             background-color: #020617;
             border-radius: 50%;
             z-index: 5;
-            box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.15);
           }
 
           .s23-screen-viewport {
             width: 100%;
             height: 100%;
-            border-radius: 20px;
+            border-radius: 26px;
             overflow: hidden;
             background: #ffffff;
             position: relative;
@@ -223,7 +241,7 @@ export default function Projects() {
             transition: transform 0.4s ease;
           }
           .project-card:hover .s23-screen-viewport img {
-            transform: scale(1.04);
+            transform: scale(1.03);
           }
 
           .project-icon-wrapper {
@@ -279,8 +297,16 @@ export default function Projects() {
               font-size: clamp(1.8rem, 5vw, 2.4rem);
             }
             .s23-phone-frame {
-              width: 160px;
-              height: 275px;
+              width: 215px;
+              height: 380px;
+              border-radius: 28px;
+              padding: 7px;
+            }
+            .s23-screen-viewport {
+              border-radius: 22px;
+            }
+            .mobile-standalone-stage {
+              padding: 1.75rem 0.5rem 0.75rem 0.5rem;
             }
           }
         `}
@@ -379,8 +405,14 @@ export default function Projects() {
                       transition={{ duration: 0.6, delay: index * 0.15, ease: "easeOut" }}
                       className="project-card"
                     >
-                      <div className="mobile-mockup-wrapper">
-                        <div className="s23-phone-frame">
+                      <div className="mobile-standalone-stage">
+                        <motion.div 
+                          variants={phoneScrollVariants}
+                          initial="hidden"
+                          whileInView="visible"
+                          viewport={{ once: false, amount: 0.25 }}
+                          className="s23-phone-frame"
+                        >
                           <div className="s23-punch-hole"></div>
                           <div className="s23-screen-viewport">
                             <img 
@@ -391,7 +423,7 @@ export default function Projects() {
                               }}
                             />
                           </div>
-                        </div>
+                        </motion.div>
                       </div>
 
                       <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem', flex: 1, justifyContent: 'space-between' }}>

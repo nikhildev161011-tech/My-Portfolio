@@ -204,7 +204,7 @@ export default function Projects() {
           .mobile-standalone-stage {
             width: 100%;
             background: transparent;
-            padding: 2.5rem 1rem 1.25rem 1rem;
+            padding: 2rem 1rem 1rem 1rem;
             box-sizing: border-box;
             display: flex;
             justify-content: center;
@@ -212,8 +212,8 @@ export default function Projects() {
           }
 
           .iphone-chassis {
-            width: 280px;
-            height: 570px;
+            width: 300px;
+            height: 600px;
             background: #18181b;
             border-radius: 50px;
             padding: 10px;
@@ -283,50 +283,20 @@ export default function Projects() {
             height: 100%;
             border-radius: 40px;
             overflow: hidden;
-            background: #000000;
+            background: #ffffff;
             position: relative;
             border: 2px solid #000000;
             display: flex;
             flex-direction: column;
           }
 
-          .iphone-status-bar {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 18px;
-            z-index: 15;
-            pointer-events: none;
-            background: linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 70%, transparent 100%);
-          }
-
-          .iphone-status-time {
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
-            font-size: 0.74rem;
-            font-weight: 700;
-            color: #ffffff;
-            letter-spacing: -0.01em;
-          }
-
-          .iphone-status-icons {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            color: #ffffff;
-          }
-
           .iphone-dynamic-island {
             position: absolute;
-            top: 9px;
+            top: 10px;
             left: 50%;
             transform: translateX(-50%);
-            width: 82px;
-            height: 24px;
+            width: 80px;
+            height: 22px;
             background-color: #000000;
             border-radius: 20px;
             z-index: 20;
@@ -334,12 +304,12 @@ export default function Projects() {
             align-items: center;
             justify-content: flex-end;
             padding-right: 8px;
-            box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.15);
           }
 
           .iphone-camera-lens {
-            width: 9px;
-            height: 9px;
+            width: 8px;
+            height: 8px;
             background: radial-gradient(circle at 35% 35%, #1e1b4b 0%, #030712 80%);
             border-radius: 50%;
             box-shadow: 0 0 2px rgba(255, 255, 255, 0.2);
@@ -347,12 +317,12 @@ export default function Projects() {
 
           .iphone-home-indicator {
             position: absolute;
-            bottom: 8px;
+            bottom: 7px;
             left: 50%;
             transform: translateX(-50%);
             width: 95px;
             height: 4px;
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: rgba(0, 0, 0, 0.7);
             border-radius: 10px;
             z-index: 15;
           }
@@ -361,23 +331,21 @@ export default function Projects() {
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background: #000000;
+            background: #ffffff;
             position: relative;
             display: flex;
-            flex-direction: column;
           }
 
           .iphone-screen-viewport img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            object-position: top center;
+            object-fit: fill;
             display: block;
             transition: transform 0.4s ease;
           }
 
           .project-subcard:hover .iphone-screen-viewport img {
-            transform: scale(1.02);
+            transform: scale(1.015);
           }
 
           .project-saffron-title {
@@ -459,26 +427,26 @@ export default function Projects() {
             .arrow-track-wrapper {
               max-width: 220px;
             }
+            .mobile-standalone-stage {
+              padding: 1.5rem 0.25rem 0.75rem 0.25rem;
+            }
             .iphone-chassis {
-              width: 240px;
-              height: 490px;
-              border-radius: 44px;
-              padding: 8px;
+              width: 275px;
+              height: 550px;
+              border-radius: 46px;
+              padding: 9px;
             }
             .iphone-display-bezel {
-              border-radius: 36px;
+              border-radius: 38px;
             }
             .iphone-dynamic-island {
-              width: 72px;
+              width: 74px;
               height: 20px;
-              top: 7px;
+              top: 8px;
             }
             .iphone-camera-lens {
               width: 7px;
               height: 7px;
-            }
-            .mobile-standalone-stage {
-              padding: 1.75rem 0.5rem 0.75rem 0.5rem;
             }
             .project-saffron-title {
               font-size: 1.25rem;
@@ -596,26 +564,6 @@ export default function Projects() {
                         <div className="iphone-side-button-power"></div>
 
                         <div className="iphone-display-bezel">
-                          <div className="iphone-status-bar">
-                            <span className="iphone-status-time">9:41</span>
-                            <div className="iphone-status-icons">
-                              <svg width="14" height="11" viewBox="0 0 16 12" fill="currentColor">
-                                <rect x="0" y="8" width="3" height="4" rx="0.5" />
-                                <rect x="4" y="6" width="3" height="6" rx="0.5" />
-                                <rect x="8" y="3" width="3" height="9" rx="0.5" />
-                                <rect x="12" y="0" width="3" height="12" rx="0.5" />
-                              </svg>
-                              <svg width="14" height="11" viewBox="0 0 16 12" fill="currentColor">
-                                <path d="M8 3.5C5.5 3.5 3.2 4.6 1.7 6.3L0.5 5C2.4 2.9 5.1 1.5 8 1.5C10.9 1.5 13.6 2.9 15.5 5L14.3 6.3C12.8 4.6 10.5 3.5 8 3.5ZM8 7C6.6 7 5.3 7.6 4.3 8.6L3.1 7.3C4.4 6 6.1 5.2 8 5.2C9.9 5.2 11.6 6 12.9 7.3L11.7 8.6C10.7 7.6 9.4 7 8 7ZM8 10.5C7.2 10.5 6.5 10.8 6 11.4L8 13.5L10 11.4C9.5 10.8 8.8 10.5 8 10.5Z" />
-                              </svg>
-                              <svg width="20" height="10" viewBox="0 0 24 12" fill="none" stroke="currentColor" strokeWidth="1.5">
-                                <rect x="1" y="1" width="19" height="10" rx="3" />
-                                <rect x="3" y="3" width="13" height="6" rx="1.5" fill="currentColor" />
-                                <path d="M22 4.5V7.5" strokeLinecap="round" />
-                              </svg>
-                            </div>
-                          </div>
-
                           <div className="iphone-dynamic-island">
                             <div className="iphone-camera-lens"></div>
                           </div>

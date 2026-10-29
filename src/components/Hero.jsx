@@ -116,16 +116,18 @@ export default function Hero() {
             position: absolute;
             top: 0;
             right: 0;
-            width: 54%;
+            width: 48vw;
             height: 100%;
-            background-image: url('/my-photo.png');
+            background-image: url('/dev.png');
             background-size: cover;
-            background-position: right 6% 24%;
+            background-position: center 26%;
             background-repeat: no-repeat;
             image-rendering: auto;
             pointer-events: none;
             z-index: 1;
-            transform: translateZ(0);
+            transform: translate3d(0, 0, 0);
+            backface-visibility: hidden;
+            will-change: transform;
           }
 
           .hero-scrim-curtain {
@@ -267,20 +269,20 @@ export default function Hero() {
               height: 56%;
               top: 0;
               right: 0;
-              background-position: center 18%;
+              background-position: center 20%;
               background-size: cover;
               -webkit-mask-image: linear-gradient(
                 to bottom,
-                black 30%,
-                rgba(0, 0, 0, 0.75) 55%,
-                rgba(0, 0, 0, 0.35) 75%,
+                black 35%,
+                rgba(0, 0, 0, 0.75) 58%,
+                rgba(0, 0, 0, 0.35) 78%,
                 transparent 100%
               );
               mask-image: linear-gradient(
                 to bottom,
-                black 30%,
-                rgba(0, 0, 0, 0.75) 55%,
-                rgba(0, 0, 0, 0.35) 75%,
+                black 35%,
+                rgba(0, 0, 0, 0.75) 58%,
+                rgba(0, 0, 0, 0.35) 78%,
                 transparent 100%
               );
             }
@@ -289,8 +291,8 @@ export default function Hero() {
                 180deg,
                 rgba(0, 0, 0, 0.08) 0%,
                 rgba(0, 0, 0, 0.25) 30%,
-                rgba(0, 0, 0, 0.70) 52%,
-                rgba(0, 0, 0, 0.96) 68%,
+                rgba(0, 0, 0, 0.65) 48%,
+                rgba(0, 0, 0, 0.94) 64%,
                 #000000 100%
               );
             }

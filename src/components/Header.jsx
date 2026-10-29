@@ -8,13 +8,13 @@ export default function Header() {
   const [activeItem, setActiveItem] = useState('HOME');
 
   const menuItems = [
-    { name: 'HOME', href: '#home', icon: <FaHome size={22} color="#2563eb" /> },
-    { name: 'ABOUT', href: '#about', icon: <FaUser size={20} color="#2563eb" /> },
-    { name: 'PROJECTS', href: '#projects', icon: <FaCode size={21} color="#2563eb" /> },
-    { name: 'EDUCATION', href: '#education', icon: <FaGraduationCap size={23} color="#2563eb" /> },
-    { name: 'LEETCODE', href: '#leetcode', icon: <SiLeetcode size={21} color="#f59e0b" /> },
-    { name: 'CONTACT', href: '#contact', icon: <FiMail size={21} color="#ea4335" /> },
-    { name: 'TERMINAL', href: '#console', icon: <FaTerminal size={19} color="#2563eb" /> }
+    { name: 'HOME', href: '#home', icon: <FaHome size={22} color="#ff671f" /> },
+    { name: 'ABOUT', href: '#about', icon: <FaUser size={20} color="#ff671f" /> },
+    { name: 'PROJECTS', href: '#projects', icon: <FaCode size={21} color="#ff671f" /> },
+    { name: 'EDUCATION', href: '#education', icon: <FaGraduationCap size={23} color="#ff671f" /> },
+    { name: 'LEETCODE', href: '#leetcode', icon: <SiLeetcode size={21} color="#ff671f" /> },
+    { name: 'CONTACT', href: '#contact', icon: <FiMail size={21} color="#ff671f" /> },
+    { name: 'TERMINAL', href: '#console', icon: <FaTerminal size={19} color="#ff671f" /> }
   ];
 
   return (
@@ -34,7 +34,7 @@ export default function Header() {
           }
 
           .signature-base {
-            color: #cbd5e1;
+            color: #27272a;
             user-select: none;
           }
 
@@ -44,7 +44,7 @@ export default function Header() {
             left: 0;
             width: 100%;
             height: 100%;
-            color: #0f172a;
+            color: #ffffff;
             overflow: hidden;
             white-space: nowrap;
             animation: signatureDraw 3.5s ease-in-out infinite;
@@ -80,7 +80,7 @@ export default function Header() {
 
           .menu-link-item:hover {
             transform: translateX(8px);
-            color: #2563eb !important;
+            color: #ff671f !important;
           }
 
           .menu-icon-container {
@@ -98,10 +98,10 @@ export default function Header() {
         top: 0, 
         zIndex: 50, 
         width: '100%',
-        backgroundColor: 'rgba(248, 250, 252, 0.85)', 
-        backdropFilter: 'blur(12px)', 
-        WebkitBackdropFilter: 'blur(12px)',
-        borderBottom: '1px solid #e2e8f0',
+        backgroundColor: '#000000', 
+        backdropFilter: 'blur(16px)', 
+        WebkitBackdropFilter: 'blur(16px)',
+        borderBottom: '1px solid #18181b',
         padding: '0.85rem 1.5rem',
         boxSizing: 'border-box',
         overflow: 'hidden'
@@ -115,8 +115,8 @@ export default function Header() {
             height: '450px',
             transform: 'translate(30%, -40%)',
             borderRadius: '50%',
-            background: 'radial-gradient(circle at 70% 30%, rgba(15, 23, 42, 0.45) 0%, rgba(15, 23, 42, 0.25) 30%, rgba(15, 23, 42, 0.08) 55%, transparent 75%)',
-            filter: 'blur(50px)',
+            background: 'radial-gradient(circle at 70% 30%, rgba(255, 103, 31, 0.16) 0%, rgba(255, 103, 31, 0.05) 30%, transparent 65%)',
+            filter: 'blur(60px)',
             pointerEvents: 'none',
             zIndex: 1
           }} 
@@ -131,7 +131,7 @@ export default function Header() {
             height: '350px',
             transform: 'translate(-30%, 40%)',
             borderRadius: '50%',
-            background: 'radial-gradient(circle at 30% 70%, rgba(15, 23, 42, 0.35) 0%, rgba(15, 23, 42, 0.18) 32%, transparent 70%)',
+            background: 'radial-gradient(circle at 30% 70%, rgba(255, 103, 31, 0.12) 0%, rgba(255, 103, 31, 0.04) 28%, transparent 60%)',
             filter: 'blur(55px)',
             pointerEvents: 'none',
             zIndex: 1
@@ -163,9 +163,9 @@ export default function Header() {
             }}
             aria-label="Open Navigation Menu"
           >
-            <span style={{ width: '24px', height: '2px', backgroundColor: '#0f172a', borderRadius: '2px' }}></span>
-            <span style={{ width: '18px', height: '2px', backgroundColor: '#0f172a', borderRadius: '2px' }}></span>
-            <span style={{ width: '24px', height: '2px', backgroundColor: '#0f172a', borderRadius: '2px' }}></span>
+            <span style={{ width: '24px', height: '2.5px', backgroundColor: '#ff671f', borderRadius: '2px', boxShadow: '0 0 10px rgba(255, 103, 31, 0.5)' }}></span>
+            <span style={{ width: '18px', height: '2.5px', backgroundColor: '#ff671f', borderRadius: '2px', boxShadow: '0 0 10px rgba(255, 103, 31, 0.5)' }}></span>
+            <span style={{ width: '24px', height: '2.5px', backgroundColor: '#ff671f', borderRadius: '2px', boxShadow: '0 0 10px rgba(255, 103, 31, 0.5)' }}></span>
           </button>
 
           <div style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', display: 'flex', alignItems: 'center' }}>
@@ -184,9 +184,9 @@ export default function Header() {
           style={{
             position: 'fixed',
             inset: 0,
-            backgroundColor: 'rgba(15, 23, 42, 0.45)',
-            backdropFilter: 'blur(6px)',
-            WebkitBackdropFilter: 'blur(6px)',
+            backgroundColor: 'rgba(0, 0, 0, 0.85)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
             zIndex: 100,
             display: 'flex'
           }}
@@ -196,10 +196,11 @@ export default function Header() {
             style={{
               width: '320px',
               maxWidth: '85vw',
-              backgroundColor: '#ffffff',
+              backgroundColor: '#000000',
+              borderRight: '1px solid #18181b',
               height: '100%',
               padding: '2.5rem 2rem',
-              boxShadow: '10px 0 30px rgba(0, 0, 0, 0.12)',
+              boxShadow: '15px 0 40px rgba(0, 0, 0, 0.9)',
               display: 'flex',
               flexDirection: 'column',
               boxSizing: 'border-box',
@@ -217,7 +218,7 @@ export default function Header() {
                   fontSize: '1.5rem', 
                   fontWeight: '800', 
                   cursor: 'pointer', 
-                  color: '#0f172a', 
+                  color: '#ff671f', 
                   padding: '4px' 
                 }}
                 aria-label="Close Navigation Menu"
@@ -239,7 +240,7 @@ export default function Header() {
                     }} 
                     className="menu-link-item"
                     style={{ 
-                      color: isActive ? '#2563eb' : '#0f172a',
+                      color: isActive ? '#ff671f' : '#a1a1aa',
                       transform: isActive ? 'translateX(8px)' : 'none'
                     }}
                   >

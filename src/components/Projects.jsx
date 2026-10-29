@@ -204,7 +204,7 @@ export default function Projects() {
           .mobile-standalone-stage {
             width: 100%;
             background: transparent;
-            padding: 2rem 1rem 1rem 1rem;
+            padding: 2.25rem 1rem 1rem 1rem;
             box-sizing: border-box;
             display: flex;
             justify-content: center;
@@ -212,11 +212,11 @@ export default function Projects() {
           }
 
           .iphone-chassis {
-            width: 300px;
-            height: 600px;
+            width: 280px;
+            height: 570px;
             background: #18181b;
-            border-radius: 50px;
-            padding: 10px;
+            border-radius: 46px;
+            padding: 8px;
             box-shadow: 
               0 0 0 1.5px #3f3f46,
               0 0 0 3px #18181b,
@@ -241,9 +241,9 @@ export default function Projects() {
           .iphone-side-button-silent {
             position: absolute;
             left: -4px;
-            top: 100px;
+            top: 95px;
             width: 3px;
-            height: 24px;
+            height: 22px;
             background: #3f3f46;
             border-radius: 2px 0 0 2px;
           }
@@ -251,9 +251,9 @@ export default function Projects() {
           .iphone-side-button-vol-up {
             position: absolute;
             left: -4px;
-            top: 145px;
+            top: 135px;
             width: 3px;
-            height: 48px;
+            height: 44px;
             background: #3f3f46;
             border-radius: 2px 0 0 2px;
           }
@@ -261,9 +261,9 @@ export default function Projects() {
           .iphone-side-button-vol-down {
             position: absolute;
             left: -4px;
-            top: 205px;
+            top: 190px;
             width: 3px;
-            height: 48px;
+            height: 44px;
             background: #3f3f46;
             border-radius: 2px 0 0 2px;
           }
@@ -271,9 +271,9 @@ export default function Projects() {
           .iphone-side-button-power {
             position: absolute;
             right: -4px;
-            top: 155px;
+            top: 145px;
             width: 3px;
-            height: 65px;
+            height: 60px;
             background: #3f3f46;
             border-radius: 0 2px 2px 0;
           }
@@ -281,11 +281,10 @@ export default function Projects() {
           .iphone-display-bezel {
             width: 100%;
             height: 100%;
-            border-radius: 40px;
+            border-radius: 38px;
             overflow: hidden;
-            background: #ffffff;
+            background: #000000;
             position: relative;
-            border: 2px solid #000000;
             display: flex;
             flex-direction: column;
           }
@@ -295,8 +294,8 @@ export default function Projects() {
             top: 10px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
-            height: 22px;
+            width: 76px;
+            height: 20px;
             background-color: #000000;
             border-radius: 20px;
             z-index: 20;
@@ -304,34 +303,22 @@ export default function Projects() {
             align-items: center;
             justify-content: flex-end;
             padding-right: 8px;
-            box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.1);
           }
 
           .iphone-camera-lens {
-            width: 8px;
-            height: 8px;
+            width: 7px;
+            height: 7px;
             background: radial-gradient(circle at 35% 35%, #1e1b4b 0%, #030712 80%);
             border-radius: 50%;
             box-shadow: 0 0 2px rgba(255, 255, 255, 0.2);
-          }
-
-          .iphone-home-indicator {
-            position: absolute;
-            bottom: 7px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 95px;
-            height: 4px;
-            background-color: rgba(0, 0, 0, 0.7);
-            border-radius: 10px;
-            z-index: 15;
           }
 
           .iphone-screen-viewport {
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background: #ffffff;
+            background: #000000;
             position: relative;
             display: flex;
           }
@@ -339,13 +326,27 @@ export default function Projects() {
           .iphone-screen-viewport img {
             width: 100%;
             height: 100%;
-            object-fit: fill;
+            object-fit: cover;
+            object-position: top center;
             display: block;
             transition: transform 0.4s ease;
           }
 
           .project-subcard:hover .iphone-screen-viewport img {
-            transform: scale(1.015);
+            transform: scale(1.02);
+          }
+
+          .iphone-home-indicator {
+            position: absolute;
+            bottom: 7px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90px;
+            height: 3.5px;
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 10px;
+            z-index: 15;
+            pointer-events: none;
           }
 
           .project-saffron-title {
@@ -428,25 +429,25 @@ export default function Projects() {
               max-width: 220px;
             }
             .mobile-standalone-stage {
-              padding: 1.5rem 0.25rem 0.75rem 0.25rem;
+              padding: 1.25rem 0.25rem 0.75rem 0.25rem;
             }
             .iphone-chassis {
-              width: 275px;
-              height: 550px;
-              border-radius: 46px;
-              padding: 9px;
+              width: 250px;
+              height: 510px;
+              border-radius: 40px;
+              padding: 7px;
             }
             .iphone-display-bezel {
-              border-radius: 38px;
+              border-radius: 33px;
             }
             .iphone-dynamic-island {
-              width: 74px;
-              height: 20px;
+              width: 68px;
+              height: 18px;
               top: 8px;
             }
             .iphone-camera-lens {
-              width: 7px;
-              height: 7px;
+              width: 6px;
+              height: 6px;
             }
             .project-saffron-title {
               font-size: 1.25rem;

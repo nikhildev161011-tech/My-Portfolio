@@ -24,7 +24,7 @@ export default function App() {
       position: 'relative',
       width: '100%', 
       minHeight: '100vh', 
-      backgroundColor: '#f1f5f9', 
+      backgroundColor: '#000000', 
       margin: 0, 
       padding: 0, 
       overflowX: 'hidden' 
@@ -51,7 +51,7 @@ export default function App() {
             width: '650px',
             height: '650px',
             borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(15, 23, 42, 0.18) 0%, rgba(15, 23, 42, 0.08) 50%, transparent 75%)',
+            background: 'radial-gradient(circle, rgba(255, 103, 31, 0.08) 0%, rgba(255, 103, 31, 0.02) 50%, transparent 75%)',
             filter: 'blur(80px)',
           }}
         />
@@ -64,7 +64,7 @@ export default function App() {
             width: '600px',
             height: '600px',
             borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(15, 23, 42, 0.16) 0%, rgba(15, 23, 42, 0.06) 50%, transparent 75%)',
+            background: 'radial-gradient(circle, rgba(255, 103, 31, 0.06) 0%, rgba(255, 103, 31, 0.01) 50%, transparent 75%)',
             filter: 'blur(90px)',
           }}
         />
@@ -77,7 +77,7 @@ export default function App() {
             width: '700px',
             height: '700px',
             borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(15, 23, 42, 0.16) 0%, transparent 75%)',
+            background: 'radial-gradient(circle, rgba(255, 103, 31, 0.06) 0%, transparent 75%)',
             filter: 'blur(90px)',
           }}
         />

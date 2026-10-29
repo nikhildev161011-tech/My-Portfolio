@@ -3,25 +3,55 @@ import { motion } from 'framer-motion';
 import { IoSchool } from 'react-icons/io5';
 
 export default function Education() {
-  const educationLetters = "Education".split("");
+  const ultraSmoothEase = [0.16, 1, 0.3, 1];
 
-  const titleContainerVariants = {
-    hidden: { opacity: 0 },
+  const cardEntranceVariants = {
+    hidden: { opacity: 0, y: 50 },
     visible: {
       opacity: 1,
+      y: 0,
       transition: {
-        staggerChildren: 0.06,
-        delayChildren: 0.1
+        duration: 0.8,
+        ease: ultraSmoothEase
       }
     }
   };
 
-  const letterVariants = {
+  const headerEntranceVariants = {
     hidden: { opacity: 0, y: 35 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.45, ease: "easeOut" }
+      transition: {
+        duration: 0.75,
+        ease: ultraSmoothEase
+      }
+    }
+  };
+
+  const arrowLineVariants = {
+    hidden: { width: "0%" },
+    visible: {
+      width: "100%",
+      transition: {
+        duration: 0.85,
+        delay: 0.25,
+        ease: ultraSmoothEase
+      }
+    }
+  };
+
+  const arrowHeadVariants = {
+    hidden: { opacity: 0, scale: 0.2, x: -10 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      x: 0,
+      transition: {
+        duration: 0.35,
+        delay: 0.85,
+        ease: ultraSmoothEase
+      }
     }
   };
 
@@ -29,95 +59,185 @@ export default function Education() {
     <>
       <style>
         {`
-          @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&display=swap');
+          @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
-          .education-seamless-section {
+          .education-amoled-section {
             width: 100%;
-            padding: 2.5rem 1.5rem 4rem 1.5rem;
-            background: transparent !important;
-            border: none !important;
-            border-top: none !important;
+            padding: 3.5rem 1.5rem 5rem 1.5rem;
+            background-color: #000000;
             box-sizing: border-box;
             position: relative;
             z-index: 2;
-          }
-
-          .education-main-heading {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: clamp(2.2rem, 5.5vw, 3.8rem);
-            font-weight: 900;
-            color: #0f172a;
-            line-height: 1.15;
-            letter-spacing: -0.03em;
-            display: flex;
             overflow: hidden;
-            margin: 0;
-            white-space: nowrap;
           }
 
-          .edu-card {
+          .education-amoled-card {
             position: relative;
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(226, 232, 240, 0.85);
+            background: rgba(10, 10, 12, 0.65);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 24px;
-            padding: 2.5rem;
-            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.03);
+            padding: 2.75rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
             overflow: hidden;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            transform: translateZ(0);
           }
-          .edu-card:hover {
-            border-color: #2563eb;
-            box-shadow: 0 18px 40px rgba(37, 99, 235, 0.1);
-            transform: translateY(-2px);
+
+          .education-amoled-card:hover {
+            border-color: rgba(255, 103, 31, 0.35);
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.95), 0 0 30px rgba(255, 103, 31, 0.08);
+          }
+
+          .education-luxury-heading {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.1rem, 5vw, 3.8rem);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.04em;
+            margin: 0;
+            display: inline-block;
+            background: linear-gradient(180deg, #ffffff 20%, #cbd5e1 60%, #1e293b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 10px 30px rgba(255, 255, 255, 0.04);
+            white-space: normal;
+            word-break: normal;
+            overflow-wrap: break-word;
+          }
+
+          .arrow-track-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 260px;
+            height: 16px;
+            margin-top: 6px;
+          }
+
+          .arrow-line-body {
+            height: 2px;
+            background: linear-gradient(90deg, #ff671f 0%, #ff8533 100%);
+            box-shadow: 0 0 10px rgba(255, 103, 31, 0.6);
+            border-radius: 2px;
+          }
+
+          .arrow-head-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: -2px;
+            color: #ff671f;
+            filter: drop-shadow(0 0 6px rgba(255, 103, 31, 0.7));
+          }
+
+          .edu-degree-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin: 0 0 0.35rem 0;
+            letter-spacing: -0.02em;
+          }
+
+          .edu-university-tag {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.05rem;
+            color: #ff671f;
+            font-weight: 700;
+            margin: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+          }
+
+          .edu-timeline-plain {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #94a3b8;
+            margin: 0;
+            letter-spacing: 0.02em;
+          }
+
+          .edu-description-text {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1rem;
+            color: #94a3b8;
+            line-height: 1.7;
+            margin: 0;
+            font-weight: 500;
           }
 
           .map-link {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
-            color: #2563eb;
-            font-weight: 700;
+            gap: 9px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.95rem;
+            color: #e2e8f0;
+            font-weight: 600;
             text-decoration: none;
-            transition: color 0.2s ease;
+            transition: color 0.25s ease, transform 0.25s ease;
           }
+
+          .map-link svg {
+            color: #ff671f;
+            flex-shrink: 0;
+            transition: transform 0.25s ease;
+          }
+
           .map-link:hover {
-            color: #1d4ed8;
-            text-decoration: underline;
+            color: #ffffff;
+            transform: translateX(3px);
+          }
+
+          .map-link:hover svg {
+            transform: scale(1.15);
           }
 
           @media (max-width: 768px) {
-            .education-seamless-section {
-              padding: 1.5rem 1rem 3rem 1rem !important;
+            .education-amoled-section {
+              padding: 2rem 1rem 3.5rem 1rem !important;
             }
-            .edu-card {
-              padding: 1.5rem;
+            .education-amoled-card {
+              padding: 1.85rem 1.25rem;
+              border-radius: 20px;
             }
-            .education-main-heading {
-              font-size: clamp(1.8rem, 5vw, 2.4rem);
+            .education-luxury-heading {
+              font-size: clamp(1.85rem, 7.5vw, 2.5rem);
+            }
+            .arrow-track-wrapper {
+              max-width: 220px;
+            }
+            .edu-degree-title {
+              font-size: 1.15rem;
+            }
+            .edu-university-tag {
+              font-size: 0.95rem;
             }
           }
         `}
       </style>
 
-      <section id="education" className="education-seamless-section">
+      <section id="education" className="education-amoled-section">
         <div style={{ 
           maxWidth: '1000px', 
           margin: '0 auto', 
           display: 'flex', 
           flexDirection: 'column', 
-          gap: '3rem' 
+          gap: '2.5rem' 
         }}>
           
           <motion.div 
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            className="education-amoled-card"
+            variants={cardEntranceVariants}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: false, amount: 0.2 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            className="edu-card"
-            style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}
           >
             <div 
               style={{
@@ -128,8 +248,8 @@ export default function Education() {
                 height: 'min(70vw, 450px)',
                 transform: 'translate(25%, -25%)',
                 borderRadius: '50%',
-                background: 'radial-gradient(circle at 70% 30%, rgba(15, 23, 42, 0.35) 0%, rgba(15, 23, 42, 0.18) 28%, rgba(15, 23, 42, 0.06) 52%, transparent 75%)',
-                filter: 'blur(52px)',
+                background: 'radial-gradient(circle at 70% 30%, rgba(255, 103, 31, 0.12) 0%, rgba(255, 103, 31, 0.04) 35%, transparent 70%)',
+                filter: 'blur(70px)',
                 pointerEvents: 'none',
                 zIndex: 0
               }} 
@@ -144,71 +264,88 @@ export default function Education() {
                 height: 'min(65vw, 400px)',
                 transform: 'translate(-25%, 25%)',
                 borderRadius: '50%',
-                background: 'radial-gradient(circle at 30% 70%, rgba(15, 23, 42, 0.28) 0%, rgba(15, 23, 42, 0.14) 30%, transparent 70%)',
-                filter: 'blur(56px)',
+                background: 'radial-gradient(circle at 30% 70%, rgba(255, 103, 31, 0.1) 0%, rgba(255, 103, 31, 0.03) 30%, transparent 70%)',
+                filter: 'blur(70px)',
                 pointerEvents: 'none',
                 zIndex: 0
               }} 
             />
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', position: 'relative', zIndex: 1 }}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', position: 'relative' }}>
-                <span style={{ fontSize: '0.85rem', fontWeight: '700', letterSpacing: '-0.02em', color: '#2563eb', textTransform: 'uppercase' }}>
+              
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', position: 'relative' }}>
+                <span style={{ fontSize: '0.85rem', fontWeight: '800', letterSpacing: '0.06em', color: '#ff671f', textTransform: 'uppercase' }}>
                   Academic Background
                 </span>
 
                 <motion.h2 
-                  className="education-main-heading"
-                  variants={titleContainerVariants}
+                  className="education-luxury-heading"
+                  variants={headerEntranceVariants}
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: false, amount: 0.2 }}
                 >
-                  {educationLetters.map((char, index) => (
-                    <motion.span 
-                      key={index} 
-                      variants={letterVariants}
-                      style={{ display: 'inline-block', whiteSpace: char === " " ? "pre" : "normal" }}
-                    >
-                      {char}
-                    </motion.span>
-                  ))}
+                  Education
                 </motion.h2>
 
-                <div style={{ width: '60px', height: '4px', background: 'linear-gradient(90deg, #2563eb 0%, #60a5fa 100%)', borderRadius: '2px', marginTop: '4px' }}></div>
+                <div className="arrow-track-wrapper">
+                  <motion.div 
+                    className="arrow-line-body"
+                    variants={arrowLineVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: false, amount: 0.2 }}
+                  />
+                  <motion.div 
+                    className="arrow-head-icon"
+                    variants={arrowHeadVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: false, amount: 0.2 }}
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </motion.div>
+                </div>
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
                   <div>
-                    <h3 style={{ fontSize: '1.35rem', fontWeight: '800', color: '#0f172a', margin: '0 0 0.25rem 0' }}>
+                    <h3 className="edu-degree-title">
                       Bachelor of Computer Applications (BCA)
                     </h3>
-                    <p style={{ fontSize: '1.05rem', color: '#2563eb', fontWeight: '700', margin: 0, display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-                      <IoSchool size={20} color="#2563eb" /> Indira Gandhi National Open University (IGNOU)
+                    <p className="edu-university-tag">
+                      <IoSchool size={20} color="#ff671f" /> Indira Gandhi National Open University (IGNOU)
                     </p>
                   </div>
-                  <span style={{ fontSize: '0.9rem', fontWeight: '700', color: '#475569' }}>
+                  <p className="edu-timeline-plain">
                     2026 – Present
-                  </span>
+                  </p>
                 </div>
 
-                <p style={{ fontSize: '0.95rem', color: '#475569', lineHeight: '1.6', margin: 0, fontWeight: '500' }}>
+                <p className="edu-description-text">
                   Pursuing foundational computer science, core programming, and software engineering principles.
                 </p>
               </div>
 
-              <div style={{ borderTop: '1px solid rgba(226, 232, 240, 0.8)', paddingTop: '1.25rem' }}>
+              <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.08)', paddingTop: '1.25rem' }}>
                 <a 
                   href="https://www.google.com/maps/search/?api=1&query=Microtek+College+of+Management+and+Technology+Maldahiya+Varanasi" 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className="map-link"
                 >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                  <span>Study Centre: Microtek College of Management & Technology (View on Map)</span>
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                  <span>Study Centre: Microtek College of Management & Technology</span>
                 </a>
               </div>
+
             </div>
           </motion.div>
 

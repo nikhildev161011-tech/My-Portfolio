@@ -1,82 +1,93 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 export default function Hero() {
   const nameString = "Nikhil Gupta";
   const letters = nameString.split("");
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
+  const typewriterTitles = [
+    "Software Engineering Aspirant",
+    "Full-Stack Developer & Problem Solver",
+    "BCA Student @ IGNOU",
+    "Learning C++ & DSA"
+  ];
+
+  const [textIndex, setTextIndex] = useState(0);
+  const [subIndex, setSubIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentString = typewriterTitles[textIndex];
+
+    if (!isDeleting && subIndex === currentString.length) {
+      const timeout = setTimeout(() => setIsDeleting(true), 1800);
+      return () => clearTimeout(timeout);
+    }
+
+    if (isDeleting && subIndex === 0) {
+      setIsDeleting(false);
+      setTextIndex((prev) => (prev + 1) % typewriterTitles.length);
+      return;
+    }
+
+    const typingSpeed = isDeleting ? 30 : 65;
+    const timer = setTimeout(() => {
+      setSubIndex((prev) => prev + (isDeleting ? -1 : 1));
+    }, typingSpeed);
+
+    return () => clearTimeout(timer);
+  }, [subIndex, isDeleting, textIndex]);
+
+  const luxuryEase = [0.16, 1, 0.3, 1];
+
+  const titleContainerVariants = {
+    hidden: { opacity: 0, x: -50 },
     visible: {
       opacity: 1,
+      x: 0,
       transition: {
-        staggerChildren: 0.05,
-        delayChildren: 0.2
+        duration: 0.8,
+        ease: luxuryEase,
+        staggerChildren: 0.03,
+        delayChildren: 0.05
       }
     }
   };
 
   const letterVariants = {
-    hidden: { opacity: 0, y: 30, filter: "blur(4px)" },
+    hidden: { opacity: 0, y: 15 },
     visible: {
       opacity: 1,
       y: 0,
-      filter: "blur(0px)",
-      transition: { 
-        duration: 0.7, 
-        ease: [0.25, 0.1, 0.25, 1.0] 
+      transition: {
+        duration: 0.45,
+        ease: luxuryEase
       }
     }
   };
 
-  const photoVariants = {
-    hidden: { opacity: 0, x: -30, scale: 0.94, filter: "blur(6px)" },
+  const typewriterVariants = {
+    hidden: { opacity: 0, x: -45 },
     visible: {
       opacity: 1,
       x: 0,
-      scale: 1,
-      filter: "blur(0px)",
-      transition: { 
-        duration: 0.9, 
-        ease: [0.25, 0.1, 0.25, 1.0] 
-      }
-    }
-  };
-
-  const textFadeVariants = {
-    hidden: { opacity: 0, y: 25, filter: "blur(4px)" },
-    visible: {
-      opacity: 1,
-      y: 0,
-      filter: "blur(0px)",
-      transition: { 
-        duration: 0.8, 
-        delay: 0.35, 
-        ease: [0.25, 0.1, 0.25, 1.0] 
-      }
-    }
-  };
-
-  const buttonContainerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
       transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.5
+        duration: 0.8,
+        delay: 0.15,
+        ease: luxuryEase
       }
     }
   };
 
-  const buttonPopVariants = {
-    hidden: { opacity: 0, y: 20, scale: 0.95 },
+  const buttonGroupVariants = {
+    hidden: { opacity: 0, x: -45 },
     visible: {
       opacity: 1,
-      y: 0,
-      scale: 1,
+      x: 0,
       transition: {
-        duration: 0.7,
-        ease: [0.25, 0.1, 0.25, 1.0]
+        duration: 0.85,
+        delay: 0.25,
+        ease: luxuryEase
       }
     }
   };
@@ -85,307 +96,309 @@ export default function Hero() {
     <>
       <style>
         {`
-          @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&display=swap');
+          @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
 
-          .hero-seamless-container {
+          .hero-amoled-viewport {
             position: relative;
             width: 100%;
-            min-height: 75vh;
+            min-height: 86vh;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 4rem 1.5rem 3rem 1.5rem;
+            justify-content: flex-start;
+            padding: 4.5rem 3rem 4.5rem 4rem;
             box-sizing: border-box;
+            background-color: #000000;
             overflow: hidden;
-            background: transparent !important;
-            border: none !important;
+            transform: translateZ(0);
           }
 
-          .photo-badge-shadow {
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12), 0 0 15px rgba(37, 99, 235, 0.15);
+          .hero-bg-photo-layer {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 54%;
+            height: 100%;
+            background-image: url('/my-photo.png');
+            background-size: cover;
+            background-position: right 6% 24%;
+            background-repeat: no-repeat;
+            image-rendering: auto;
+            pointer-events: none;
+            z-index: 1;
+            transform: translateZ(0);
           }
 
-          .hero-main-title {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
-            font-weight: 900;
-            color: #0f172a;
-            margin: 0;
-            letter-spacing: -0.04em;
-            line-height: 1.05;
-            display: flex;
-            overflow: hidden;
-          }
-
-          .primary-action-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 0.65rem 1.25rem;
-            background: #2563eb;
-            color: #ffffff;
-            border: 1px solid #2563eb;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.9rem;
-            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.25);
-            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
-            white-space: nowrap;
-          }
-          .primary-action-btn:hover {
-            transform: translateY(-3px);
-            background: #1d4ed8;
-            box-shadow: 0 8px 22px rgba(37, 99, 235, 0.35);
-          }
-
-          .secondary-action-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 0.65rem 1.25rem;
-            background: rgba(15, 23, 42, 0.08);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            color: #0f172a;
-            border: 1px solid rgba(15, 23, 42, 0.16);
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.9rem;
-            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
-            transition: transform 0.3s ease, border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-            white-space: nowrap;
-          }
-          .secondary-action-btn:hover {
-            transform: translateY(-3px);
-            background: rgba(15, 23, 42, 0.14);
-            border-color: rgba(15, 23, 42, 0.3);
-            color: #0f172a;
-            box-shadow: 0 6px 18px rgba(15, 23, 42, 0.12);
-          }
-
-          .hero-desktop-grid {
-            display: grid;
-            grid-template-columns: 220px 1fr;
-            gap: 2.5rem;
-            align-items: center;
-            max-width: 950px;
-            width: 100%;
-            position: relative;
+          .hero-scrim-curtain {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+              90deg,
+              #000000 0%,
+              #000000 36%,
+              rgba(0, 0, 0, 0.98) 46%,
+              rgba(0, 0, 0, 0.90) 54%,
+              rgba(0, 0, 0, 0.72) 64%,
+              rgba(0, 0, 0, 0.48) 74%,
+              rgba(0, 0, 0, 0.22) 84%,
+              rgba(0, 0, 0, 0.05) 94%,
+              transparent 100%
+            ),
+            linear-gradient(
+              180deg,
+              rgba(0, 0, 0, 0.5) 0%,
+              transparent 22%,
+              transparent 78%,
+              #000000 100%
+            );
+            pointer-events: none;
             z-index: 2;
           }
 
-          .hero-action-buttons {
+          .hero-diffuse-glow {
+            position: absolute;
+            top: 30%;
+            left: 12%;
+            width: 480px;
+            height: 480px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 103, 31, 0.08) 0%, transparent 68%);
+            pointer-events: none;
+            z-index: 2;
+            filter: blur(75px);
+          }
+
+          .hero-content-frame {
+            position: relative;
+            z-index: 3;
+            max-width: 1250px;
+            width: 100%;
+            margin: 0;
             display: flex;
-            gap: 0.85rem;
+            justify-content: flex-start;
+          }
+
+          .hero-text-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1.4rem;
+            max-width: 560px;
+          }
+
+          .hero-luxury-headline {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.6rem, 5.2vw, 4.8rem);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -0.04em;
+            margin: 0;
+            display: flex;
+            overflow: hidden;
+            background: linear-gradient(180deg, #ffffff 20%, #cbd5e1 60%, #1e293b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 10px 30px rgba(255, 255, 255, 0.04);
+            white-space: nowrap;
+          }
+
+          .hero-typewriter-text {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: clamp(1.15rem, 2.3vw, 1.55rem);
+            font-weight: 700;
+            line-height: 1.4;
+            letter-spacing: -0.02em;
+            margin: 0;
+            min-height: 1.7em;
+            background: linear-gradient(180deg, #ffffff 15%, #cbd5e1 65%, #64748b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
             align-items: center;
+          }
+
+          .hero-buttons-cluster {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 0.4rem;
             flex-wrap: nowrap;
-            margin-top: 0.25rem;
+          }
+
+          .hero-liquid-glass-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            padding: 0.78rem 1.6rem;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            color: #e2e8f0;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 14px;
+            text-decoration: none;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            font-size: 0.92rem;
+            letter-spacing: 0.01em;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease, box-shadow 0.25s ease;
+            white-space: nowrap;
+            cursor: pointer;
+          }
+
+          .hero-liquid-glass-btn:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.25);
+            color: #ffffff;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.7);
           }
 
           @media (max-width: 850px) {
-            .hero-desktop-grid {
-              grid-template-columns: 1fr;
-              justify-items: center;
-              text-align: center;
-            }
-            .hero-text-content {
-              align-items: center !important;
-            }
-            .hero-main-title {
-              justify-content: center !important;
-            }
-            .hero-action-buttons {
-              width: 100%;
-              max-width: 380px;
+            .hero-amoled-viewport {
+              min-height: 90vh;
+              padding: 5rem 1.5rem 3.5rem 1.5rem;
               justify-content: center;
-              flex-direction: row;
-              flex-wrap: nowrap;
-              gap: 0.65rem;
+              align-items: flex-end;
             }
-            .primary-action-btn,
-            .secondary-action-btn {
+            .hero-bg-photo-layer {
+              width: 100%;
+              height: 56%;
+              top: 0;
+              right: 0;
+              background-position: center 18%;
+              background-size: cover;
+              -webkit-mask-image: linear-gradient(
+                to bottom,
+                black 30%,
+                rgba(0, 0, 0, 0.75) 55%,
+                rgba(0, 0, 0, 0.35) 75%,
+                transparent 100%
+              );
+              mask-image: linear-gradient(
+                to bottom,
+                black 30%,
+                rgba(0, 0, 0, 0.75) 55%,
+                rgba(0, 0, 0, 0.35) 75%,
+                transparent 100%
+              );
+            }
+            .hero-scrim-curtain {
+              background: linear-gradient(
+                180deg,
+                rgba(0, 0, 0, 0.08) 0%,
+                rgba(0, 0, 0, 0.25) 30%,
+                rgba(0, 0, 0, 0.70) 52%,
+                rgba(0, 0, 0, 0.96) 68%,
+                #000000 100%
+              );
+            }
+            .hero-content-frame {
+              justify-content: center;
+              margin: 0 auto;
+            }
+            .hero-text-stack {
+              align-items: center;
+              text-align: center;
+              max-width: 100%;
+              gap: 1.2rem;
+            }
+            .hero-luxury-headline {
+              font-size: clamp(2.3rem, 9.5vw, 3.5rem);
+              justify-content: center;
+            }
+            .hero-typewriter-text {
+              font-size: clamp(1.05rem, 4.4vw, 1.25rem);
+              justify-content: center;
+            }
+            .hero-buttons-cluster {
+              justify-content: center;
+              width: 100%;
+              max-width: 360px;
+              gap: 0.75rem;
+            }
+            .hero-liquid-glass-btn {
               flex: 1;
-              padding: 0.65rem 0.85rem;
-              font-size: 0.82rem;
+              padding: 0.72rem 0.95rem;
+              font-size: 0.84rem;
               gap: 6px;
             }
-            .primary-action-btn svg,
-            .secondary-action-btn svg {
-              width: 15px;
-              height: 15px;
-              flex-shrink: 0;
-            }
-            .hero-seamless-container {
-              padding: 2.5rem 1rem !important;
-            }
-            .hero-avatar-box {
-              width: 140px !important;
-              height: 175px !important;
+            .hero-liquid-glass-btn svg {
+              width: 14px;
+              height: 14px;
             }
           }
         `}
       </style>
 
-      <section id="home" className="hero-seamless-container">
-        <motion.div 
-          animate={{
-            x: [0, 20, -15, 0],
-            y: [0, -25, 15, 0],
-            scale: [1, 1.05, 0.96, 1]
-          }}
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-          style={{
-            position: 'absolute',
-            top: 0,
-            right: 0,
-            width: 'min(90vw, 750px)',
-            height: 'min(90vw, 750px)',
-            transform: 'translate(25%, -25%)',
-            borderRadius: '50%',
-            background: 'radial-gradient(circle at 70% 30%, rgba(15, 23, 42, 0.38) 0%, rgba(15, 23, 42, 0.22) 25%, rgba(15, 23, 42, 0.08) 50%, transparent 80%)',
-            filter: 'blur(58px)',
-            pointerEvents: 'none',
-            zIndex: 1
-          }} 
-        />
+      <section id="home" className="hero-amoled-viewport">
+        <div className="hero-bg-photo-layer" />
+        <div className="hero-scrim-curtain" />
+        <div className="hero-diffuse-glow" />
 
-        <motion.div 
-          animate={{
-            x: [0, -20, 15, 0],
-            y: [0, 20, -20, 0],
-            scale: [1, 0.95, 1.06, 1]
-          }}
-          transition={{
-            duration: 14,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            left: 0,
-            width: 'min(80vw, 650px)',
-            height: 'min(80vw, 650px)',
-            transform: 'translate(-25%, 25%)',
-            borderRadius: '50%',
-            background: 'radial-gradient(circle at 30% 70%, rgba(15, 23, 42, 0.28) 0%, rgba(15, 23, 42, 0.16) 28%, transparent 75%)',
-            filter: 'blur(62px)',
-            pointerEvents: 'none',
-            zIndex: 1
-          }} 
-        />
+        <div className="hero-content-frame">
+          <div className="hero-text-stack">
 
-        <div className="hero-desktop-grid">
-          
-          <motion.div 
-            variants={photoVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false, amount: 0.2 }}
-            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.85rem' }}
-          >
-            <div 
-              className="photo-badge-shadow hero-avatar-box" 
-              style={{ 
-                width: '160px', 
-                height: '195px', 
-                borderRadius: '18px', 
-                overflow: 'hidden', 
-                border: '3px solid #ffffff', 
-                backgroundColor: '#e2e8f0', 
-                flexShrink: 0 
-              }}
-            >
-              <img 
-                src="/my-photo.png" 
-                alt="Nikhil Gupta" 
-                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} 
-              />
-            </div>
-            <span style={{ fontSize: '0.78rem', fontWeight: '700', letterSpacing: '0.04em', color: '#64748b', textTransform: 'uppercase', textAlign: 'center' }}>
-            Software Engineering Aspirant
-            </span>
-          </motion.div>
-
-          <div 
-            style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '1.15rem', width: '100%' }} 
-            className="hero-text-content"
-          >
-            <motion.h1 
-              className="hero-main-title"
-              variants={containerVariants}
+            <motion.h1
+              className="hero-luxury-headline"
+              variants={titleContainerVariants}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: false, amount: 0.2 }}
+              viewport={{ once: false, amount: 0.25 }}
             >
               {letters.map((char, index) => (
-                <motion.span 
-                  key={index} 
+                <motion.span
+                  key={index}
                   variants={letterVariants}
-                  style={{ display: 'inline-block', whiteSpace: char === " " ? "pre" : "normal" }}
+                  style={{
+                    display: 'inline-block',
+                    whiteSpace: char === " " ? "pre" : "normal"
+                  }}
                 >
                   {char}
                 </motion.span>
               ))}
             </motion.h1>
 
-            <motion.p 
-              variants={textFadeVariants}
+            <motion.h2
+              className="hero-typewriter-text"
+              variants={typewriterVariants}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: false, amount: 0.2 }}
-              style={{ fontSize: '1.05rem', color: '#334155', lineHeight: '1.6', margin: 0, fontWeight: '500', maxWidth: '640px' }}
+              viewport={{ once: false, amount: 0.25 }}
             >
-              I am a BCA first-year student and aspiring software engineer passionate about building strong fundamentals in computer science, solving problems through code, and mastering Data Structures & Algorithms (DSA).
-            </motion.p>
+              {typewriterTitles[textIndex].substring(0, subIndex)}
+            </motion.h2>
 
-            <motion.div 
-              variants={buttonContainerVariants}
+            <motion.div
+              className="hero-buttons-cluster"
+              variants={buttonGroupVariants}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: false, amount: 0.2 }}
-              className="hero-action-buttons"
+              viewport={{ once: false, amount: 0.25 }}
             >
-              <motion.a 
-                href="#projects" 
-                variants={buttonPopVariants}
-                className="primary-action-btn"
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <a href="#projects" className="hero-liquid-glass-btn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
                   <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
                   <polyline points="2 17 12 22 22 17"></polyline>
                   <polyline points="2 12 12 17 22 12"></polyline>
                 </svg>
-                Explore Projects
-              </motion.a>
+                <span>Explore Projects</span>
+              </a>
 
-              <motion.a 
-                href="#resume" 
-                variants={buttonPopVariants}
-                className="secondary-action-btn"
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <a href="#resume" className="hero-liquid-glass-btn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                   <polyline points="14 2 14 8 20 8"></polyline>
                   <line x1="16" y1="13" x2="8" y2="13"></line>
                   <line x1="16" y1="17" x2="8" y2="17"></line>
-                  <polyline points="10 9 9 9 8 9"></polyline>
                 </svg>
-                View Resume
-              </motion.a>
+                <span>View Resume</span>
+              </a>
             </motion.div>
 
           </div>
-
         </div>
       </section>
     </>

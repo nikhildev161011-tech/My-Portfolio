@@ -257,42 +257,45 @@ export default function Hero() {
             box-shadow: 0 12px 28px rgba(0, 0, 0, 0.7);
           }
 
+          /* Refined Mobile View: Clear Face and Shirt Visibility */
           @media (max-width: 850px) {
             .hero-amoled-viewport {
-              min-height: 90vh;
-              padding: 5rem 1.5rem 3.5rem 1.5rem;
+              min-height: 92vh;
+              padding: 4.5rem 1.5rem 4rem 1.5rem;
               justify-content: center;
               align-items: flex-end;
             }
             .hero-bg-photo-layer {
               width: 100%;
-              height: 56%;
+              height: 68%;
               top: 0;
               right: 0;
-              background-position: center 20%;
+              background-position: center 10%;
               background-size: cover;
               -webkit-mask-image: linear-gradient(
                 to bottom,
-                black 35%,
-                rgba(0, 0, 0, 0.75) 58%,
-                rgba(0, 0, 0, 0.35) 78%,
+                black 0%,
+                black 55%,
+                rgba(0, 0, 0, 0.85) 72%,
+                rgba(0, 0, 0, 0.35) 88%,
                 transparent 100%
               );
               mask-image: linear-gradient(
                 to bottom,
-                black 35%,
-                rgba(0, 0, 0, 0.75) 58%,
-                rgba(0, 0, 0, 0.35) 78%,
+                black 0%,
+                black 55%,
+                rgba(0, 0, 0, 0.85) 72%,
+                rgba(0, 0, 0, 0.35) 88%,
                 transparent 100%
               );
             }
             .hero-scrim-curtain {
               background: linear-gradient(
                 180deg,
-                rgba(0, 0, 0, 0.08) 0%,
-                rgba(0, 0, 0, 0.25) 30%,
-                rgba(0, 0, 0, 0.65) 48%,
-                rgba(0, 0, 0, 0.94) 64%,
+                rgba(0, 0, 0, 0.02) 0%,
+                transparent 30%,
+                rgba(0, 0, 0, 0.40) 65%,
+                rgba(0, 0, 0, 0.88) 82%,
                 #000000 100%
               );
             }
@@ -304,7 +307,7 @@ export default function Hero() {
               align-items: center;
               text-align: center;
               max-width: 100%;
-              gap: 1.2rem;
+              gap: 1.15rem;
             }
             .hero-luxury-headline {
               font-size: clamp(2.3rem, 9.5vw, 3.5rem);

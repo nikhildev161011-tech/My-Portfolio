@@ -1,276 +1,250 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaInstagram, FaHome, FaUser, FaCode, FaGraduationCap } from 'react-icons/fa';
-import { FiMail } from 'react-icons/fi';
-import { SiLeetcode } from 'react-icons/si';
+import { FaCode } from 'react-icons/fa';
 
 export default function Footer() {
-  const iconsContainerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.08,
-        delayChildren: 0.1
-      }
-    }
-  };
+  const ultraSmoothEase = [0.16, 1, 0.3, 1];
 
-  const iconBounceVariant = {
-    hidden: { 
-      opacity: 0, 
-      y: -20, 
-      scale: 0.4,
-      rotate: -10 
-    },
+  const footerCardVariants = {
+    hidden: { opacity: 0, y: 35 },
     visible: {
       opacity: 1,
       y: 0,
-      scale: 1,
-      rotate: 0,
-      transition: { 
-        type: "spring",
-        stiffness: 300,
-        damping: 15,
-        mass: 0.8
+      transition: {
+        duration: 0.8,
+        ease: ultraSmoothEase
       }
     }
   };
-
-  const socialLinks = [
-    {
-      title: "GitHub",
-      link: "https://github.com/nikhildev161011-tech",
-      icon: <FaGithub size={22} color="#181717" />
-    },
-    {
-      title: "LinkedIn",
-      link: "https://www.linkedin.com/in/nikhil-gupta-64697b3b6",
-      icon: <FaLinkedin size={22} color="#0A66C2" />
-    },
-    {
-      title: "LeetCode",
-      link: "https://leetcode.com/u/nikhil161011/",
-      icon: <SiLeetcode size={22} color="#FFA116" />
-    },
-    {
-      title: "Instagram",
-      link: "https://instagram.com/nikhildev161011",
-      icon: <FaInstagram size={22} color="#E4405F" />
-    },
-    {
-      title: "Email",
-      link: "mailto:nikhil.dev161011@gmail.com",
-      icon: <FiMail size={22} color="#EA4335" />
-    }
-  ];
 
   return (
     <>
       <style>
         {`
-          @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700&display=swap');
+          @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@600;700;800&display=swap');
 
-          .footer-seamless-section {
+          .footer-amoled-section {
             width: 100%;
-            padding: 2.5rem 1.5rem 4rem 1.5rem;
-            background: transparent !important;
-            border: none !important;
-            border-top: none !important;
+            padding: 3rem 1.5rem 8rem 1.5rem;
+            background-color: #000000;
             box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+          }
+
+          .footer-amoled-card {
+            position: relative;
+            max-width: 1000px;
+            width: 100%;
+            background: rgba(10, 10, 12, 0.65);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 2.75rem 2.5rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
+            overflow: hidden;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            transform: translateZ(0);
+          }
+
+          .footer-amoled-card:hover {
+            border-color: rgba(255, 103, 31, 0.35);
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.95), 0 0 30px rgba(255, 103, 31, 0.08);
+          }
+
+          .footer-stack-center {
+            position: relative;
+            z-index: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 1.5rem;
+          }
+
+          /* Aesthetic Radar Status Pill without thick glass */
+          .footer-radar-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 6px 16px;
+            background: #050505;
+            border: 1px solid #1a1a1e;
+            border-radius: 9999px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #e2e8f0;
+            letter-spacing: 0.02em;
+          }
+
+          /* Multi-ring pulsating radar core */
+          .footer-radar-beacon {
+            position: relative;
+            width: 10px;
+            height: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .footer-radar-core {
+            width: 7px;
+            height: 7px;
+            background-color: #10b981;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #10b981;
             position: relative;
             z-index: 2;
           }
 
-          .footer-wrapper-card {
-            position: relative;
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(226, 232, 240, 0.85);
-            border-radius: 24px;
-            padding: 2.5rem;
-            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.03);
-            overflow: hidden;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-          }
-          .footer-wrapper-card:hover {
-            border-color: #2563eb;
-            box-shadow: 0 18px 40px rgba(37, 99, 235, 0.1);
-            transform: translateY(-2px);
+          .footer-radar-wave {
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(16, 185, 129, 0.65);
+            animation: radarPing 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
           }
 
-          .footer-social-icon-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 48px;
-            height: 48px;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid #e2e8f0;
-            border-radius: 14px;
-            text-decoration: none;
-            cursor: pointer;
-            transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
-          }
-          .footer-social-icon-btn:hover {
-            transform: translateY(-3px) scale(1.05);
-            border-color: #2563eb;
-            background: #eff6ff;
-            box-shadow: 0 6px 15px rgba(37, 99, 235, 0.15);
+          .footer-radar-wave-outer {
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            animation: radarPing 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+            animation-delay: 0.8s;
           }
 
-          .footer-link {
+          @keyframes radarPing {
+            0% {
+              transform: scale(0.6);
+              opacity: 1;
+            }
+            100% {
+              transform: scale(2.2);
+              opacity: 0;
+            }
+          }
+
+          .footer-tech-stack-tagline {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            color: #475569;
-            text-decoration: none;
-            font-size: 0.95rem;
+            gap: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.84rem;
             font-weight: 600;
-            transition: color 0.2s ease;
+            color: #94a3b8;
+            margin: 0;
+            letter-spacing: 0.01em;
           }
-          .footer-link:hover {
-            color: #2563eb;
+
+          .footer-brand-copyright {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.94rem;
+            font-weight: 600;
+            color: #64748b;
+            margin: 0;
+            letter-spacing: -0.01em;
+          }
+
+          .footer-saffron-bold {
+            color: #ff671f;
+            font-weight: 800;
+            letter-spacing: -0.01em;
           }
 
           @media (max-width: 768px) {
-            .footer-seamless-section {
-              padding: 1.5rem 1rem 3rem 1rem !important;
+            .footer-amoled-section {
+              padding: 2rem 1rem 7.5rem 1rem !important;
             }
-            .footer-wrapper-card {
-              padding: 1.5rem;
+            .footer-amoled-card {
+              padding: 2rem 1.25rem;
+              border-radius: 20px;
             }
-            .footer-bottom-row {
-              flex-direction: column;
-              align-items: center;
-              text-align: center;
-              gap: 1.25rem;
+            .footer-radar-pill {
+              font-size: 0.74rem;
+              padding: 6px 13px;
+              gap: 10px;
+            }
+            .footer-tech-stack-tagline {
+              font-size: 0.78rem;
+            }
+            .footer-brand-copyright {
+              font-size: 0.88rem;
             }
           }
         `}
       </style>
 
-      <footer className="footer-seamless-section">
-        <div style={{ 
-          maxWidth: '1000px', 
-          width: '100%', 
-          margin: '0 auto', 
-          display: 'flex', 
-          flexDirection: 'column' 
-        }}>
-          
-          <div className="footer-wrapper-card" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-            
-            <div 
-              style={{
-                position: 'absolute',
-                top: 0,
-                right: 0,
-                width: 'min(70vw, 450px)',
-                height: 'min(70vw, 450px)',
-                transform: 'translate(25%, -25%)',
-                borderRadius: '50%',
-                background: 'radial-gradient(circle at 70% 30%, rgba(15, 23, 42, 0.35) 0%, rgba(15, 23, 42, 0.18) 28%, rgba(15, 23, 42, 0.06) 52%, transparent 75%)',
-                filter: 'blur(52px)',
-                pointerEvents: 'none',
-                zIndex: 0
-              }} 
-            />
+      <footer className="footer-amoled-section">
+        <motion.div 
+          className="footer-amoled-card"
+          variants={footerCardVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.2 }}
+        >
+          <div 
+            style={{
+              position: 'absolute',
+              top: 0,
+              right: 0,
+              width: 'min(70vw, 450px)',
+              height: 'min(70vw, 450px)',
+              transform: 'translate(25%, -25%)',
+              borderRadius: '50%',
+              background: 'radial-gradient(circle at 70% 30%, rgba(255, 103, 31, 0.12) 0%, rgba(255, 103, 31, 0.04) 35%, transparent 70%)',
+              filter: 'blur(70px)',
+              pointerEvents: 'none',
+              zIndex: 0
+            }} 
+          />
 
-            <div 
-              style={{
-                position: 'absolute',
-                bottom: 0,
-                left: 0,
-                width: 'min(65vw, 400px)',
-                height: 'min(65vw, 400px)',
-                transform: 'translate(-25%, 25%)',
-                borderRadius: '50%',
-                background: 'radial-gradient(circle at 30% 70%, rgba(15, 23, 42, 0.28) 0%, rgba(15, 23, 42, 0.14) 30%, transparent 70%)',
-                filter: 'blur(56px)',
-                pointerEvents: 'none',
-                zIndex: 0
-              }} 
-            />
+          <div 
+            style={{
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              width: 'min(65vw, 400px)',
+              height: 'min(65vw, 400px)',
+              transform: 'translate(-25%, 25%)',
+              borderRadius: '50%',
+              background: 'radial-gradient(circle at 30% 70%, rgba(255, 103, 31, 0.1) 0%, rgba(255, 103, 31, 0.03) 30%, transparent 70%)',
+              filter: 'blur(70px)',
+              pointerEvents: 'none',
+              zIndex: 0
+            }} 
+          />
 
-            <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-              <div 
-                style={{ 
-                  display: 'flex', 
-                  justifyContent: 'center', 
-                  alignItems: 'center', 
-                  width: '100%',
-                  borderBottom: '1px solid rgba(226, 232, 240, 0.8)',
-                  paddingBottom: '2rem'
-                }}
-              >
-                <motion.div 
-                  variants={iconsContainerVariants}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: false, amount: 0.2 }}
-                  style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}
-                >
-                  {socialLinks.map((item, index) => (
-                    <motion.a 
-                      key={index}
-                      href={item.link} 
-                      target={item.title === "Email" ? "_self" : "_blank"} 
-                      rel="noopener noreferrer" 
-                      variants={iconBounceVariant}
-                      className="footer-social-icon-btn" 
-                      title={item.title}
-                    >
-                      {item.icon}
-                    </motion.a>
-                  ))}
-                </motion.div>
+          <div className="footer-stack-center">
+            {/* Top Level: Radar Status Indicator */}
+            <div className="footer-radar-pill">
+              <div className="footer-radar-beacon">
+                <span className="footer-radar-core" />
+                <span className="footer-radar-wave" />
+                <span className="footer-radar-wave-outer" />
               </div>
-
-              <div 
-                className="footer-bottom-row"
-                style={{ 
-                  display: 'flex', 
-                  justifyContent: 'space-between', 
-                  alignItems: 'center', 
-                  width: '100%',
-                  gap: '1.5rem' 
-                }}
-              >
-                <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}>
-                  <a href="#home" className="footer-link">
-                    <FaHome size={15} color="#2563eb" /> Home
-                  </a>
-                  <a href="#about" className="footer-link">
-                    <FaUser size={14} color="#2563eb" /> About
-                  </a>
-                  <a href="#projects" className="footer-link">
-                    <FaCode size={15} color="#2563eb" /> Projects
-                  </a>
-                  <a href="#education" className="footer-link">
-                    <FaGraduationCap size={16} color="#2563eb" /> Education
-                  </a>
-                  <a href="#leetcode" className="footer-link">
-                    <SiLeetcode size={15} color="#FFA116" /> LeetCode
-                  </a>
-                </div>
-
-                <p style={{ margin: 0, fontSize: '0.85rem', color: '#94a3b8', fontWeight: '600' }}>
-                  &copy; 2026 || All rights reserved
-                </p>
-              </div>
+              <span>Systems Active • Open to Opportunities</span>
             </div>
 
-          </div>
+            {/* Middle Level: Engineering Tagline */}
+            <p className="footer-tech-stack-tagline">
+              <FaCode size={14} color="#ff671f" />
+              <span>Built for High Performance</span>
+            </p>
 
-        </div>
+            {/* Bottom Level: Saffron Copyright */}
+            <p className="footer-brand-copyright">
+              &copy; <span className="footer-saffron-bold">2026 Nikhil Gupta</span>. All Rights Reserved.
+            </p>
+          </div>
+        </motion.div>
       </footer>
     </>
   );

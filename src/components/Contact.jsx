@@ -4,61 +4,60 @@ import { FiMail, FiSend } from 'react-icons/fi';
 import { FaLinkedin, FaGithub, FaInstagram } from 'react-icons/fa';
 
 export default function Contact() {
-  const headingLetters = "Contact Me".split("");
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: ''
   });
 
-  const titleContainerVariants = {
-    hidden: { opacity: 0 },
+  const ultraSmoothEase = [0.16, 1, 0.3, 1];
+
+  const cardEntranceVariants = {
+    hidden: { opacity: 0, y: 50 },
     visible: {
       opacity: 1,
+      y: 0,
       transition: {
-        staggerChildren: 0.05,
-        delayChildren: 0.1
+        duration: 0.8,
+        ease: ultraSmoothEase
       }
     }
   };
 
-  const letterVariants = {
+  const headerEntranceVariants = {
     hidden: { opacity: 0, y: 35 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.45, ease: "easeOut" }
-    }
-  };
-
-  const iconsContainerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
       transition: {
-        staggerChildren: 0.08,
-        delayChildren: 0.15
+        duration: 0.75,
+        ease: ultraSmoothEase
       }
     }
   };
 
-  const iconBounceVariant = {
-    hidden: { 
-      opacity: 0, 
-      y: -25, 
-      scale: 0.4,
-      rotate: -10 
-    },
+  const arrowLineVariants = {
+    hidden: { width: "0%" },
+    visible: {
+      width: "100%",
+      transition: {
+        duration: 0.85,
+        delay: 0.25,
+        ease: ultraSmoothEase
+      }
+    }
+  };
+
+  const arrowHeadVariants = {
+    hidden: { opacity: 0, scale: 0.2, x: -10 },
     visible: {
       opacity: 1,
-      y: 0,
       scale: 1,
-      rotate: 0,
-      transition: { 
-        type: "spring",
-        stiffness: 300,
-        damping: 15,
-        mass: 0.8
+      x: 0,
+      transition: {
+        duration: 0.35,
+        delay: 0.85,
+        ease: ultraSmoothEase
       }
     }
   };
@@ -91,7 +90,7 @@ export default function Contact() {
     {
       title: "GitHub",
       link: "https://github.com/nikhildev161011-tech",
-      icon: <FaGithub size={22} color="#181717" />
+      icon: <FaGithub size={22} color="#ffffff" />
     },
     {
       title: "Instagram",
@@ -104,155 +103,224 @@ export default function Contact() {
     <>
       <style>
         {`
-          @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&display=swap');
+          @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
-          .contact-seamless-section {
+          .contact-amoled-section {
             width: 100%;
-            padding: 2.5rem 1.5rem 5rem 1.5rem;
-            background: transparent !important;
-            border: none !important;
-            border-top: none !important;
+            padding: 3.5rem 1.5rem 5rem 1.5rem;
+            background-color: #000000;
             box-sizing: border-box;
             position: relative;
             z-index: 2;
-          }
-
-          .contact-main-heading {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: clamp(2.2rem, 5.5vw, 3.8rem);
-            font-weight: 900;
-            color: #0f172a;
-            line-height: 1.15;
-            letter-spacing: -0.03em;
-            display: flex;
             overflow: hidden;
-            margin: 0;
-            white-space: nowrap;
           }
 
-          .contact-wrapper-card {
+          .contact-amoled-card {
             position: relative;
-            background: rgba(255, 255, 255, 0.75);
+            background: rgba(10, 10, 12, 0.65);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 2.75rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
+            overflow: hidden;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            transform: translateZ(0);
+          }
+
+          .contact-amoled-card:hover {
+            border-color: rgba(255, 103, 31, 0.35);
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.95), 0 0 30px rgba(255, 103, 31, 0.08);
+          }
+
+          .contact-luxury-heading {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.1rem, 5vw, 3.8rem);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.04em;
+            margin: 0;
+            display: inline-block;
+            background: linear-gradient(180deg, #ffffff 20%, #cbd5e1 60%, #1e293b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 10px 30px rgba(255, 255, 255, 0.04);
+            white-space: normal;
+            word-break: normal;
+            overflow-wrap: break-word;
+          }
+
+          .arrow-track-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 260px;
+            height: 16px;
+            margin-top: 6px;
+          }
+
+          .arrow-line-body {
+            height: 2px;
+            background: linear-gradient(90deg, #ff671f 0%, #ff8533 100%);
+            box-shadow: 0 0 10px rgba(255, 103, 31, 0.6);
+            border-radius: 2px;
+          }
+
+          .arrow-head-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: -2px;
+            color: #ff671f;
+            filter: drop-shadow(0 0 6px rgba(255, 103, 31, 0.7));
+          }
+
+          .contact-lead-text {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.05rem;
+            color: #cbd5e1;
+            line-height: 1.75;
+            margin: 0;
+            font-weight: 500;
+          }
+
+          .contact-saffron-label {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #ff671f;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+          }
+
+          .contact-social-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.04);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(226, 232, 240, 0.85);
-            border-radius: 24px;
-            padding: 2.5rem;
-            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.03);
-            overflow: hidden;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-          }
-          .contact-wrapper-card:hover {
-            border-color: #2563eb;
-            box-shadow: 0 18px 40px rgba(37, 99, 235, 0.1);
-            transform: translateY(-2px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
           }
 
-          .contact-form-box {
-            background: rgba(248, 250, 252, 0.85);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            padding: 1.75rem;
-            border-radius: 18px;
-            border: 1px solid rgba(226, 232, 240, 0.9);
+          .contact-social-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            border-color: rgba(255, 103, 31, 0.5);
+            background: rgba(255, 103, 31, 0.08);
+            box-shadow: 0 8px 22px rgba(255, 103, 31, 0.2);
+          }
+
+          .contact-form-glass-box {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
           }
 
           .contact-input-field {
             width: 100%;
-            padding: 14px 16px;
+            padding: 13px 16px;
             border-radius: 12px;
-            border: 1px solid #cbd5e1;
-            background: rgba(255, 255, 255, 0.9);
-            color: #0f172a;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.5);
+            color: #ffffff;
             font-size: 0.95rem;
-            font-family: inherit;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             box-sizing: border-box;
             outline: none;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
           }
+
+          .contact-input-field::placeholder {
+            color: #64748b;
+          }
+
           .contact-input-field:focus {
-            border-color: #2563eb;
-            background: #ffffff;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+            border-color: rgba(255, 103, 31, 0.6);
+            background: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 0 0 3px rgba(255, 103, 31, 0.15);
           }
 
-          .contact-submit-outline-btn {
+          .contact-submit-liquid-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 9px;
             width: 100%;
-            font-size: 0.95rem;
+            padding: 0.85rem 1.6rem;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            color: #e2e8f0;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 14px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-weight: 700;
-            color: #2563eb;
-            background-color: #ffffff;
-            border: 1.5px solid #2563eb;
-            padding: 13px 20px;
-            border-radius: 12px;
+            font-size: 0.95rem;
+            letter-spacing: 0.01em;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, color 0.25s ease;
             cursor: pointer;
-            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.08);
-            transition: all 0.25s ease;
-          }
-          .contact-submit-outline-btn:hover {
-            background-color: #eff6ff;
-            color: #1d4ed8;
-            border-color: #1d4ed8;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 18px rgba(37, 99, 235, 0.18);
+            box-sizing: border-box;
           }
 
-          .contact-social-icon-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 48px;
-            height: 48px;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid #e2e8f0;
-            border-radius: 14px;
-            text-decoration: none;
-            cursor: pointer;
-            transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
-          }
-          .contact-social-icon-btn:hover {
-            transform: translateY(-3px) scale(1.05);
-            border-color: #2563eb;
-            background: #eff6ff;
-            box-shadow: 0 6px 15px rgba(37, 99, 235, 0.15);
+          .contact-submit-liquid-btn:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.25);
+            color: #ffffff;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.7);
           }
 
           @media (max-width: 768px) {
-            .contact-seamless-section {
-              padding: 1.5rem 1rem 3rem 1rem !important;
+            .contact-amoled-section {
+              padding: 2rem 1rem 3.5rem 1rem !important;
             }
-            .contact-wrapper-card {
-              padding: 1.5rem;
+            .contact-amoled-card {
+              padding: 1.85rem 1.25rem;
+              border-radius: 20px;
             }
-            .contact-main-heading {
-              font-size: clamp(1.8rem, 5vw, 2.4rem);
+            .contact-luxury-heading {
+              font-size: clamp(1.85rem, 7.5vw, 2.5rem);
+            }
+            .arrow-track-wrapper {
+              max-width: 220px;
+            }
+            .contact-form-glass-box {
+              padding: 1.5rem 1.25rem;
             }
           }
         `}
       </style>
 
-      <section id="contact" className="contact-seamless-section">
+      <section id="contact" className="contact-amoled-section">
         <div style={{ 
           maxWidth: '1000px', 
           margin: '0 auto', 
           display: 'flex', 
           flexDirection: 'column', 
-          gap: '3rem' 
+          gap: '2.5rem' 
         }}>
           
           <motion.div 
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            className="contact-amoled-card"
+            variants={cardEntranceVariants}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: false, amount: 0.2 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            className="contact-wrapper-card"
-            style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}
           >
             <div 
               style={{
@@ -263,8 +331,8 @@ export default function Contact() {
                 height: 'min(70vw, 450px)',
                 transform: 'translate(25%, -25%)',
                 borderRadius: '50%',
-                background: 'radial-gradient(circle at 70% 30%, rgba(15, 23, 42, 0.35) 0%, rgba(15, 23, 42, 0.18) 28%, rgba(15, 23, 42, 0.06) 52%, transparent 75%)',
-                filter: 'blur(52px)',
+                background: 'radial-gradient(circle at 70% 30%, rgba(255, 103, 31, 0.12) 0%, rgba(255, 103, 31, 0.04) 35%, transparent 70%)',
+                filter: 'blur(70px)',
                 pointerEvents: 'none',
                 zIndex: 0
               }} 
@@ -279,38 +347,51 @@ export default function Contact() {
                 height: 'min(65vw, 400px)',
                 transform: 'translate(-25%, 25%)',
                 borderRadius: '50%',
-                background: 'radial-gradient(circle at 30% 70%, rgba(15, 23, 42, 0.28) 0%, rgba(15, 23, 42, 0.14) 30%, transparent 70%)',
-                filter: 'blur(56px)',
+                background: 'radial-gradient(circle at 30% 70%, rgba(255, 103, 31, 0.1) 0%, rgba(255, 103, 31, 0.03) 30%, transparent 70%)',
+                filter: 'blur(70px)',
                 pointerEvents: 'none',
                 zIndex: 0
               }} 
             />
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem', position: 'relative', zIndex: 1 }}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', position: 'relative' }}>
-                <span style={{ fontSize: '0.85rem', fontWeight: '700', letterSpacing: '-0.02em', color: '#2563eb', textTransform: 'uppercase' }}>
+              
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', position: 'relative' }}>
+                <span style={{ fontSize: '0.85rem', fontWeight: '800', letterSpacing: '0.06em', color: '#ff671f', textTransform: 'uppercase' }}>
                   Get In Touch
                 </span>
 
                 <motion.h2 
-                  className="contact-main-heading"
-                  variants={titleContainerVariants}
+                  className="contact-luxury-heading"
+                  variants={headerEntranceVariants}
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: false, amount: 0.2 }}
                 >
-                  {headingLetters.map((char, index) => (
-                    <motion.span 
-                      key={index} 
-                      variants={letterVariants}
-                      style={{ display: 'inline-block', whiteSpace: char === " " ? "pre" : "normal" }}
-                    >
-                      {char}
-                    </motion.span>
-                  ))}
+                  Contact Me
                 </motion.h2>
 
-                <div style={{ width: '60px', height: '4px', background: 'linear-gradient(90deg, #2563eb 0%, #60a5fa 100%)', borderRadius: '2px', marginTop: '4px' }}></div>
+                <div className="arrow-track-wrapper">
+                  <motion.div 
+                    className="arrow-line-body"
+                    variants={arrowLineVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: false, amount: 0.2 }}
+                  />
+                  <motion.div 
+                    className="arrow-head-icon"
+                    variants={arrowHeadVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: false, amount: 0.2 }}
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </motion.div>
+                </div>
               </div>
 
               <div style={{ 
@@ -319,43 +400,36 @@ export default function Contact() {
                 gap: '2.5rem',
                 alignItems: 'start'
               }}>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                  <p style={{ fontSize: '1.1rem', color: '#334155', lineHeight: '1.7', margin: 0, fontWeight: '500' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
+                  <p className="contact-lead-text">
                     Have an exciting project idea, internship opportunity, or just want to chat about tech and DSA? Feel free to reach out directly!
                   </p>
 
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
-                    <span style={{ fontSize: '0.85rem', fontWeight: '700', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                    <span className="contact-saffron-label">
                       Connect Across Platforms
                     </span>
-                    <motion.div 
-                      variants={iconsContainerVariants}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: false, amount: 0.2 }}
-                      style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', alignItems: 'center' }}
-                    >
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', alignItems: 'center' }}>
                       {socialLinks.map((item, index) => (
-                        <motion.a 
+                        <a 
                           key={index}
                           href={item.link} 
                           target={item.title === "Email" ? "_self" : "_blank"} 
                           rel="noopener noreferrer" 
-                          variants={iconBounceVariant}
-                          className="contact-social-icon-btn" 
+                          className="contact-social-btn" 
                           title={item.title}
                         >
                           {item.icon}
-                        </motion.a>
+                        </a>
                       ))}
-                    </motion.div>
+                    </div>
                   </div>
                 </div>
 
-                <div className="contact-form-box">
+                <div className="contact-form-glass-box">
                   <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-                      <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#334155' }}>Your Name</label>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
+                      <label className="contact-saffron-label">Your Name</label>
                       <input 
                         type="text" 
                         name="name" 
@@ -367,8 +441,8 @@ export default function Contact() {
                       />
                     </div>
 
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-                      <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#334155' }}>Your Email</label>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
+                      <label className="contact-saffron-label">Your Email</label>
                       <input 
                         type="email" 
                         name="email" 
@@ -380,27 +454,28 @@ export default function Contact() {
                       />
                     </div>
 
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-                      <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#334155' }}>Message</label>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
+                      <label className="contact-saffron-label">Message</label>
                       <textarea 
                         name="message" 
                         required 
-                        rows="6" 
+                        rows="5" 
                         value={formData.message}
                         onChange={handleChange}
                         placeholder="Enter your message" 
                         className="contact-input-field" 
-                        style={{ resize: 'vertical', minHeight: '140px' }}
+                        style={{ resize: 'vertical', minHeight: '130px' }}
                       ></textarea>
                     </div>
 
-                    <button type="submit" className="contact-submit-outline-btn">
+                    <button type="submit" className="contact-submit-liquid-btn">
                       <FiSend size={16} />
                       <span>Send Message</span>
                     </button>
                   </form>
                 </div>
               </div>
+
             </div>
           </motion.div>
 

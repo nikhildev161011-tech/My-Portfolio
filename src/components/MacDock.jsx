@@ -7,12 +7,12 @@ export default function MacDock() {
   const [activeIndex, setActiveIndex] = useState(null);
 
   const dockItems = [
-    { name: "Home", icon: <FaHome size={22} color="#2563eb" />, type: "scroll", target: "#home" },
-    { name: "About Me", icon: <FaUser size={20} color="#4f46e5" />, type: "scroll", target: "#about" },
-    { name: "Education", icon: <FaGraduationCap size={22} color="#0284c7" />, type: "scroll", target: "#education" },
-    { name: "LeetCode", icon: <SiLeetcode size={22} color="#f59e0b" />, type: "link", url: "https://leetcode.com/u/nikhil161011/" },
-    { name: "Projects", icon: <FaCode size={22} color="#059669" />, type: "scroll", target: "#projects" },
-    { name: "Contact", icon: <FaEnvelope size={20} color="#dc2626" />, type: "menu" }
+    { name: "Home", icon: <FaHome size={20} color="#ff671f" />, type: "scroll", target: "#home" },
+    { name: "About Me", icon: <FaUser size={18} color="#e2e8f0" />, type: "scroll", target: "#about" },
+    { name: "Education", icon: <FaGraduationCap size={20} color="#e2e8f0" />, type: "scroll", target: "#education" },
+    { name: "LeetCode", icon: <SiLeetcode size={20} color="#f59e0b" />, type: "link", url: "https://leetcode.com/u/nikhil161011/" },
+    { name: "Projects", icon: <FaCode size={19} color="#e2e8f0" />, type: "scroll", target: "#projects" },
+    { name: "Contact", icon: <FaEnvelope size={18} color="#ff671f" />, type: "menu" }
   ];
 
   const handleTouchMove = (e) => {
@@ -52,84 +52,92 @@ export default function MacDock() {
     <>
       <style>
         {`
-          .mac-dock-seamless-container {
+          @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&display=swap');
+
+          /* Permanent Floating Taskbar Container */
+          .mac-dock-floating-container {
+            position: fixed;
+            bottom: 22px;
+            left: 0;
+            width: 100%;
             display: flex;
             justify-content: center;
-            width: 100%;
-            padding: 2.5rem 1rem 3rem 1rem;
-            background: transparent !important;
-            border: none !important;
-            border-top: none !important;
+            align-items: center;
+            pointer-events: none;
+            z-index: 9999;
             box-sizing: border-box;
-            position: relative;
-            z-index: 10;
+            padding: 0 1rem;
           }
 
-          .mac-dock {
+          /* Liquid Glass AMOLED Taskbar Surface */
+          .mac-dock-surface {
             display: flex;
-            align-items: flex-end;
+            align-items: center;
             justify-content: center;
-            gap: 12px;
-            padding: 10px 18px;
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(226, 232, 240, 0.85);
-            border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
-            max-width: 100%;
-            touch-action: none;
+            gap: 10px;
+            padding: 9px 16px;
+            background: rgba(12, 12, 16, 0.72);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 9999px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 20px rgba(255, 103, 31, 0.08);
+            pointer-events: auto;
             position: relative;
+            transform: translateZ(0);
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
           }
 
-          .mac-dock:hover {
-            border-color: #2563eb;
-            box-shadow: 0 14px 35px rgba(37, 99, 235, 0.12);
+          .mac-dock-surface:hover {
+            border-color: rgba(255, 103, 31, 0.35);
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.95), 0 0 25px rgba(255, 103, 31, 0.18);
           }
 
+          /* Dock Icon Capsule */
           .dock-icon-item {
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 48px;
-            height: 48px;
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid rgba(226, 232, 240, 0.9);
-            border-radius: 14px;
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
             cursor: pointer;
-            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
             text-decoration: none;
             -webkit-tap-highlight-color: transparent;
           }
 
           .dock-icon-item:hover, .dock-icon-item.touch-active {
-            transform: translateY(-8px) scale(1.2);
-            border-color: #2563eb;
-            background: #eff6ff;
-            box-shadow: 0 10px 22px rgba(37, 99, 235, 0.25);
+            transform: translateY(-6px) scale(1.15);
+            border-color: rgba(255, 103, 31, 0.5);
+            background: rgba(255, 103, 31, 0.12);
+            box-shadow: 0 10px 22px rgba(255, 103, 31, 0.25);
             z-index: 10;
           }
 
+          /* Tooltip Tag */
           .dock-tooltip {
             position: absolute;
-            bottom: 60px;
+            bottom: 58px;
             left: 50%;
             transform: translateX(-50%) translateY(4px);
-            background: #0f172a;
+            background: #09090b;
             color: #ffffff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 0.75rem;
             font-weight: 700;
-            padding: 4px 8px;
-            border-radius: 6px;
+            padding: 5px 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
             white-space: nowrap;
             opacity: 0;
             visibility: hidden;
             transition: all 0.2s ease;
             pointer-events: none;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
           }
 
           .dock-icon-item:hover .dock-tooltip, .dock-icon-item.touch-active .dock-tooltip {
@@ -138,20 +146,22 @@ export default function MacDock() {
             transform: translateX(-50%) translateY(0);
           }
 
+          /* Floating Contact Submenu */
           .contact-popup-menu {
             position: absolute;
-            bottom: 85px;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(226, 232, 240, 0.9);
+            bottom: 74px;
+            background: rgba(12, 12, 16, 0.9);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.14);
             border-radius: 18px;
-            padding: 10px;
+            padding: 8px;
             display: flex;
             flex-direction: column;
-            gap: 6px;
-            box-shadow: 0 15px 35px rgba(15, 23, 42, 0.12);
+            gap: 4px;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.95), 0 0 25px rgba(255, 103, 31, 0.12);
             z-index: 50;
+            pointer-events: auto;
             animation: popUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
           }
 
@@ -164,38 +174,52 @@ export default function MacDock() {
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 8px 14px;
-            color: #334155;
+            padding: 9px 14px;
+            color: #cbd5e1;
             text-decoration: none;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 0.85rem;
             font-weight: 700;
-            border-radius: 10px;
+            border-radius: 12px;
             transition: all 0.2s ease;
             white-space: nowrap;
           }
 
           .contact-popup-item:hover {
-            background-color: #eff6ff;
-            color: #2563eb;
+            background: rgba(255, 103, 31, 0.15);
+            color: #ffffff;
           }
 
-          @media (max-width: 480px) {
-            .mac-dock-seamless-container {
-              padding: 1.5rem 0.5rem 2.5rem 0.5rem !important;
+          /* 100% Mobile Responsive Bottom Nav Bar */
+          @media (max-width: 600px) {
+            .mac-dock-floating-container {
+              bottom: 12px;
+              padding: 0 0.5rem;
             }
-            .mac-dock {
+            .mac-dock-surface {
               gap: 8px;
-              padding: 8px 12px;
+              padding: 7px 12px;
+              border-radius: 9999px;
             }
             .dock-icon-item {
-              width: 42px;
-              height: 42px;
+              width: 38px;
+              height: 38px;
+            }
+            .dock-icon-item svg {
+              width: 17px;
+              height: 17px;
+            }
+            .dock-tooltip {
+              display: none;
+            }
+            .contact-popup-menu {
+              bottom: 64px;
             }
           }
         `}
       </style>
 
-      <div className="mac-dock-seamless-container">
+      <div className="mac-dock-floating-container">
         {showContactMenu && (
           <div className="contact-popup-menu">
             <a 
@@ -204,7 +228,7 @@ export default function MacDock() {
               rel="noopener noreferrer" 
               className="contact-popup-item"
             >
-              <FaGithub size={16} color="#0f172a" /> GitHub Profile
+              <FaGithub size={16} color="#ffffff" /> GitHub Profile
             </a>
             <a 
               href="https://www.linkedin.com/in/nikhil-gupta-64697b3b6" 
@@ -218,13 +242,13 @@ export default function MacDock() {
               href="mailto:nikhil.dev161011@gmail.com" 
               className="contact-popup-item"
             >
-              <FaEnvelope size={16} color="#ea4335" /> Send Email
+              <FaEnvelope size={16} color="#ff671f" /> Send Email
             </a>
           </div>
         )}
 
         <div 
-          className="mac-dock"
+          className="mac-dock-surface"
           onTouchMove={handleTouchMove}
           onTouchEnd={() => setActiveIndex(null)}
         >

@@ -68,12 +68,11 @@ export default function Footer() {
             gap: 1.5rem;
           }
 
-          /* Aesthetic Radar Status Pill without thick glass */
-          .footer-radar-pill {
+          .footer-status-pill {
             display: inline-flex;
             align-items: center;
-            gap: 12px;
-            padding: 6px 16px;
+            justify-content: center;
+            padding: 6px 18px;
             background: #050505;
             border: 1px solid #1a1a1e;
             border-radius: 9999px;
@@ -82,54 +81,6 @@ export default function Footer() {
             font-weight: 700;
             color: #e2e8f0;
             letter-spacing: 0.02em;
-          }
-
-          /* Multi-ring pulsating radar core */
-          .footer-radar-beacon {
-            position: relative;
-            width: 10px;
-            height: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          }
-
-          .footer-radar-core {
-            width: 7px;
-            height: 7px;
-            background-color: #10b981;
-            border-radius: 50%;
-            box-shadow: 0 0 8px #10b981;
-            position: relative;
-            z-index: 2;
-          }
-
-          .footer-radar-wave {
-            position: absolute;
-            inset: -4px;
-            border-radius: 50%;
-            border: 1.5px solid rgba(16, 185, 129, 0.65);
-            animation: radarPing 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
-          }
-
-          .footer-radar-wave-outer {
-            position: absolute;
-            inset: -8px;
-            border-radius: 50%;
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            animation: radarPing 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
-            animation-delay: 0.8s;
-          }
-
-          @keyframes radarPing {
-            0% {
-              transform: scale(0.6);
-              opacity: 1;
-            }
-            100% {
-              transform: scale(2.2);
-              opacity: 0;
-            }
           }
 
           .footer-tech-stack-tagline {
@@ -167,10 +118,9 @@ export default function Footer() {
               padding: 2rem 1.25rem;
               border-radius: 20px;
             }
-            .footer-radar-pill {
+            .footer-status-pill {
               font-size: 0.74rem;
-              padding: 6px 13px;
-              gap: 10px;
+              padding: 6px 14px;
             }
             .footer-tech-stack-tagline {
               font-size: 0.78rem;
@@ -223,23 +173,15 @@ export default function Footer() {
           />
 
           <div className="footer-stack-center">
-            {/* Top Level: Radar Status Indicator */}
-            <div className="footer-radar-pill">
-              <div className="footer-radar-beacon">
-                <span className="footer-radar-core" />
-                <span className="footer-radar-wave" />
-                <span className="footer-radar-wave-outer" />
-              </div>
+            <div className="footer-status-pill">
               <span>Systems Active • Open to Opportunities</span>
             </div>
 
-            {/* Middle Level: Engineering Tagline */}
             <p className="footer-tech-stack-tagline">
               <FaCode size={14} color="#ff671f" />
               <span>Built for High Performance</span>
             </p>
 
-            {/* Bottom Level: Saffron Copyright */}
             <p className="footer-brand-copyright">
               &copy; <span className="footer-saffron-bold">2026 Nikhil Gupta</span>. All Rights Reserved.
             </p>
